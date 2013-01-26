@@ -2,10 +2,10 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://yoursite.com
+url: http://Buttonwoo.github.com
 title: My Octopress Blog
 subtitle: A blogging framework for hackers.
-author: Your Name
+author: Buttonwood(HaoTan)
 simple_search: http://google.com/search
 description:
 
@@ -17,9 +17,9 @@ date_format: "ordinal"
 
 # RSS / Email (optional) subscription links (change if using something like Feedburner)
 subscribe_rss: /atom.xml
-subscribe_email:
+subscribe_email:tanhao2013@me.com
 # RSS feeds can list your email address if you like
-email:
+email: tanhao2013@foxmail.com
 
 # ----------------------- #
 #    Jekyll & Plugins     #
