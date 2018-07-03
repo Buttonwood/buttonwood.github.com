@@ -1,0 +1,560 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>Buttonwood</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Buttonwood">
+  
+  
+  <meta name="description" content="Buttonwood | Data Mining | python | perl | Bioinformatics">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Buttonwood">
+<meta property="og:url" content="http://buttonwood.github.io/index.html">
+<meta property="og:site_name" content="Buttonwood">
+<meta property="og:description" content="Buttonwood | Data Mining | python | perl | Bioinformatics">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Buttonwood">
+<meta name="twitter:description" content="Buttonwood | Data Mining | python | perl | Bioinformatics">
+  
+    <link rel="alternate" href="/atom.xml" title="Buttonwood" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Buttonwood</a></h1>
+    <p><a href="/">Being A Coding Poet. Less Talk, and More Move!</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/about/">About</a></li>
+      
+        <li><a href="/archives/">Archives</a></li>
+      
+        <li><a href="/links/">Links</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content">
+
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2016/03/15/2016-03-15-zookeeper-and-docker/">
+  <time datetime="2016-03-15T07:51:00.000Z">
+    Mar 15 2016
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2016/03/15/2016-03-15-zookeeper-and-docker/">用docker创建zookeeper集群</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>参考dynamic-zookeeper-cluster-with-docker[^1]，可用来动态增加zookeeper结点，这里主要稍微修正了时区和id添加的问题。</p>
+<h3 id="1-创建-Dockerfile"><a href="#1-创建-Dockerfile" class="headerlink" title="1. 创建 Dockerfile"></a>1. 创建 Dockerfile</h3><p>安装jdk 及 zookeeper</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">FROM ubuntu</span><br><span class="line"></span><br><span class="line"># update time </span><br><span class="line">RUN echo &quot;Asia/Shanghai&quot; &gt; /etc/timezone</span><br><span class="line">RUN dpkg-reconfigure -f noninteractive tzdata</span><br><span class="line"></span><br><span class="line">RUN apt-get update</span><br><span class="line">RUN apt-get -y install wget bash vim &amp;&amp; apt-get clean</span><br><span class="line"></span><br><span class="line"># install java</span><br><span class="line">RUN wget http://119.254.110.32:8081/download/jdk1.7.0_60.tar.gz \</span><br><span class="line">   &amp;&amp; tar -xvzf  jdk1.7.0_60.tar.gz \</span><br><span class="line">   &amp;&amp; mv jdk1.7.0_60 /usr/share/ \</span><br><span class="line">   &amp;&amp; rm -rf /usr/lib/jvm/java-1.7-openjdk \</span><br><span class="line">   &amp;&amp; mkdir -p /usr/lib/jvm/ \</span><br><span class="line">   &amp;&amp; ln -s /usr/share/jdk1.7.0_60 /usr/lib/jvm/java-1.7-openjdk \</span><br><span class="line">   &amp;&amp; rm -rf jdk1.7.0_60.tar.gz</span><br><span class="line"></span><br><span class="line">ENV JAVA_HOME /usr/lib/jvm/java-1.7-openjdk/</span><br><span class="line"></span><br><span class="line">RUN apt-get -y install git ant &amp;&amp; apt-get clean</span><br><span class="line"></span><br><span class="line"># install zookeeper</span><br><span class="line">RUN mkdir /tmp/zookeeper</span><br><span class="line">WORKDIR /tmp/zookeeper</span><br><span class="line">RUN git clone https://github.com/apache/zookeeper.git .</span><br><span class="line">RUN git checkout release-3.5.1-rc2</span><br><span class="line">RUN ant jar</span><br><span class="line">RUN cp /tmp/zookeeper/conf/zoo_sample.cfg \</span><br><span class="line">    /tmp/zookeeper/conf/zoo.cfg</span><br><span class="line">RUN echo &quot;standaloneEnabled=false&quot; &gt;&gt; /tmp/zookeeper/conf/zoo.cfg</span><br><span class="line">RUN echo &quot;dynamicConfigFile=/tmp/zookeeper/conf/zoo.cfg.dynamic&quot; &gt;&gt; /tmp/zookeeper/conf/zoo.cfg</span><br><span class="line">ADD zk-init.sh /usr/local/bin/</span><br><span class="line">ENTRYPOINT [&quot;/usr/local/bin/zk-init.sh&quot;]</span><br></pre></td></tr></table></figure>
+<p>zookeeper 初始化脚本 <code>zk-init.sh</code></p>
+<p>需要指定自己的id和ip以及第一个zookeeper结点的ip。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">MYID=$1</span><br><span class="line">MYIP=$2</span><br><span class="line">ZK=$3</span><br><span class="line">IPADDRESS=$MYIP</span><br><span class="line"></span><br><span class="line">cd /tmp/zookeeper</span><br><span class="line"></span><br><span class="line">if [ -n &quot;$ZK&quot; ];then</span><br><span class="line">  output=`./bin/zkCli.sh -server $ZK:2181 \</span><br><span class="line">      get /zookeeper/config | grep ^server`</span><br><span class="line">  #echo $output &gt;&gt; /tmp/zookeeper/conf/zoo.cfg.dynamic</span><br><span class="line">  for i in $output; do echo $i &gt;&gt; /tmp/zookeeper/conf/zoo.cfg.dynamic; done</span><br><span class="line">  echo &quot;server.$MYID=$IPADDRESS:2888:3888:observer;2181&quot; \</span><br><span class="line">      &gt;&gt; /tmp/zookeeper/conf/zoo.cfg.dynamic</span><br><span class="line">  cp /tmp/zookeeper/conf/zoo.cfg.dynamic \</span><br><span class="line">      /tmp/zookeeper/conf/zoo.cfg.dynamic.org</span><br><span class="line">  /tmp/zookeeper/bin/zkServer-initialize.sh \</span><br><span class="line">      --force --myid=$MYID</span><br><span class="line">  ZOO_LOG_DIR=/var/log</span><br><span class="line">  ZOO_LOG4J_PROP=&apos;INFO,CONSOLE,ROLLINGFILE&apos;</span><br><span class="line">  /tmp/zookeeper/bin/zkServer.sh start</span><br><span class="line">  /tmp/zookeeper/bin/zkCli.sh -server $ZK:2181 reconfig \</span><br><span class="line">      -add &quot;server.$MYID=$IPADDRESS:2888:3888:participant;2181&quot;</span><br><span class="line">  /tmp/zookeeper/bin/zkServer.sh stop</span><br><span class="line">  ZOO_LOG_DIR=/var/log</span><br><span class="line">  ZOO_LOG4J_PROP=&apos;INFO,CONSOLE,ROLLINGFILE&apos;</span><br><span class="line">  /tmp/zookeeper/bin/zkServer.sh start-foreground</span><br><span class="line">else</span><br><span class="line">  echo &quot;server.$MYID=$IPADDRESS:2888:3888;2181&quot; \</span><br><span class="line">      &gt;&gt; /tmp/zookeeper/conf/zoo.cfg.dynamic</span><br><span class="line">  /tmp/zookeeper/bin/zkServer-initialize.sh --force --myid=$MYID</span><br><span class="line">  ZOO_LOG_DIR=/var/log</span><br><span class="line">  ZOO_LOG4J_PROP=&apos;INFO,CONSOLE,ROLLINGFILE&apos;</span><br><span class="line">  /tmp/zookeeper/bin/zkServer.sh start-foreground</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<h3 id="2-创建镜像"><a href="#2-创建镜像" class="headerlink" title="2. 创建镜像"></a>2. 创建镜像</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t peony/zk:2 .</span><br></pre></td></tr></table></figure>
+<h3 id="3-开启容器"><a href="#3-开启容器" class="headerlink" title="3. 开启容器"></a>3. 开启容器</h3><p>测试脚本<code>start-zk-2.sh</code>，启动三个结点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">docker rm -f zk01 zk02 zk03</span><br><span class="line">docker run -d --net=net04 --name zk01 --add-host \</span><br><span class="line">    zk01:192.168.4.2 --hostname zk01.mudan.com \</span><br><span class="line">    peony/zk:2 1 192.168.4.2</span><br><span class="line">docker run -d --net=net04 --name zk02 --add-host \</span><br><span class="line">    zk02:192.168.4.3 --hostname zk02.mudan.com \</span><br><span class="line">    peony/zk:2 2 192.168.4.3 192.168.4.2</span><br><span class="line">docker run -d --net=net04 --name zk03 --add-host \</span><br><span class="line">    zk03:192.168.4.4 --hostname zk03.mudan.com \</span><br><span class="line">    peony/zk:2 3 192.168.4.4 192.168.4.2</span><br></pre></td></tr></table></figure>
+<h3 id="4-参考"><a href="#4-参考" class="headerlink" title="4. 参考:"></a>4. 参考:</h3><p>[^1]:<a href="http://container-solutions.com/dynamic-zookeeper-cluster-with-docker" target="_blank" rel="noopener">dynamic zookeeper cluster with docker</a></p>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2016/02/17/2016-02-17-ElasticSearch-Queen-Too-High/">
+  <time datetime="2016-02-17T07:51:00.000Z">
+    Feb 17 2016
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2016/02/17/2016-02-17-ElasticSearch-Queen-Too-High/">ElasticSearch search queen size is too high</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>我们有两个ElasticSearch集群用于提供文档索引和搜索服务，其中一个20个结点的大集群用于存储全量数据，一个12个结点的小集群用于存储近一个周数据，ES2即该小集群。</p>
+<h3 id="1-问题描述"><a href="#1-问题描述" class="headerlink" title="1 问题描述"></a>1 问题描述</h3><p>ES2-1 CPU负载偏高，search队列积压，集群查询速度过慢。</p>
+<h4 id="1-1-CPU负载偏高，search队列积压"><a href="#1-1-CPU负载偏高，search队列积压" class="headerlink" title="1.1 CPU负载偏高，search队列积压"></a>1.1 CPU负载偏高，search队列积压</h4><p>ES2-1</p>
+<p><img src="http://ww4.sinaimg.cn/large/6fbc15dcgw1f125pb5c93j20xj0dgdi0.jpg" alt="ES2-1"></p>
+<p>ES2-1 search queue size较其他节点偏高。<br><img src="http://ww1.sinaimg.cn/large/6fbc15dcgw1f125rajxd7j20y508q76a.jpg" alt="ES2-1-search"></p>
+<p>ES2-2</p>
+<p><img src="http://ww4.sinaimg.cn/large/6fbc15dcgw1f125qi2jiij20xd0dfgnr.jpg" alt="ES2-2"></p>
+<h4 id="1-2-查询速度"><a href="#1-2-查询速度" class="headerlink" title="1.2 查询速度"></a>1.2 查询速度</h4><p>查询在50s以上</p>
+<p><img src="http://ww2.sinaimg.cn/large/6fbc15dcgw1f1252a2hzvj21af0bzk35.jpg" alt="186"></p>
+<p><img src="http://ww2.sinaimg.cn/large/6fbc15dcgw1f125oeruk0j21a50bm7gg.jpg" alt="187"></p>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/2016/02/17/2016-02-17-ElasticSearch-Queen-Too-High/#more" class="more-link">Read More</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2016/01/29/2016-01-29-mysql-truncate-partition/">
+  <time datetime="2016-01-29T15:51:00.000Z">
+    Jan 29 2016
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2016/01/29/2016-01-29-mysql-truncate-partition/">mysql清理分区</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>问题描述： mysql集群一个结点(appdb05)磁盘满，需要清理分区数据，同时保留部分客户数据。</p>
+<p>解决方法： 先停止写入，再导出数据，再清空分区，再导入数据，确认无误后重新刷新写入。</p>
+<p>待观察问题： slaver(appdb12)磁盘满，主从复制可能失效，数据可能不一致。</p>
+<h3 id="step-1-关掉相关专题刷新"><a href="#step-1-关掉相关专题刷新" class="headerlink" title="step 1 关掉相关专题刷新"></a>step 1 关掉相关专题刷新</h3><p>@5.23</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql -h 192.168.5.23 peony_t -uroot -p</span><br><span class="line">mysql &gt; update pe_t_subject set state = 0,\</span><br><span class="line">update_time = now() where id in \</span><br><span class="line">(4620,4849,4850,4852,4853,4854,4855,4858,4859,4860,\</span><br><span class="line">4861,4862,4865,4866,4875,4876,4877,4879,4880,4881,\</span><br><span class="line">4882,4883,4884,4885,4888,5034,5079,5081,5082,5083,\</span><br><span class="line">5101,5102,5103,5104,5162);</span><br><span class="line"></span><br><span class="line">mysql&gt; update pe_t_subject set state = 0,\</span><br><span class="line">update_time = now() where id in (3418,3419);</span><br></pre></td></tr></table></figure>
+<h3 id="step-2-确保数据没有再写入"><a href="#step-2-确保数据没有再写入" class="headerlink" title="step 2 确保数据没有再写入"></a>step 2 确保数据没有再写入</h3><p>@5.5</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use peony_m_63;</span><br><span class="line">mysql&gt; select count(*) from  pe_t_subject_page where \</span><br><span class="line">userId=1526 AND publishDate&lt;&apos;2016-01-01&apos;;</span><br><span class="line">+----------+</span><br><span class="line">| count(*) |</span><br><span class="line">+----------+</span><br><span class="line">|    53226 |</span><br><span class="line">+----------+</span><br><span class="line">1 row in set (0.05 sec)</span><br><span class="line">[root@i-cphylyv8 ~]# ll -rt /home/mysql3306/peony_m_63</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww2.sinaimg.cn/large/6fbc15dcgw1f0jv3sxw05j20q7040n05.jpg" alt=""></p>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/2016/01/29/2016-01-29-mysql-truncate-partition/#more" class="more-link">Read More</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/04/05/2015-04-05-ch8-Axes/">
+  <time datetime="2015-04-05T13:51:00.000Z">
+    Apr 5 2015
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2015/04/05/2015-04-05-ch8-Axes/">Axes</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p><a href="https://github.com/mbostock/d3/wiki/SVG-Axes" target="_blank" rel="noopener">SVG Axes</a></p>
+<h4 id="1-Setting-Up-an-Axis"><a href="#1-Setting-Up-an-Axis" class="headerlink" title="1. Setting Up an Axis"></a>1. Setting Up an Axis</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var xAxis = d3.svg.axis();</span><br><span class="line">xAxis.scale(xScale);</span><br><span class="line">xAxis.orient(&quot;bottom&quot;);</span><br><span class="line"># 一步到位</span><br><span class="line">var xAxis = d3.svg.axis()</span><br><span class="line">    .scale(xScale)</span><br><span class="line">    .orient(&quot;bottom&quot;);</span><br><span class="line"># 添加</span><br><span class="line">svg.append(&quot;g&quot;)</span><br><span class="line">    .call(xAxis);</span><br></pre></td></tr></table></figure>
+<h4 id="2-style-SVG-elements"><a href="#2-style-SVG-elements" class="headerlink" title="2. style SVG elements"></a>2. style SVG elements</h4><p><a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute" target="_blank" rel="noopener">SVG Attribute reference</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">svg.append(&quot;g&quot;)</span><br><span class="line">    .attr(&quot;class&quot;, &quot;axis&quot;) //Assign &quot;axis&quot; class</span><br><span class="line">    .call(xAxis);</span><br></pre></td></tr></table></figure>
+<p>CSS</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.axis path,</span><br><span class="line">.axis line &#123;</span><br><span class="line">    fill: none;</span><br><span class="line">    stroke: black;</span><br><span class="line">    shape-rendering: crispEdges;</span><br><span class="line">&#125;</span><br><span class="line">.axis text &#123;</span><br><span class="line">    font-family: sans-serif;</span><br><span class="line">    font-size: 11px;</span><br><span class="line">&#125;</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">#### 3. [SVG transformations](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/transform)</span><br></pre></td></tr></table></figure>
+<h1 id="Note-that-we-use-attr-to-apply-transform-as-an-attribute-of-g"><a href="#Note-that-we-use-attr-to-apply-transform-as-an-attribute-of-g" class="headerlink" title="Note that we use attr() to apply transform as an attribute of g."></a>Note that we use attr() to apply transform as an attribute of g.</h1><p>svg.append(“g”)<br>    .attr(“class”, “axis”)<br>    .attr(“transform”, “translate(0,” + (h - padding) + “)”)<br>    .call(xAxis);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;!-- more --&gt;</span><br><span class="line"></span><br><span class="line">#### 4. Ticks</span><br><span class="line">Ticks communicate information and can also clutter your chart.</span><br></pre></td></tr></table></figure></p>
+<p>var xAxis = d3.svg.axis()<br>                  .scale(xScale)<br>                  .orient(“bottom”)<br>                  .ticks(5);  //Set rough # of ticks<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 5. Y axis</span><br></pre></td></tr></table></figure></p>
+<p>//Define Y axis<br>var yAxis = d3.svg.axis()<br>                  .scale(yScale)<br>                  .orient(“left”)<br>                  .ticks(5);<br>//Create Y axis<br>svg.append(“g”)<br>    .attr(“class”, “axis”)<br>    .attr(“transform”, “translate(“ + padding + “,0)”)<br>    .call(yAxis);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 6. Formatting Tick Labels</span><br><span class="line">[d3 formatting](https://github.com/mbostock/d3/wiki/Formatting#d3_format)</span><br></pre></td></tr></table></figure></p>
+<p>var formatAsPercentage = d3.format(“.1%”);<br>xAxis.tickFormat(formatAsPercentage);<br><code>`</code></p>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/03/29/2015-03-29-ch7-scales/">
+  <time datetime="2015-03-29T14:51:00.000Z">
+    Mar 29 2015
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2015/03/29/2015-03-29-ch7-scales/">Scales</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h4 id="1-Scales"><a href="#1-Scales" class="headerlink" title="1. Scales"></a>1. Scales</h4><p>“Scales are functions that map from an input domain to an output range.”</p>
+<p>An input domain and an output range, visualized as parallel axes.</p>
+<ul>
+<li>Normalization</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var scale = d3.scale.linear()</span><br><span class="line">    .domain([100, 500])</span><br><span class="line">    .range([10, 350]);</span><br><span class="line">scale(100);  //Returns 10</span><br><span class="line">scale(300);  //Returns 180</span><br><span class="line">scale(500);  //Returns 350</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var dataset = [</span><br><span class="line">    [5, 20], [480, 90], [250, 50], [100, 33], [330, 95],</span><br><span class="line">    [410, 12], [475, 44], [25, 67], [85, 21], [220, 88]</span><br><span class="line">    ];</span><br><span class="line">d3.max(dataset, function(d) &#123;</span><br><span class="line">    return d[0];</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/2015/03/29/2015-03-29-ch7-scales/#more" class="more-link">Read More</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/03/24/2015-03-24-ch5-6-data-svg/">
+  <time datetime="2015-03-24T13:51:00.000Z">
+    Mar 24 2015
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2015/03/24/2015-03-24-ch5-6-data-svg/"> Data and SVG</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h4 id="1-project-structure"><a href="#1-project-structure" class="headerlink" title="1. project structure"></a>1. project structure</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">project-folder/</span><br><span class="line">    d3/</span><br><span class="line">        d3.v3.js</span><br><span class="line">        d3.v3.min.js (optional)</span><br><span class="line">    index.html</span><br></pre></td></tr></table></figure>
+<p>index.html</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">        &lt;title&gt;D3 Page Template&lt;/title&gt;</span><br><span class="line">        &lt;script type=&quot;text/javascript&quot; src=&quot;d3/d3.v3.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">            // Your beautiful D3 code will go here</span><br><span class="line">        &lt;/script&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="2-Setting-Up-a-Web-Server"><a href="#2-Setting-Up-a-Web-Server" class="headerlink" title="2. Setting Up a Web Server"></a>2. Setting Up a Web Server</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd project-folder</span><br><span class="line">python -m SimpleHTTPServer 8888 &amp;</span><br></pre></td></tr></table></figure>
+<p>Then,  <a href="http://localhost:8888" target="_blank" rel="noopener">http://localhost:8888</a></p>
+<h4 id="3-data"><a href="#3-data" class="headerlink" title="3. data"></a>3. data</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">        &lt;title&gt;D3 Page Template&lt;/title&gt;</span><br><span class="line">        &lt;script type=&quot;text/javascript&quot; src=&quot;../d3/d3.v3.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">            // Your beautiful D3 code will go here</span><br><span class="line">            d3.select(&quot;body&quot;).append(&quot;p&quot;).text(&quot;New paragraph!&quot;);</span><br><span class="line">        &lt;/script&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="4-bind-data"><a href="#4-bind-data" class="headerlink" title="4. bind data"></a>4. bind data</h4><ul>
+<li>The data</li>
+<li>A selection of DOM elements</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># define</span><br><span class="line">var dataset = [ 5, 10, 15, 20, 25 ];</span><br><span class="line"># from file</span><br><span class="line">d3.csv(&quot;food.csv&quot;, function(data) &#123;</span><br><span class="line">    console.log(data);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/2015/03/24/2015-03-24-ch5-6-data-svg/#more" class="more-link">Read More</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/03/21/2015-03-21-ch3-Technology-Fundamentals/">
+  <time datetime="2015-03-21T03:51:00.000Z">
+    Mar 21 2015
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2015/03/21/2015-03-21-ch3-Technology-Fundamentals/">Technology Fundamentals</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h4 id="1-Common-Elements"><a href="#1-Common-Elements" class="headerlink" title="1.Common Elements"></a><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element" target="_blank" rel="noopener">1.Common Elements</a></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">html</span><br><span class="line">head</span><br><span class="line">title</span><br><span class="line">body</span><br><span class="line">ul, ol, li</span><br><span class="line">em/strong</span><br><span class="line">a</span><br><span class="line">span</span><br><span class="line">div</span><br></pre></td></tr></table></figure>
+<h4 id="2-Attributes"><a href="#2-Attributes" class="headerlink" title="2. Attributes"></a>2. Attributes</h4><p>All HTML elements can be assigned attributes by including property/value pairs in the opening tag.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;tagname property=&quot;value&quot;&gt;&lt;/tagname&gt;</span><br></pre></td></tr></table></figure>
+<p>Different kinds of elements can be assigned different attributes.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;http://d3js.org/&quot;&gt;The D3 website&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/2015/03/21/2015-03-21-ch3-Technology-Fundamentals/#more" class="more-link">Read More</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/01/16/2015-01-16-gitlab-workflow/">
+  <time datetime="2015-01-16T11:51:00.000Z">
+    Jan 16 2015
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2015/01/16/2015-01-16-gitlab-workflow/">gitlab使用说明</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>这是gitlab搭建起来后，为团队内部写的简单配置说明。</p>
+<h3 id="Step1-Use-ssh-keygen-to-generate-a-new-pair-of-id-rsa-new-id-rsa-new-pub"><a href="#Step1-Use-ssh-keygen-to-generate-a-new-pair-of-id-rsa-new-id-rsa-new-pub" class="headerlink" title="Step1: Use ssh-keygen to generate a new pair of id_rsa_new / id_rsa_new.pub"></a>Step1: Use <code>ssh-keygen</code> to generate a new pair of id_rsa_new / id_rsa_new.pub</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ssh</span><br><span class="line">ssh-keygen -t rsa -C &quot;tanhao2013@foxmail.com&quot; # your email</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww1.sinaimg.cn/large/6fbc15dcjw1enxr1dp2asj20hw0blmz5.jpg" alt="step1"></p>
+<h3 id="Step2-Add-the-ssh-key-to-the-gitlab"><a href="#Step2-Add-the-ssh-key-to-the-gitlab" class="headerlink" title="Step2: Add the ssh key to the gitlab"></a>Step2: Add the ssh key to the gitlab</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat gitlab_rsa.pub</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww3.sinaimg.cn/large/6fbc15dcgw1f2aib0m5kpj20uw06nwgq.jpg" alt="step2"></p>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/2015/01/16/2015-01-16-gitlab-workflow/#more" class="more-link">Read More</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/12/31/2014-12-31-gitlab/">
+  <time datetime="2014-12-31T02:51:00.000Z">
+    Dec 31 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2014/12/31/2014-12-31-gitlab/">使用gitlab搭建代码仓库</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>我来之前，公司一直用windows server搭建的svn托管代码，每次都要手动远程登陆到服务器然后后台授权。我看网上很多类github的平台，于是选了gitlab实验推荐大家迁移到git上来。</p>
+<h3 id="1-搭建脚本很简单，下载安装包，启动即可。"><a href="#1-搭建脚本很简单，下载安装包，启动即可。" class="headerlink" title="1. 搭建脚本很简单，下载安装包，启动即可。"></a>1. 搭建脚本很简单，下载安装包，启动即可。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">curl -O https://downloads-packages.s3.amazonaws.com/centos-6.6/gitlab-7.6.1_omnibus.5.3.0.ci.1-1.el6.x86_64.rpm</span><br><span class="line"></span><br><span class="line">yum install openssh-server postfix cronie</span><br><span class="line"></span><br><span class="line">service postfix start &amp;&amp; chkconfig postfix on</span><br><span class="line"></span><br><span class="line">rpm -i gitlab-7.6.1_omnibus.5.3.0.ci.1-1.el6.x86_64.rpm</span><br></pre></td></tr></table></figure>
+<p>然后按说明配置一下gitlab.rb，启动服务即可。注意8080端口和ssh端口转发。</p>
+<h3 id="2-用docker来更新最新版本的gitlab"><a href="#2-用docker来更新最新版本的gitlab" class="headerlink" title="2. 用docker来更新最新版本的gitlab"></a>2. 用docker来更新最新版本的gitlab</h3><p>Updated 2016-03-24 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">## 修改防火墙</span><br><span class="line">iptables -A INPUT -m state --state NEW -p tcp --dport 10022 -j ACCEPT</span><br><span class="line">iptables -A INPUT -m state --state NEW -p tcp --dport 8080 -j ACCEPT</span><br><span class="line">service iptables save</span><br><span class="line">service iptables status</span><br><span class="line">service iptables restart</span><br><span class="line">iptables -L</span><br><span class="line"></span><br><span class="line">service docker restart</span><br><span class="line">docker run --detach \</span><br><span class="line">    --hostname gitlab.example.com \</span><br><span class="line">    --env GITLAB_OMNIBUS_CONFIG=&quot;external_url &apos;http://119.*.*.*/&apos;; gitlab_rails[&apos;lfs_enabled&apos;] = true;&quot; \</span><br><span class="line">    -p 443:443 -p 8080:80 -p 10022:22 \</span><br><span class="line">    --name gitlab \</span><br><span class="line">    --restart always \</span><br><span class="line">    --volume /srv/gitlab/config:/etc/gitlab \</span><br><span class="line">    --volume /srv/gitlab/logs:/var/log/gitlab \</span><br><span class="line">    --volume /srv/gitlab/data:/var/opt/gitlab \</span><br><span class="line">    gitlab/gitlab-ce:latest</span><br></pre></td></tr></table></figure>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/12/15/2014-12-15-rChart/">
+  <time datetime="2014-12-15T03:51:00.000Z">
+    Dec 15 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2014/12/15/2014-12-15-rChart/">rChart and morris.js</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h3 id="1-Using-rChart-and-morris-js-for-time-series-visualization"><a href="#1-Using-rChart-and-morris-js-for-time-series-visualization" class="headerlink" title="1. Using rChart and morris.js for time series visualization"></a>1. Using <code>rChart</code> and <code>morris.js</code> for time series visualization</h3><p>Here are the codes!</p>
+<pre><code>library(&apos;rCharts&apos;, &apos;ramnathv&apos;)
+df &lt;- read.csv(&quot;type.1h.csv&quot;,header=FALSE,stringsAsFactors=FALSE)
+colnames(df) &lt;- c(&quot;date&quot;,&quot;1&quot;, &quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;,&quot;8&quot;,&quot;9&quot;,&quot;10&quot;)
+transform(df, date = as.character(date))
+m1 &lt;- mPlot(x = &quot;date&quot;, y = c(&quot;1&quot;, &quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;,&quot;8&quot;,&quot;9&quot;,&quot;10&quot;), type = &quot;Line&quot;, data = df)
+m1$set(pointSize = 0, lineWidth = 1)
+m1$print(&quot;chart2&quot;)
+m1
+#base64enc
+# install.packages(&quot;base64enc&quot;)
+library(&quot;base64enc&quot;)
+m1$save(&apos;graph1.html&apos;, &apos;inline&apos;, cdn=TRUE)
+#m1$save(&apos;graph1.html&apos;, &apos;inline&apos;, standalone=TRUE)
+</code></pre><h4 id="2-Graph"><a href="#2-Graph" class="headerlink" title="2. Graph"></a>2. Graph</h4><p>Here, we can see this is a test graph!</p>
+<p>Here is a test image!<br><img src="http://ww3.sinaimg.cn/mw690/6fbc15dcgw1enahmlkcp1j20n20b941c.jpg" alt=""></p>
+<p>Here is a test page!<br><a href="../../../../fish/graph1.html">graph1.html</a></p>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+
+  <nav id="pagination">
+  
+  
+    <a href="/page/2/" class="next">Next</a>
+  
+  <div class="clearfix"></div>
+</nav>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2018 <a href="/">Buttonwood</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'buttonwood' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

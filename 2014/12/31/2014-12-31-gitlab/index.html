@@ -1,0 +1,154 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>使用gitlab搭建代码仓库 | Buttonwood</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Buttonwood">
+  
+  
+    <meta name="description" content="我来之前，公司一直用windows server搭建的svn托管代码，每次都要手动远程登陆到服务器然后后台授权。我看网上很多类github的平台，于是选了gitlab实验推荐大家迁移到git上来。
+1. 搭建脚本很简单，下载安装包，启动即可。1234567curl -O https://downloads-packages.s3.amazonaws.com/centos-6.6/gitlab-7.">
+  
+  <meta name="description" content="我来之前，公司一直用windows server搭建的svn托管代码，每次都要手动远程登陆到服务器然后后台授权。我看网上很多类github的平台，于是选了gitlab实验推荐大家迁移到git上来。 1. 搭建脚本很简单，下载安装包，启动即可。1234567curl -O https://downloads-packages.s3.amazonaws.com/centos-6.6/gitlab-7.">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用gitlab搭建代码仓库">
+<meta property="og:url" content="http://buttonwood.github.io/2014/12/31/2014-12-31-gitlab/index.html">
+<meta property="og:site_name" content="Buttonwood">
+<meta property="og:description" content="我来之前，公司一直用windows server搭建的svn托管代码，每次都要手动远程登陆到服务器然后后台授权。我看网上很多类github的平台，于是选了gitlab实验推荐大家迁移到git上来。 1. 搭建脚本很简单，下载安装包，启动即可。1234567curl -O https://downloads-packages.s3.amazonaws.com/centos-6.6/gitlab-7.">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-03T02:32:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用gitlab搭建代码仓库">
+<meta name="twitter:description" content="我来之前，公司一直用windows server搭建的svn托管代码，每次都要手动远程登陆到服务器然后后台授权。我看网上很多类github的平台，于是选了gitlab实验推荐大家迁移到git上来。 1. 搭建脚本很简单，下载安装包，启动即可。1234567curl -O https://downloads-packages.s3.amazonaws.com/centos-6.6/gitlab-7.">
+  
+    <link rel="alternate" href="/atom.xml" title="Buttonwood" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Buttonwood</a></h1>
+    <p><a href="/">Being A Coding Poet. Less Talk, and More Move!</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/about/">About</a></li>
+      
+        <li><a href="/archives/">Archives</a></li>
+      
+        <li><a href="/links/">Links</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/12/31/2014-12-31-gitlab/">
+  <time datetime="2014-12-31T02:51:00.000Z">
+    Dec 31 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">使用gitlab搭建代码仓库</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>我来之前，公司一直用windows server搭建的svn托管代码，每次都要手动远程登陆到服务器然后后台授权。我看网上很多类github的平台，于是选了gitlab实验推荐大家迁移到git上来。</p>
+<h3 id="1-搭建脚本很简单，下载安装包，启动即可。"><a href="#1-搭建脚本很简单，下载安装包，启动即可。" class="headerlink" title="1. 搭建脚本很简单，下载安装包，启动即可。"></a>1. 搭建脚本很简单，下载安装包，启动即可。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">curl -O https://downloads-packages.s3.amazonaws.com/centos-6.6/gitlab-7.6.1_omnibus.5.3.0.ci.1-1.el6.x86_64.rpm</span><br><span class="line"></span><br><span class="line">yum install openssh-server postfix cronie</span><br><span class="line"></span><br><span class="line">service postfix start &amp;&amp; chkconfig postfix on</span><br><span class="line"></span><br><span class="line">rpm -i gitlab-7.6.1_omnibus.5.3.0.ci.1-1.el6.x86_64.rpm</span><br></pre></td></tr></table></figure>
+<p>然后按说明配置一下gitlab.rb，启动服务即可。注意8080端口和ssh端口转发。</p>
+<h3 id="2-用docker来更新最新版本的gitlab"><a href="#2-用docker来更新最新版本的gitlab" class="headerlink" title="2. 用docker来更新最新版本的gitlab"></a>2. 用docker来更新最新版本的gitlab</h3><p>Updated 2016-03-24 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">## 修改防火墙</span><br><span class="line">iptables -A INPUT -m state --state NEW -p tcp --dport 10022 -j ACCEPT</span><br><span class="line">iptables -A INPUT -m state --state NEW -p tcp --dport 8080 -j ACCEPT</span><br><span class="line">service iptables save</span><br><span class="line">service iptables status</span><br><span class="line">service iptables restart</span><br><span class="line">iptables -L</span><br><span class="line"></span><br><span class="line">service docker restart</span><br><span class="line">docker run --detach \</span><br><span class="line">    --hostname gitlab.example.com \</span><br><span class="line">    --env GITLAB_OMNIBUS_CONFIG=&quot;external_url &apos;http://119.*.*.*/&apos;; gitlab_rails[&apos;lfs_enabled&apos;] = true;&quot; \</span><br><span class="line">    -p 443:443 -p 8080:80 -p 10022:22 \</span><br><span class="line">    --name gitlab \</span><br><span class="line">    --restart always \</span><br><span class="line">    --volume /srv/gitlab/config:/etc/gitlab \</span><br><span class="line">    --volume /srv/gitlab/logs:/var/log/gitlab \</span><br><span class="line">    --volume /srv/gitlab/data:/var/opt/gitlab \</span><br><span class="line">    gitlab/gitlab-ce:latest</span><br></pre></td></tr></table></figure>
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/Tips/">Tips</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/git/">git</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+<section id="comment"> 
+    <h1 class="title">Comments</h1>
+    <div class="ds-thread" data-title="使用gitlab搭建代码仓库"></div> 
+</section>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2018 <a href="/">Buttonwood</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'buttonwood' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title> 单文库基因组组装 (A Single Library for Genome  Assemble)  | Buttonwood</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Buttonwood">
+  
+  
+    <meta name="description" content="Illumina 报告中比较了 Reads 长度，coverage，insert size 等对组装结果的影响，可以看到理想状况下，对于简单基因组，30X左右短片段reads加上适量长片段reads可以覆盖足够的基因组区域，并且有较好的N50等指标。
+最开始sanger测序可能为了避免重复序列的影响，采用了1k-40k的建库策略，后来soapdenovo在做人类基因组的时候沿用了200，500，2">
+  
+  <meta name="description" content="Illumina 报告中比较了 Reads 长度，coverage，insert size 等对组装结果的影响，可以看到理想状况下，对于简单基因组，30X左右短片段reads加上适量长片段reads可以覆盖足够的基因组区域，并且有较好的N50等指标。 最开始sanger测序可能为了避免重复序列的影响，采用了1k-40k的建库策略，后来soapdenovo在做人类基因组的时候沿用了200，500，2">
+<meta name="keywords" content="Assemble,Tips">
+<meta property="og:type" content="article">
+<meta property="og:title" content=" 单文库基因组组装 (A Single Library for Genome  Assemble) ">
+<meta property="og:url" content="http://buttonwood.github.io/2013/08/14/2013-08-14-A-Single-Library/index.html">
+<meta property="og:site_name" content="Buttonwood">
+<meta property="og:description" content="Illumina 报告中比较了 Reads 长度，coverage，insert size 等对组装结果的影响，可以看到理想状况下，对于简单基因组，30X左右短片段reads加上适量长片段reads可以覆盖足够的基因组区域，并且有较好的N50等指标。 最开始sanger测序可能为了避免重复序列的影响，采用了1k-40k的建库策略，后来soapdenovo在做人类基因组的时候沿用了200，500，2">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-03T02:32:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content=" 单文库基因组组装 (A Single Library for Genome  Assemble) ">
+<meta name="twitter:description" content="Illumina 报告中比较了 Reads 长度，coverage，insert size 等对组装结果的影响，可以看到理想状况下，对于简单基因组，30X左右短片段reads加上适量长片段reads可以覆盖足够的基因组区域，并且有较好的N50等指标。 最开始sanger测序可能为了避免重复序列的影响，采用了1k-40k的建库策略，后来soapdenovo在做人类基因组的时候沿用了200，500，2">
+  
+    <link rel="alternate" href="/atom.xml" title="Buttonwood" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Buttonwood</a></h1>
+    <p><a href="/">Being A Coding Poet. Less Talk, and More Move!</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/about/">About</a></li>
+      
+        <li><a href="/archives/">Archives</a></li>
+      
+        <li><a href="/links/">Links</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2013/08/14/2013-08-14-A-Single-Library/">
+  <time datetime="2013-08-14T11:43:00.000Z">
+    Aug 14 2013
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"> 单文库基因组组装 (A Single Library for Genome  Assemble) </h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p><a href="1"><em>Illumina</em> 报告</a>中比较了 Reads 长度，coverage，insert size 等对组装结果的影响，可以看到理想状况下，对于简单基因组，30X左右短片段reads加上适量长片段reads可以覆盖足够的基因组区域，并且有较好的N50等指标。</p>
+<p><a href="2">最开始sanger测序</a>可能为了避免重复序列的影响，采用了1k-40k的建库策略，后来soapdenovo在做人类基因组的时候沿用了200，500，2k，5k，10k的测序方法。但是不同基因组具体采用的策略并不一致，但是一般均需要短片段文库（&lt;2k）和长片段文库(&gt;2k)。像Abyss由于做<a href="3">非洲人</a>的时候就只用了42X的210文库数据。        </p>
+<p><a href="4">GAGE评价了一些组装软件的组装效果</a>，有 Effect of multiple libraries on assembly 这一段。结合我自己的项目经验，multilib的策略是为了辅助scaffolding。因为contig的组装主要用到reads见的overlap信息，只要测序随机和均一，并且深度足够，短片段reads可以很好的组装出contig（无N的一致性序列），contig的组装步骤并不设计文库片段信息（insert-size和pair-end关系），后面scaffolding则需要用到文库信息来辅助contig间建立连接关系，而这里最主要的也是需要大雨2k的文库梯度分配。所以像allpath这种软件推荐的就是一个短片段文库加一个大片段文库。金小峰这种单倍体物种，基因组也不太大，考虑到个体小，提取DNA复杂，一只蜜蜂样品不足以构建三个短片段文库（200，500，800），我们可以尽量尝试建1到2个文库，对于contig组装影响不会太大（我曾经组装的单染色体蚂蚁也是由于样品原因，建了一个500的文库，效果也很好）。</p>
+<p>另外我们注意到像<a href="5">fermi这样的最新的组装软件的进展</a>，对人类基因组已经可以一个样品一个库，35X数据做denovo assembly了。</p>
+<p>为了更好的开展后续的分析和讨论工作，后面我还会具体找下已经出来的蜜蜂或蚂蚁的组装文献给大家看看，应该说膜翅目的研究现在还是比较热门的，有很多可参考的借鉴的地方。为了尽快推进这个项目，我们没必要非建3个文库。这是我的意见。<br>[1]:<a href="http://res.illumina.com/documents/products/technotes/technote_denovo_assembly_ecoli.pdf" target="_blank" rel="noopener">http://res.illumina.com/documents/products/technotes/technote_denovo_assembly_ecoli.pdf</a><br>[2]:<a href="http://genome.cshlp.org/content/20/2/265.full" target="_blank" rel="noopener">http://genome.cshlp.org/content/20/2/265.full</a><br>[3]:<a href="http://genome.cshlp.org/content/19/6/1117.full.pdf+html" target="_blank" rel="noopener">http://genome.cshlp.org/content/19/6/1117.full.pdf+html</a><br>[4]:<a href="http://genome.cshlp.org/content/22/3/557.full.pdf" target="_blank" rel="noopener">http://genome.cshlp.org/content/22/3/557.full.pdf</a><br>[5]:<a href="http://bioinformatics.oxfordjournals.org/content/28/14/1838.full.pdf" target="_blank" rel="noopener">http://bioinformatics.oxfordjournals.org/content/28/14/1838.full.pdf</a>    </p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/Bioinformatics/">Bioinformatics</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/Assemble/">Assemble</a>, <a class="tags-link" href="/tags/Tips/">Tips</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+<section id="comment"> 
+    <h1 class="title">Comments</h1>
+    <div class="ds-thread" data-title=" 单文库基因组组装 (A Single Library for Genome  Assemble) "></div> 
+</section>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2018 <a href="/">Buttonwood</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'buttonwood' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

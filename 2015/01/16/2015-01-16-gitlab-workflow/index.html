@@ -1,0 +1,170 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>gitlab使用说明 | Buttonwood</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Buttonwood">
+  
+  
+    <meta name="description" content="这是gitlab搭建起来后，为团队内部写的简单配置说明。
+Step1: Use ssh-keygen to generate a new pair of id_rsa_new / id_rsa_new.pub12cd ~/.sshssh-keygen -t rsa -C &amp;quot;tanhao2013@foxmail.com&amp;quot; # your email
+
+Step2: Add the">
+  
+  <meta name="description" content="这是gitlab搭建起来后，为团队内部写的简单配置说明。 Step1: Use ssh-keygen to generate a new pair of id_rsa_new / id_rsa_new.pub12cd ~/.sshssh-keygen -t rsa -C &amp;quot;tanhao2013@foxmail.com&amp;quot; # your email  Step2: Add the">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gitlab使用说明">
+<meta property="og:url" content="http://buttonwood.github.io/2015/01/16/2015-01-16-gitlab-workflow/index.html">
+<meta property="og:site_name" content="Buttonwood">
+<meta property="og:description" content="这是gitlab搭建起来后，为团队内部写的简单配置说明。 Step1: Use ssh-keygen to generate a new pair of id_rsa_new / id_rsa_new.pub12cd ~/.sshssh-keygen -t rsa -C &amp;quot;tanhao2013@foxmail.com&amp;quot; # your email  Step2: Add the">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/6fbc15dcjw1enxr1dp2asj20hw0blmz5.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/6fbc15dcgw1f2aib0m5kpj20uw06nwgq.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/6fbc15dcgw1f2aidrh5o6j20at042dgh.jpg">
+<meta property="og:updated_time" content="2018-07-03T02:32:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="gitlab使用说明">
+<meta name="twitter:description" content="这是gitlab搭建起来后，为团队内部写的简单配置说明。 Step1: Use ssh-keygen to generate a new pair of id_rsa_new / id_rsa_new.pub12cd ~/.sshssh-keygen -t rsa -C &amp;quot;tanhao2013@foxmail.com&amp;quot; # your email  Step2: Add the">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/6fbc15dcjw1enxr1dp2asj20hw0blmz5.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Buttonwood" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Buttonwood</a></h1>
+    <p><a href="/">Being A Coding Poet. Less Talk, and More Move!</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/about/">About</a></li>
+      
+        <li><a href="/archives/">Archives</a></li>
+      
+        <li><a href="/links/">Links</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/01/16/2015-01-16-gitlab-workflow/">
+  <time datetime="2015-01-16T11:51:00.000Z">
+    Jan 16 2015
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">gitlab使用说明</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>这是gitlab搭建起来后，为团队内部写的简单配置说明。</p>
+<h3 id="Step1-Use-ssh-keygen-to-generate-a-new-pair-of-id-rsa-new-id-rsa-new-pub"><a href="#Step1-Use-ssh-keygen-to-generate-a-new-pair-of-id-rsa-new-id-rsa-new-pub" class="headerlink" title="Step1: Use ssh-keygen to generate a new pair of id_rsa_new / id_rsa_new.pub"></a>Step1: Use <code>ssh-keygen</code> to generate a new pair of id_rsa_new / id_rsa_new.pub</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ssh</span><br><span class="line">ssh-keygen -t rsa -C &quot;tanhao2013@foxmail.com&quot; # your email</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww1.sinaimg.cn/large/6fbc15dcjw1enxr1dp2asj20hw0blmz5.jpg" alt="step1"></p>
+<h3 id="Step2-Add-the-ssh-key-to-the-gitlab"><a href="#Step2-Add-the-ssh-key-to-the-gitlab" class="headerlink" title="Step2: Add the ssh key to the gitlab"></a>Step2: Add the ssh key to the gitlab</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat gitlab_rsa.pub</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww3.sinaimg.cn/large/6fbc15dcgw1f2aib0m5kpj20uw06nwgq.jpg" alt="step2"></p>
+<a id="more"></a>
+<h3 id="Step3-Modify-youy-ssh-config"><a href="#Step3-Modify-youy-ssh-config" class="headerlink" title="Step3: Modify youy ~/.ssh/config"></a>Step3: Modify youy <code>~/.ssh/config</code></h3><p><img src="http://ww2.sinaimg.cn/large/6fbc15dcgw1f2aidrh5o6j20at042dgh.jpg" alt="step3"></p>
+<h3 id="Step4-Testing"><a href="#Step4-Testing" class="headerlink" title="Step4: Testing"></a>Step4: Testing</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ssh-agent bash</span><br><span class="line">ssh-add ~/.ssh/gitlab_rsa</span><br><span class="line"># Input the password you set at step1</span><br><span class="line"># Enter passphrase for /root/.ssh/gitlab_rsa:</span><br><span class="line"># Identity added: /root/.ssh/gitlab_rsa (/root/.ssh/gitlab_rsa)</span><br><span class="line">ssh -T git@gitlab.mudan.com</span><br></pre></td></tr></table></figure>
+<h3 id="Step5：-Use-it"><a href="#Step5：-Use-it" class="headerlink" title="Step5： Use it"></a>Step5： Use it</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd workdir</span><br><span class="line">git config --global user.name &quot;tanhao&quot;</span><br><span class="line">git config --global user.email &quot;tanhao2013@foxmail.com&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mkdir test</span><br><span class="line">cd test</span><br><span class="line">git init</span><br><span class="line">touch README.md</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m &quot;first commit&quot;</span><br><span class="line">git remote add origin ssh://git@*.*.*.*:1020/tanhao/test.git</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<h3 id="Step6：-Windows-下使用方法"><a href="#Step6：-Windows-下使用方法" class="headerlink" title="Step6： Windows 下使用方法"></a>Step6： Windows 下使用方法</h3><p><a href="http://www.showerlee.com/archives/1300" target="_blank" rel="noopener">http://www.showerlee.com/archives/1300</a>        </p>
+<h3 id="Step7：Eclipes-使用方法"><a href="#Step7：Eclipes-使用方法" class="headerlink" title="Step7：Eclipes 使用方法"></a>Step7：Eclipes 使用方法</h3><p><a href="http://blog.csdn.net/luckarecs/article/details/7427605" target="_blank" rel="noopener">http://blog.csdn.net/luckarecs/article/details/7427605</a>        </p>
+<h3 id="Step8：-多人协作及WorkFlow"><a href="#Step8：-多人协作及WorkFlow" class="headerlink" title="Step8： 多人协作及WorkFlow"></a>Step8： 多人协作及WorkFlow</h3><p><a href="http://herry2013git.blog.163.com/blog/static/219568011201341111240751/" target="_blank" rel="noopener">http://herry2013git.blog.163.com/blog/static/219568011201341111240751/</a><br><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013760174128707b935b0be6fc4fc6ace66c4f15618f8d000" target="_blank" rel="noopener">http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013760174128707b935b0be6fc4fc6ace66c4f15618f8d000</a></p>
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a href="http://www.kuqin.com/shuoit/20141213/343854.html" target="_blank" rel="noopener">http://www.kuqin.com/shuoit/20141213/343854.html</a><br><a href="http://www.2cto.com/os/201402/281792.html" target="_blank" rel="noopener">http://www.2cto.com/os/201402/281792.html</a><br><a href="http://www.cnblogs.com/BeginMan/p/3548139.html" target="_blank" rel="noopener">http://www.cnblogs.com/BeginMan/p/3548139.html</a><br><a href="http://my.oschina.net/csensix/blog/184434" target="_blank" rel="noopener">http://my.oschina.net/csensix/blog/184434</a></p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/Tips/">Tips</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/git/">git</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+<section id="comment"> 
+    <h1 class="title">Comments</h1>
+    <div class="ds-thread" data-title="gitlab使用说明"></div> 
+</section>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2018 <a href="/">Buttonwood</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'buttonwood' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

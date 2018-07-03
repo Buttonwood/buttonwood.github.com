@@ -1,0 +1,274 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title> 杂合基因组的组装（De novo assembly of highly heterozygous genomes ) | Buttonwood</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Buttonwood">
+  
+  
+    <meta name="description" content="杂合基因组的组装（De novo assembly of highly heterozygous genomes ）最近看到一篇文献Efficient de novo assembly of highly heterozygous genomes from whole-genome shotgun short reads 。感觉高杂合的大型基因组的组装有了一些可喜的进展，日本人的工作还是很扎实的，">
+  
+  <meta name="description" content="杂合基因组的组装（De novo assembly of highly heterozygous genomes ）最近看到一篇文献Efficient de novo assembly of highly heterozygous genomes from whole-genome shotgun short reads 。感觉高杂合的大型基因组的组装有了一些可喜的进展，日本人的工作还是很扎实的，">
+<meta name="keywords" content="DBG,OLC">
+<meta property="og:type" content="article">
+<meta property="og:title" content=" 杂合基因组的组装（De novo assembly of highly heterozygous genomes )">
+<meta property="og:url" content="http://buttonwood.github.io/2014/05/02/2014-05-02-de-novo-assembly-of-highly-heterozygous-genomes/index.html">
+<meta property="og:site_name" content="Buttonwood">
+<meta property="og:description" content="杂合基因组的组装（De novo assembly of highly heterozygous genomes ）最近看到一篇文献Efficient de novo assembly of highly heterozygous genomes from whole-genome shotgun short reads 。感觉高杂合的大型基因组的组装有了一些可喜的进展，日本人的工作还是很扎实的，">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://dl.dropboxusercontent.com/u/78977353/Octopress/image/genome/hass-contig.png">
+<meta property="og:image" content="https://dl.dropboxusercontent.com/u/78977353/Octopress/image/genome/hass-scaffolding.png">
+<meta property="og:image" content="https://dl.dropboxusercontent.com/u/78977353/Octopress/image/genome/hass-gapping.png">
+<meta property="og:image" content="https://dl.dropboxusercontent.com/u/78977353/Octopress/image/genome/Screen%20Shot%202014-05-06%20at%20%E4%B8%8A%E5%8D%8811.35.11.png">
+<meta property="og:image" content="https://dl.dropboxusercontent.com/u/78977353/Octopress/image/genome/Screen%20Shot%202014-05-06%20at%20%E4%B8%8A%E5%8D%8811.36.08.png">
+<meta property="og:updated_time" content="2018-07-03T02:32:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content=" 杂合基因组的组装（De novo assembly of highly heterozygous genomes )">
+<meta name="twitter:description" content="杂合基因组的组装（De novo assembly of highly heterozygous genomes ）最近看到一篇文献Efficient de novo assembly of highly heterozygous genomes from whole-genome shotgun short reads 。感觉高杂合的大型基因组的组装有了一些可喜的进展，日本人的工作还是很扎实的，">
+<meta name="twitter:image" content="https://dl.dropboxusercontent.com/u/78977353/Octopress/image/genome/hass-contig.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Buttonwood" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Buttonwood</a></h1>
+    <p><a href="/">Being A Coding Poet. Less Talk, and More Move!</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/about/">About</a></li>
+      
+        <li><a href="/archives/">Archives</a></li>
+      
+        <li><a href="/links/">Links</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/05/02/2014-05-02-de-novo-assembly-of-highly-heterozygous-genomes/">
+  <time datetime="2014-05-02T03:51:00.000Z">
+    May 2 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"> 杂合基因组的组装（De novo assembly of highly heterozygous genomes )</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h4 id="杂合基因组的组装（De-novo-assembly-of-highly-heterozygous-genomes-）"><a href="#杂合基因组的组装（De-novo-assembly-of-highly-heterozygous-genomes-）" class="headerlink" title="杂合基因组的组装（De novo assembly of highly heterozygous genomes ）"></a>杂合基因组的组装（De novo assembly of highly heterozygous genomes ）</h4><p>最近看到一篇文献<br><a href="http://genome.cshlp.org/content/early/2014/04/22/gr.170720.113?top=1" target="_blank" rel="noopener">Efficient de novo assembly of highly heterozygous genomes from whole-genome shotgun short reads </a>。<br>感觉高杂合的大型基因组的组装有了一些可喜的进展，日本人的工作还是很扎实的，有一些值得借鉴和参考的地方。</p>
+<h4 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h4><p>随着测序平台的改进和发展，测序通量已经不是问题，测序价格越来越便宜，对于一些非模式生物或野生物种来说，测定它们的基因组序列对于科学研究意义越来越明显。但是，大多数情况来看，它们通常又具有较高的杂合或者多倍性这些问题，这对于以短reads做组装为主流的<strong><em>de novo</em></strong>项目非常棘手，目前尚缺乏较完善兼具可实践的方案(经费多的实验室除外)。</p>
+<p>一般来说，杂合基因组的解决有两种可行的方案，但都公认为比较费时费力费钱费脑.</p>
+<blockquote>
+<ol>
+<li>Fosmid-based (or Bac-based) hierarchical sequencing;</li>
+<li>Inbred lines ( doubled-monoploid clone).</li>
+</ol>
+</blockquote>
+<p><strong><em>Fosmid或者bac</em></strong>为基础的分层组装需要构建大量的长片段文库，实验工作以及组装拼接都是精细活，像牡蛎<em>oyster</em> (Zhang et al. 2012), 小菜饿<em>diamondback moth</em> (You et al. 2013), and 挪威云杉<em>Norway spruce</em> (Nysted et al. 2013)这些经典案例都值得看一看、读一读。</p>
+<a id="more"></a>
+<p>再就是<strong><em>双单倍体</em></strong>的做法，这也是可遇不可求的，像土豆、甜橙等高杂合的植物都是花药离体培养出双单倍体之后测序组装的。</p>
+<h4 id="Back-to-genome-assembly"><a href="#Back-to-genome-assembly" class="headerlink" title="Back to genome assembly"></a>Back to genome assembly</h4><p>什么是组装，说白了就是基因组序列很长，而测序已知的reads很短，所以就有了所谓组装拼接工作。比如人的基因组大小3G，23条染色单体平均长度130,434,783bp，而即使bac测序也只能知道大概100kb左右片段的两个末端序列长度，一代sanger测序约1000bp读长，而现在100bp左右的的短reads。因而，reads太短，又要利用这些信息去拼接更长的序列，就是砖头与房子的关系。也许，期待未来的某一天，测序能够直接读完一整条染色体，更长的序列，对于组装的改善是必然的。</p>
+<p>言归正传，基因组的组装目前也是两种主流的做法：</p>
+<blockquote>
+<ol>
+<li><strong><em>D</em></strong>e <strong><em>B</em></strong>ruijn <strong><em>G</em></strong>raph based algorithms  (Gnerre et al. 2011; Pevzner et al. 2001; Vinson et al. 2005; Zerbino and Birney 2008);</li>
+<li><strong><em>O</em></strong>verlap <strong><em>L</em></strong>ayout <strong><em>C</em></strong>onsensus algorithms (Kurtz et al. 2004).</li>
+</ol>
+</blockquote>
+<p>前面挖了两个坑，找机会把它们补上。</p>
+<p><a href="http://buttonwood.github.io/2013/01/10/2013-01-10-assemble-a-genome/">Assemble a genome </a><br><a href="http://buttonwood.github.io/2013/11/18/2013-11-18-genome-assembly/">Genome assembly </a></p>
+<p>简短唠叨一下，DBG算法对于处理短reads非常有效，它的思想是将reads打断成更短的K-mer(一定长度，如K = 17的片段)，那这些K-mer之间share的信息就是overlap信息了，于是用K-mer做顶点，有overlap的定点连接起来，边就是overlap信息；或者相反K-1个overlap做顶点，可延伸的做边。Whatevers，就是将reads构成kmer的链接图，多个kmer形成的路径就是一条reads，如果能延续或者找到一条欧拉路径或者汉密尔顿路径，就是最后的基因组的遍历了。</p>
+<p>很显然，这个图很庞大，也很复杂，于是也有很多算法和研究去实现这个过程。但是要注意三点：</p>
+<blockquote>
+<ol>
+<li>sequence errors;</li>
+<li>heterozygous;</li>
+<li>repeat.</li>
+</ol>
+</blockquote>
+<p>测序错误带来错误连接，但是深度较低，可解。<br>杂合形成bubbles，两条路径覆盖度相近，较低杂合部分可解，高杂合较难。<br>repeat的原因比较复杂，有时候repeat和杂合影响类似，有时候则是复杂的结构原因。一般说来，解决repeat需要比repeat更长的reads跨过去。</p>
+<p>OLC算法对于长reads组装效果就好，因为reads长的话，再打断成kmer就损失了信息，而长reads间overlap关系图比较清晰。缺点是，算法复杂，大量的overlap比对和确定，再就是构图和解图需要较多的计算资源。</p>
+<h4 id="How-they-do-it"><a href="#How-they-do-it" class="headerlink" title="How they do it?"></a>How they do it?</h4><p>言归正传，究竟如何处理高杂合基因组的组装？</p>
+<p>由于主要利用二代高通量测序的短reads，他们其实主要也是借鉴DBG的优势和思想，不过做了一些重要的优化和改进。</p>
+<blockquote>
+<p>“Similarly to other de Bruijn-graph-based assemblers, Platanus first constructs contigs from a de Bruijn graph and then builds up scaffolds from the contigs using paired-end or mate-pair libraries.”</p>
+</blockquote>
+<blockquote>
+<p>“various improvements (e.g.,k-mer auto-extension) have been implemented to allow Platanus to efficiently handle giga-order and relatively repetitive genomes. In addition, Platanus efficiently captures heterozygous regions containing structural variations, repeats, and/or low-coverage sites; it can merge haplotypes during not only the contig assembly step but also the scaffolding step to overcome the challenge of heterozygosity.”</p>
+</blockquote>
+<p>整体过程还是DBG的思想，先利用reads间overlap信息构建contig，然后再利用reads间PE关系构建scaffold的过程。不过他们做了很多改进工作，比如k-mer auto-extension这个关键思想使得他们能够发现杂合区域（一些structural variations, repeats, and/or low-coverage sites），并且在contig步和scaffold步都能对杂合的haplotypes进行合并。</p>
+<h4 id="Algorithm-overview"><a href="#Algorithm-overview" class="headerlink" title="Algorithm overview"></a>Algorithm overview</h4><p>主要是以下三个步骤</p>
+<blockquote>
+<ol>
+<li>Contig assembly；</li>
+<li>Scaffolding；</li>
+<li>Gap-close。</li>
+</ol>
+</blockquote>
+<p>熟悉不熟悉？像极了SOAPdenovo (Li et al. 2010) 和 Velvet (Zerbino and Birney 2008) 有木有？来来来！看图说话！</p>
+<h5 id="STEP-1-Contig-assembly"><a href="#STEP-1-Contig-assembly" class="headerlink" title="STEP 1:  Contig assembly"></a><strong><em>STEP 1:  Contig assembly</em></strong></h5><p><img src="https://dl.dropboxusercontent.com/u/78977353/Octopress/image/genome/hass-contig.png" alt="contig"></p>
+<p>这一节的主要内容有：</p>
+<blockquote>
+<ol>
+<li>reads 打断成kmer并计数kmer频率，低频kmer视为测序错误会去掉；</li>
+<li>kmer 构建De Bruijin Graph，去掉低覆盖的短分枝；</li>
+<li>marked junction nodes；</li>
+<li>K-mer extending；</li>
+<li>Remove bubbles；</li>
+<li>junction-free contigs。</li>
+</ol>
+</blockquote>
+<p>第四步和第五步是关键，涉及到小的repeat的处理以及杂合bubbles的处理。文中是这样说的:</p>
+<blockquote>
+<p>“the k-mers are extracted from both the contigs of the kpre-mer graph and reads containing marked kpre-mers. In this way, repeats shorter than k can typically be resolved, and Platanus effectively excludes junctions caused by heterozygosity, short repeats, and errors.”</p>
+</blockquote>
+<p>所谓junction nodes其实就是有冲突和分枝的kmer结点，error、repeat、heterozygosity都有可能带来这个问题，但是error形成低覆盖的tips极容易去除，错接也容易分辨；repeat和杂合的话，如果是小的repeat和杂合，他这里利用那些原始的有junction nodes的reads去辅助解图，思想非常好，和color DBG以及转录组做可变剪切的思想类似。</p>
+<p>还有就是bubbles的去除，首先弄清楚bubbles形成的原因：</p>
+<blockquote>
+<p>“Bubble structures are caused by both the heterozygosity of the diploid samples and errors.”</p>
+</blockquote>
+<p>再就是bubbles的表现：</p>
+<blockquote>
+<p>“A bubble is defined as a set of two straight nodes and two junction nodes at which the straight nodes are connected to the same junction in both directions.”</p>
+</blockquote>
+<p>接下来就是怎么去除了，也是比较直观的：</p>
+<blockquote>
+<ol>
+<li>a high identity between the two straight nodes and</li>
+<li>a low coverage depth of k-mers in the two straight nodes.</li>
+</ol>
+</blockquote>
+<p>然后他们还保留了这些bubbles信息以用于后续scaffolding步骤中</p>
+<blockquote>
+<p>“The second condition is helpful to distinguish heterozygous regions from repetitive regions. The removed bubble structures are saved and utilized in the Scaffolding step.”</p>
+</blockquote>
+<h5 id="STEP-2-scaffolding"><a href="#STEP-2-scaffolding" class="headerlink" title="STEP 2:  scaffolding"></a><strong><em>STEP 2:  scaffolding</em></strong></h5><p>以上得到了一些contig序列，还可以利用reads见的PE关系估计contig间的顺序和gap从而将contig连城更长的scaffolds。这就需要将原始的reads又重新map回组装的contig序列。</p>
+<p>这一部分干了这么些事：</p>
+<blockquote>
+<ol>
+<li>Re-map bubbles removed in contig-assembly</li>
+<li>Map PE/MP reads</li>
+<li>Construct scaffold graph</li>
+<li>Removed bubbles and branches</li>
+<li>Output scaffold sequences</li>
+</ol>
+</blockquote>
+<p>第一步是将那些去掉的bubbles重新定位回contig，这样便于区分那些杂合的contig；剩下的就是比对，然后估计insert size距离，构建contig图，解图之类的。但是呢？由于杂合contig的存在和可追溯，所以比一般的scaffolding多了去除bubbles和branches的过程。<br>很显然，这些bubbles和分枝来自于highly heterozygous regions (i.e.,regions with high SNV densities and/or structural variations)，去除它们主要基于以下散点信息：</p>
+<blockquote>
+<p>(1) coverage depth,<br>(2) identity with other contigs, and<br>(3) bubble structures constructed in Contig-assembly.</p>
+</blockquote>
+<p>前两点和前面contig步对bubbles的处理方式类似，后一点是基于二倍体的假设:</p>
+<blockquote>
+<p>“The third condition means that Platanus assumes that the target genome is diploid and therefore does not allow for triple or higher-ordered heterozygote alleles.”</p>
+</blockquote>
+<p><img src="https://dl.dropboxusercontent.com/u/78977353/Octopress/image/genome/hass-scaffolding.png" alt="scaffolding"></p>
+<h5 id="STEP-3：-Gap-Filling"><a href="#STEP-3：-Gap-Filling" class="headerlink" title="STEP 3：  Gap Filling"></a><strong><em>STEP 3：  Gap Filling</em></strong></h5><p>补洞的过程就是局部组装，还是利用reads间PE关系及overlap关系，做一些延拓。<br>下图过程一目了然。</p>
+<p><img src="https://dl.dropboxusercontent.com/u/78977353/Octopress/image/genome/hass-gapping.png" alt="Gapping"></p>
+<h4 id="Assemblers-for-comparisons-and-evaluation"><a href="#Assemblers-for-comparisons-and-evaluation" class="headerlink" title="Assemblers for comparisons and evaluation"></a>Assemblers for comparisons and evaluation</h4><p>他们与其他的软件做了一些比较，包括真实的数据和模拟的数据，结果无非是更高的N50，更少的错误，更短的时间之类的。</p>
+<p><img src="https://dl.dropboxusercontent.com/u/78977353/Octopress/image/genome/Screen%20Shot%202014-05-06%20at%20%E4%B8%8A%E5%8D%8811.35.11.png" alt="Error"></p>
+<p>还有对bubbles区域的验证，结果也挺不错的。</p>
+<p><img src="https://dl.dropboxusercontent.com/u/78977353/Octopress/image/genome/Screen%20Shot%202014-05-06%20at%20%E4%B8%8A%E5%8D%8811.36.08.png" alt="bubbles"></p>
+<h4 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h4><p>总体的感觉，这还是一个典型的DBG的实例，甚至基本步骤和思想都是一样的，就是在bubbles的处理和改进上做了一些保留和细化，能够追溯和处理bubbles。</p>
+<p>For more details, you can see it <a href="http://genome.cshlp.org/content/early/2014/04/22/gr.170720.113?top=1" target="_blank" rel="noopener">here[1]</a>.</p>
+<p>PS：杂合基因组的组装还有<br><a href="http://www.cs.toronto.edu/~nild/donmez11.pdf" target="_blank" rel="noopener">Hapsembler: An Assembler for Highly Polymorphic Genomes</a></p>
+<p><a href="http://www.ncbi.nlm.nih.gov/pubmed/22697235" target="_blank" rel="noopener">HapCompass: a fast cycle basis algorithm for accurate haplotype assembly of sequence data.</a></p>
+<p>也非常值得研究！</p>
+<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><p><a href="http://genome.cshlp.org/content/early/2014/04/22/gr.170720.113?top=1" target="_blank" rel="noopener">[1]: Rei Kajitani, Kouta Toshimoto, Hideki Noguchi, <em>et al</em>. Efficient de novo assembly of highly heterozygous genomes from whole-genome shotgun short reads. Genome Res. <em>doi:10.1101/gr.170720.113</em> </a></p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/Bioinformatics/">Bioinformatics</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/DBG/">DBG</a>, <a class="tags-link" href="/tags/OLC/">OLC</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+<section id="comment"> 
+    <h1 class="title">Comments</h1>
+    <div class="ds-thread" data-title=" 杂合基因组的组装（De novo assembly of highly heterozygous genomes )"></div> 
+</section>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2018 <a href="/">Buttonwood</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'buttonwood' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>用docker创建zookeeper集群 | Buttonwood</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Buttonwood">
+  
+  
+    <meta name="description" content="参考dynamic-zookeeper-cluster-with-docker[^1]，可用来动态增加zookeeper结点，这里主要稍微修正了时区和id添加的问题。
+1. 创建 Dockerfile安装jdk 及 zookeeper
+12345678910111213141516171819202122232425262728293031323334FROM ubuntu# update tim">
+  
+  <meta name="description" content="参考dynamic-zookeeper-cluster-with-docker[^1]，可用来动态增加zookeeper结点，这里主要稍微修正了时区和id添加的问题。 1. 创建 Dockerfile安装jdk 及 zookeeper 12345678910111213141516171819202122232425262728293031323334FROM ubuntu# update tim">
+<meta name="keywords" content="docker,zookeeper">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用docker创建zookeeper集群">
+<meta property="og:url" content="http://buttonwood.github.io/2016/03/15/2016-03-15-zookeeper-and-docker/index.html">
+<meta property="og:site_name" content="Buttonwood">
+<meta property="og:description" content="参考dynamic-zookeeper-cluster-with-docker[^1]，可用来动态增加zookeeper结点，这里主要稍微修正了时区和id添加的问题。 1. 创建 Dockerfile安装jdk 及 zookeeper 12345678910111213141516171819202122232425262728293031323334FROM ubuntu# update tim">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-03T02:32:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用docker创建zookeeper集群">
+<meta name="twitter:description" content="参考dynamic-zookeeper-cluster-with-docker[^1]，可用来动态增加zookeeper结点，这里主要稍微修正了时区和id添加的问题。 1. 创建 Dockerfile安装jdk 及 zookeeper 12345678910111213141516171819202122232425262728293031323334FROM ubuntu# update tim">
+  
+    <link rel="alternate" href="/atom.xml" title="Buttonwood" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Buttonwood</a></h1>
+    <p><a href="/">Being A Coding Poet. Less Talk, and More Move!</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/about/">About</a></li>
+      
+        <li><a href="/archives/">Archives</a></li>
+      
+        <li><a href="/links/">Links</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2016/03/15/2016-03-15-zookeeper-and-docker/">
+  <time datetime="2016-03-15T07:51:00.000Z">
+    Mar 15 2016
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">用docker创建zookeeper集群</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>参考dynamic-zookeeper-cluster-with-docker[^1]，可用来动态增加zookeeper结点，这里主要稍微修正了时区和id添加的问题。</p>
+<h3 id="1-创建-Dockerfile"><a href="#1-创建-Dockerfile" class="headerlink" title="1. 创建 Dockerfile"></a>1. 创建 Dockerfile</h3><p>安装jdk 及 zookeeper</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">FROM ubuntu</span><br><span class="line"></span><br><span class="line"># update time </span><br><span class="line">RUN echo &quot;Asia/Shanghai&quot; &gt; /etc/timezone</span><br><span class="line">RUN dpkg-reconfigure -f noninteractive tzdata</span><br><span class="line"></span><br><span class="line">RUN apt-get update</span><br><span class="line">RUN apt-get -y install wget bash vim &amp;&amp; apt-get clean</span><br><span class="line"></span><br><span class="line"># install java</span><br><span class="line">RUN wget http://119.254.110.32:8081/download/jdk1.7.0_60.tar.gz \</span><br><span class="line">   &amp;&amp; tar -xvzf  jdk1.7.0_60.tar.gz \</span><br><span class="line">   &amp;&amp; mv jdk1.7.0_60 /usr/share/ \</span><br><span class="line">   &amp;&amp; rm -rf /usr/lib/jvm/java-1.7-openjdk \</span><br><span class="line">   &amp;&amp; mkdir -p /usr/lib/jvm/ \</span><br><span class="line">   &amp;&amp; ln -s /usr/share/jdk1.7.0_60 /usr/lib/jvm/java-1.7-openjdk \</span><br><span class="line">   &amp;&amp; rm -rf jdk1.7.0_60.tar.gz</span><br><span class="line"></span><br><span class="line">ENV JAVA_HOME /usr/lib/jvm/java-1.7-openjdk/</span><br><span class="line"></span><br><span class="line">RUN apt-get -y install git ant &amp;&amp; apt-get clean</span><br><span class="line"></span><br><span class="line"># install zookeeper</span><br><span class="line">RUN mkdir /tmp/zookeeper</span><br><span class="line">WORKDIR /tmp/zookeeper</span><br><span class="line">RUN git clone https://github.com/apache/zookeeper.git .</span><br><span class="line">RUN git checkout release-3.5.1-rc2</span><br><span class="line">RUN ant jar</span><br><span class="line">RUN cp /tmp/zookeeper/conf/zoo_sample.cfg \</span><br><span class="line">    /tmp/zookeeper/conf/zoo.cfg</span><br><span class="line">RUN echo &quot;standaloneEnabled=false&quot; &gt;&gt; /tmp/zookeeper/conf/zoo.cfg</span><br><span class="line">RUN echo &quot;dynamicConfigFile=/tmp/zookeeper/conf/zoo.cfg.dynamic&quot; &gt;&gt; /tmp/zookeeper/conf/zoo.cfg</span><br><span class="line">ADD zk-init.sh /usr/local/bin/</span><br><span class="line">ENTRYPOINT [&quot;/usr/local/bin/zk-init.sh&quot;]</span><br></pre></td></tr></table></figure>
+<p>zookeeper 初始化脚本 <code>zk-init.sh</code></p>
+<p>需要指定自己的id和ip以及第一个zookeeper结点的ip。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">MYID=$1</span><br><span class="line">MYIP=$2</span><br><span class="line">ZK=$3</span><br><span class="line">IPADDRESS=$MYIP</span><br><span class="line"></span><br><span class="line">cd /tmp/zookeeper</span><br><span class="line"></span><br><span class="line">if [ -n &quot;$ZK&quot; ];then</span><br><span class="line">  output=`./bin/zkCli.sh -server $ZK:2181 \</span><br><span class="line">      get /zookeeper/config | grep ^server`</span><br><span class="line">  #echo $output &gt;&gt; /tmp/zookeeper/conf/zoo.cfg.dynamic</span><br><span class="line">  for i in $output; do echo $i &gt;&gt; /tmp/zookeeper/conf/zoo.cfg.dynamic; done</span><br><span class="line">  echo &quot;server.$MYID=$IPADDRESS:2888:3888:observer;2181&quot; \</span><br><span class="line">      &gt;&gt; /tmp/zookeeper/conf/zoo.cfg.dynamic</span><br><span class="line">  cp /tmp/zookeeper/conf/zoo.cfg.dynamic \</span><br><span class="line">      /tmp/zookeeper/conf/zoo.cfg.dynamic.org</span><br><span class="line">  /tmp/zookeeper/bin/zkServer-initialize.sh \</span><br><span class="line">      --force --myid=$MYID</span><br><span class="line">  ZOO_LOG_DIR=/var/log</span><br><span class="line">  ZOO_LOG4J_PROP=&apos;INFO,CONSOLE,ROLLINGFILE&apos;</span><br><span class="line">  /tmp/zookeeper/bin/zkServer.sh start</span><br><span class="line">  /tmp/zookeeper/bin/zkCli.sh -server $ZK:2181 reconfig \</span><br><span class="line">      -add &quot;server.$MYID=$IPADDRESS:2888:3888:participant;2181&quot;</span><br><span class="line">  /tmp/zookeeper/bin/zkServer.sh stop</span><br><span class="line">  ZOO_LOG_DIR=/var/log</span><br><span class="line">  ZOO_LOG4J_PROP=&apos;INFO,CONSOLE,ROLLINGFILE&apos;</span><br><span class="line">  /tmp/zookeeper/bin/zkServer.sh start-foreground</span><br><span class="line">else</span><br><span class="line">  echo &quot;server.$MYID=$IPADDRESS:2888:3888;2181&quot; \</span><br><span class="line">      &gt;&gt; /tmp/zookeeper/conf/zoo.cfg.dynamic</span><br><span class="line">  /tmp/zookeeper/bin/zkServer-initialize.sh --force --myid=$MYID</span><br><span class="line">  ZOO_LOG_DIR=/var/log</span><br><span class="line">  ZOO_LOG4J_PROP=&apos;INFO,CONSOLE,ROLLINGFILE&apos;</span><br><span class="line">  /tmp/zookeeper/bin/zkServer.sh start-foreground</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<h3 id="2-创建镜像"><a href="#2-创建镜像" class="headerlink" title="2. 创建镜像"></a>2. 创建镜像</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t peony/zk:2 .</span><br></pre></td></tr></table></figure>
+<h3 id="3-开启容器"><a href="#3-开启容器" class="headerlink" title="3. 开启容器"></a>3. 开启容器</h3><p>测试脚本<code>start-zk-2.sh</code>，启动三个结点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">docker rm -f zk01 zk02 zk03</span><br><span class="line">docker run -d --net=net04 --name zk01 --add-host \</span><br><span class="line">    zk01:192.168.4.2 --hostname zk01.mudan.com \</span><br><span class="line">    peony/zk:2 1 192.168.4.2</span><br><span class="line">docker run -d --net=net04 --name zk02 --add-host \</span><br><span class="line">    zk02:192.168.4.3 --hostname zk02.mudan.com \</span><br><span class="line">    peony/zk:2 2 192.168.4.3 192.168.4.2</span><br><span class="line">docker run -d --net=net04 --name zk03 --add-host \</span><br><span class="line">    zk03:192.168.4.4 --hostname zk03.mudan.com \</span><br><span class="line">    peony/zk:2 3 192.168.4.4 192.168.4.2</span><br></pre></td></tr></table></figure>
+<h3 id="4-参考"><a href="#4-参考" class="headerlink" title="4. 参考:"></a>4. 参考:</h3><p>[^1]:<a href="http://container-solutions.com/dynamic-zookeeper-cluster-with-docker" target="_blank" rel="noopener">dynamic zookeeper cluster with docker</a></p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/Tools/">Tools</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/docker/">docker</a>, <a class="tags-link" href="/tags/zookeeper/">zookeeper</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+<section id="comment"> 
+    <h1 class="title">Comments</h1>
+    <div class="ds-thread" data-title="用docker创建zookeeper集群"></div> 
+</section>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2018 <a href="/">Buttonwood</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'buttonwood' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

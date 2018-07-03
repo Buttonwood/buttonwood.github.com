@@ -1,0 +1,170 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>rChart and morris.js | Buttonwood</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Buttonwood">
+  
+  
+    <meta name="description" content="1. Using rChart and morris.js for time series visualizationHere are the codes!
+library(&amp;apos;rCharts&amp;apos;, &amp;apos;ramnathv&amp;apos;)
+df &amp;lt;- read.csv(&amp;quot;type.1h.csv&amp;quot;,header=FALSE,stringsAsFactor">
+  
+  <meta name="description" content="1. Using rChart and morris.js for time series visualizationHere are the codes! library(&amp;apos;rCharts&amp;apos;, &amp;apos;ramnathv&amp;apos;) df &amp;lt;- read.csv(&amp;quot;type.1h.csv&amp;quot;,header=FALSE,stringsAsFactor">
+<meta name="keywords" content="R">
+<meta property="og:type" content="article">
+<meta property="og:title" content="rChart and morris.js">
+<meta property="og:url" content="http://buttonwood.github.io/2014/12/15/2014-12-15-rChart/index.html">
+<meta property="og:site_name" content="Buttonwood">
+<meta property="og:description" content="1. Using rChart and morris.js for time series visualizationHere are the codes! library(&amp;apos;rCharts&amp;apos;, &amp;apos;ramnathv&amp;apos;) df &amp;lt;- read.csv(&amp;quot;type.1h.csv&amp;quot;,header=FALSE,stringsAsFactor">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://ww3.sinaimg.cn/mw690/6fbc15dcgw1enahmlkcp1j20n20b941c.jpg">
+<meta property="og:updated_time" content="2018-07-03T02:32:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="rChart and morris.js">
+<meta name="twitter:description" content="1. Using rChart and morris.js for time series visualizationHere are the codes! library(&amp;apos;rCharts&amp;apos;, &amp;apos;ramnathv&amp;apos;) df &amp;lt;- read.csv(&amp;quot;type.1h.csv&amp;quot;,header=FALSE,stringsAsFactor">
+<meta name="twitter:image" content="http://ww3.sinaimg.cn/mw690/6fbc15dcgw1enahmlkcp1j20n20b941c.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Buttonwood" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Buttonwood</a></h1>
+    <p><a href="/">Being A Coding Poet. Less Talk, and More Move!</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/about/">About</a></li>
+      
+        <li><a href="/archives/">Archives</a></li>
+      
+        <li><a href="/links/">Links</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/12/15/2014-12-15-rChart/">
+  <time datetime="2014-12-15T03:51:00.000Z">
+    Dec 15 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">rChart and morris.js</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h3 id="1-Using-rChart-and-morris-js-for-time-series-visualization"><a href="#1-Using-rChart-and-morris-js-for-time-series-visualization" class="headerlink" title="1. Using rChart and morris.js for time series visualization"></a>1. Using <code>rChart</code> and <code>morris.js</code> for time series visualization</h3><p>Here are the codes!</p>
+<pre><code>library(&apos;rCharts&apos;, &apos;ramnathv&apos;)
+df &lt;- read.csv(&quot;type.1h.csv&quot;,header=FALSE,stringsAsFactors=FALSE)
+colnames(df) &lt;- c(&quot;date&quot;,&quot;1&quot;, &quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;,&quot;8&quot;,&quot;9&quot;,&quot;10&quot;)
+transform(df, date = as.character(date))
+m1 &lt;- mPlot(x = &quot;date&quot;, y = c(&quot;1&quot;, &quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;,&quot;8&quot;,&quot;9&quot;,&quot;10&quot;), type = &quot;Line&quot;, data = df)
+m1$set(pointSize = 0, lineWidth = 1)
+m1$print(&quot;chart2&quot;)
+m1
+#base64enc
+# install.packages(&quot;base64enc&quot;)
+library(&quot;base64enc&quot;)
+m1$save(&apos;graph1.html&apos;, &apos;inline&apos;, cdn=TRUE)
+#m1$save(&apos;graph1.html&apos;, &apos;inline&apos;, standalone=TRUE)
+</code></pre><h4 id="2-Graph"><a href="#2-Graph" class="headerlink" title="2. Graph"></a>2. Graph</h4><p>Here, we can see this is a test graph!</p>
+<p>Here is a test image!<br><img src="http://ww3.sinaimg.cn/mw690/6fbc15dcgw1enahmlkcp1j20n20b941c.jpg" alt=""></p>
+<p>Here is a test page!<br><a href="../../../../fish/graph1.html">graph1.html</a></p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/Tools/">Tools</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/R/">R</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+<section id="comment"> 
+    <h1 class="title">Comments</h1>
+    <div class="ds-thread" data-title="rChart and morris.js"></div> 
+</section>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2018 <a href="/">Buttonwood</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'buttonwood' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

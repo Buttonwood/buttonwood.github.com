@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>Axes | Buttonwood</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Buttonwood">
+  
+  
+    <meta name="description" content="SVG Axes
+1. Setting Up an Axis12345678910var xAxis = d3.svg.axis();xAxis.scale(xScale);xAxis.orient(&amp;quot;bottom&amp;quot;);# 一步到位var xAxis = d3.svg.axis()    .scale(xScale)    .orient(&amp;quot;bottom&amp;quot;)">
+  
+  <meta name="description" content="SVG Axes 1. Setting Up an Axis12345678910var xAxis = d3.svg.axis();xAxis.scale(xScale);xAxis.orient(&amp;quot;bottom&amp;quot;);# 一步到位var xAxis = d3.svg.axis()    .scale(xScale)    .orient(&amp;quot;bottom&amp;quot;)">
+<meta name="keywords" content="D3.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Axes">
+<meta property="og:url" content="http://buttonwood.github.io/2015/04/05/2015-04-05-ch8-Axes/index.html">
+<meta property="og:site_name" content="Buttonwood">
+<meta property="og:description" content="SVG Axes 1. Setting Up an Axis12345678910var xAxis = d3.svg.axis();xAxis.scale(xScale);xAxis.orient(&amp;quot;bottom&amp;quot;);# 一步到位var xAxis = d3.svg.axis()    .scale(xScale)    .orient(&amp;quot;bottom&amp;quot;)">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-03T02:32:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Axes">
+<meta name="twitter:description" content="SVG Axes 1. Setting Up an Axis12345678910var xAxis = d3.svg.axis();xAxis.scale(xScale);xAxis.orient(&amp;quot;bottom&amp;quot;);# 一步到位var xAxis = d3.svg.axis()    .scale(xScale)    .orient(&amp;quot;bottom&amp;quot;)">
+  
+    <link rel="alternate" href="/atom.xml" title="Buttonwood" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Buttonwood</a></h1>
+    <p><a href="/">Being A Coding Poet. Less Talk, and More Move!</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/about/">About</a></li>
+      
+        <li><a href="/archives/">Archives</a></li>
+      
+        <li><a href="/links/">Links</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/04/05/2015-04-05-ch8-Axes/">
+  <time datetime="2015-04-05T13:51:00.000Z">
+    Apr 5 2015
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">Axes</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p><a href="https://github.com/mbostock/d3/wiki/SVG-Axes" target="_blank" rel="noopener">SVG Axes</a></p>
+<h4 id="1-Setting-Up-an-Axis"><a href="#1-Setting-Up-an-Axis" class="headerlink" title="1. Setting Up an Axis"></a>1. Setting Up an Axis</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var xAxis = d3.svg.axis();</span><br><span class="line">xAxis.scale(xScale);</span><br><span class="line">xAxis.orient(&quot;bottom&quot;);</span><br><span class="line"># 一步到位</span><br><span class="line">var xAxis = d3.svg.axis()</span><br><span class="line">    .scale(xScale)</span><br><span class="line">    .orient(&quot;bottom&quot;);</span><br><span class="line"># 添加</span><br><span class="line">svg.append(&quot;g&quot;)</span><br><span class="line">    .call(xAxis);</span><br></pre></td></tr></table></figure>
+<h4 id="2-style-SVG-elements"><a href="#2-style-SVG-elements" class="headerlink" title="2. style SVG elements"></a>2. style SVG elements</h4><p><a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute" target="_blank" rel="noopener">SVG Attribute reference</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">svg.append(&quot;g&quot;)</span><br><span class="line">    .attr(&quot;class&quot;, &quot;axis&quot;) //Assign &quot;axis&quot; class</span><br><span class="line">    .call(xAxis);</span><br></pre></td></tr></table></figure>
+<p>CSS</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.axis path,</span><br><span class="line">.axis line &#123;</span><br><span class="line">    fill: none;</span><br><span class="line">    stroke: black;</span><br><span class="line">    shape-rendering: crispEdges;</span><br><span class="line">&#125;</span><br><span class="line">.axis text &#123;</span><br><span class="line">    font-family: sans-serif;</span><br><span class="line">    font-size: 11px;</span><br><span class="line">&#125;</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">#### 3. [SVG transformations](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/transform)</span><br></pre></td></tr></table></figure>
+<h1 id="Note-that-we-use-attr-to-apply-transform-as-an-attribute-of-g"><a href="#Note-that-we-use-attr-to-apply-transform-as-an-attribute-of-g" class="headerlink" title="Note that we use attr() to apply transform as an attribute of g."></a>Note that we use attr() to apply transform as an attribute of g.</h1><p>svg.append(“g”)<br>    .attr(“class”, “axis”)<br>    .attr(“transform”, “translate(0,” + (h - padding) + “)”)<br>    .call(xAxis);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;!-- more --&gt;</span><br><span class="line"></span><br><span class="line">#### 4. Ticks</span><br><span class="line">Ticks communicate information and can also clutter your chart.</span><br></pre></td></tr></table></figure></p>
+<p>var xAxis = d3.svg.axis()<br>                  .scale(xScale)<br>                  .orient(“bottom”)<br>                  .ticks(5);  //Set rough # of ticks<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 5. Y axis</span><br></pre></td></tr></table></figure></p>
+<p>//Define Y axis<br>var yAxis = d3.svg.axis()<br>                  .scale(yScale)<br>                  .orient(“left”)<br>                  .ticks(5);<br>//Create Y axis<br>svg.append(“g”)<br>    .attr(“class”, “axis”)<br>    .attr(“transform”, “translate(“ + padding + “,0)”)<br>    .call(yAxis);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 6. Formatting Tick Labels</span><br><span class="line">[d3 formatting](https://github.com/mbostock/d3/wiki/Formatting#d3_format)</span><br></pre></td></tr></table></figure></p>
+<p>var formatAsPercentage = d3.format(“.1%”);<br>xAxis.tickFormat(formatAsPercentage);<br><code>`</code></p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/D3-js/">D3.js</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/D3-js/">D3.js</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+<section id="comment"> 
+    <h1 class="title">Comments</h1>
+    <div class="ds-thread" data-title="Axes"></div> 
+</section>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2018 <a href="/">Buttonwood</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'buttonwood' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

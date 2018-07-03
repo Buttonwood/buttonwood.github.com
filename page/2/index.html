@@ -1,0 +1,615 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>Buttonwood</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Buttonwood">
+  
+  
+  <meta name="description" content="Buttonwood | Data Mining | python | perl | Bioinformatics">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Buttonwood">
+<meta property="og:url" content="http://buttonwood.github.io/page/2/index.html">
+<meta property="og:site_name" content="Buttonwood">
+<meta property="og:description" content="Buttonwood | Data Mining | python | perl | Bioinformatics">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Buttonwood">
+<meta name="twitter:description" content="Buttonwood | Data Mining | python | perl | Bioinformatics">
+  
+    <link rel="alternate" href="/atom.xml" title="Buttonwood" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Buttonwood</a></h1>
+    <p><a href="/">Being A Coding Poet. Less Talk, and More Move!</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/about/">About</a></li>
+      
+        <li><a href="/archives/">Archives</a></li>
+      
+        <li><a href="/links/">Links</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content">
+
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/08/22/2014-08-22-centOS-reinstall/">
+  <time datetime="2014-08-22T02:51:00.000Z">
+    Aug 22 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2014/08/22/2014-08-22-centOS-reinstall/">服务器重装centOS设定静态ip</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>电信机房5台托管服务器被攻击，为安全起见，老板令我需要重装系统。可采用光盘刻录或u盘安装方法(过程从略)。</p>
+<h3 id="1-重装系统"><a href="#1-重装系统" class="headerlink" title="1. 重装系统"></a>1. 重装系统</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">reboot(crtl+allt+delete) </span><br><span class="line">-&gt; </span><br><span class="line">F2(system manage) </span><br><span class="line">-&gt; </span><br><span class="line">F11(BIOS Menu) </span><br><span class="line">-&gt; </span><br><span class="line">BIOS Boot Setting </span><br><span class="line">-&gt;</span><br><span class="line">Boot Sequence </span><br><span class="line">-&gt; </span><br><span class="line"># 光盘或U盘</span><br><span class="line">COD(DVD or U Driver) </span><br><span class="line">-&gt; </span><br><span class="line">OK </span><br><span class="line">-&gt; </span><br><span class="line">Install from video / U Driver</span><br><span class="line">-&gt; </span><br><span class="line">No Test </span><br><span class="line">-&gt; </span><br><span class="line">Basic </span><br><span class="line">-&gt; </span><br><span class="line">Fresh </span><br><span class="line">-&gt; </span><br><span class="line">Use All </span><br><span class="line">-&gt; </span><br><span class="line">Basic Server </span><br><span class="line">-&gt; </span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+<h3 id="2-设置固定IP上网"><a href="#2-设置固定IP上网" class="headerlink" title="2. 设置固定IP上网"></a>2. 设置固定IP上网</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#### 内网或外网ip</span><br><span class="line">IPADDR=192.168.1.201</span><br><span class="line"></span><br><span class="line">#### 2.1 网关配置</span><br><span class="line">cp /etc/sysconfig/network /etc/sysconfig/network.bak</span><br><span class="line">echo &quot;</span><br><span class="line">NETWORKING=yes</span><br><span class="line">NETWORKING_IPV6=yes</span><br><span class="line">GATEWAY=192.168.1.1</span><br><span class="line">&quot; &gt;&gt; /etc/sysconfig/network</span><br><span class="line"></span><br><span class="line">#### 2.2 网卡配置 </span><br><span class="line">cp /etc/sysconfig/network-scripts/ifcfg-em1 /etc/sysconfig/network-scripts/ifcfg-em1.bak</span><br><span class="line">sed -i &apos;s/BOOTPROTO=dhcp/BOOTPROTO=none/&apos; /etc/sysconfig/network-scripts/ifcfg-em1</span><br><span class="line">sed -i &apos;s/ONBOOT=no/ONBOOT=yes/&apos; /etc/sysconfig/network-scripts/ifcfg-em1</span><br><span class="line"></span><br><span class="line">echo &quot;</span><br><span class="line">BROADCAST=192.168.1.255</span><br><span class="line">IPADDR=$IPADDR</span><br><span class="line">NETWORK=192.168.1.0</span><br><span class="line">&quot; &gt;&gt;/etc/sysconfig/network-scripts/ifcfg-em1</span><br><span class="line"></span><br><span class="line">#### 2.3 DNS解析</span><br><span class="line">echo &quot;nameserver 202.103.24.68&quot; &gt;/etc/resolv.conf</span><br><span class="line"></span><br><span class="line">#### 2.4 测试</span><br><span class="line">chkconfig | grep network</span><br><span class="line">service network restart</span><br><span class="line">ping www.baidu.com</span><br></pre></td></tr></table></figure>
+<h3 id="3-参考"><a href="#3-参考" class="headerlink" title="3. 参考"></a>3. 参考</h3><p><a href="http://blog.51yip.com/linux/1120.html" target="_blank" rel="noopener">http://blog.51yip.com/linux/1120.html</a><br><a href="https://github.com/iofdata/DM/issues/8" target="_blank" rel="noopener">https://github.com/iofdata/DM/issues/8</a></p>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/07/25/2014-07-25-sysbench-mysql/">
+  <time datetime="2014-07-25T15:51:00.000Z">
+    Jul 25 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2014/07/25/2014-07-25-sysbench-mysql/">Sysbench for MySQL Testing</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h3 id="1-For-whole-testing-scripts"><a href="#1-For-whole-testing-scripts" class="headerlink" title="1. For whole testing scripts"></a>1. For whole testing scripts</h3><pre><code>host=localhost
+port=3306
+socket=/home/data/mysql/mysql.sock
+user=root
+password=123456
+
+resultsdir=./results-thread
+
+threads=&quot;8 16 32 64 128&quot;
+
+sizes=&quot;1000000 5000000 10000000 15000000 20000000 25000000 30000000&quot;
+
+
+printf &quot;sizes,threads,transactions,trns p/s,deadlocks, dls p/s,read/write requests,r/w reqs p/s,min,avg,max,99 percentile \n&quot; &gt;&gt; stat.txt
+
+mkdir -p $resultsdir
+
+for thread in $threads;do
+    mkdir $resultsdir/thread-$thread
+    for size in $sizes; do
+        sysbench --test=oltp --mysql-table-engine=innodb \
+        --oltp-table-size=$size  --mysql-socket=$socket \
+        --mysql-user=$user --mysql-host=$host \
+        --mysql-password=$password --mysql-db=students \
+        --oltp-table-name=test$size prepare;
+        sysbench --test=oltp --mysql-table-engine=innodb \
+        --oltp-table-size=$size --mysql-socket=$socket \
+        --mysql-user=$user --mysql-host=$host \
+        --mysql-password=$password --mysql-db=students \
+        --oltp-table-name=test$size  --max-requests=1000 \
+        --num-threads=$thread run | \ 
+        tee -a $resultsdir/thread-$thread/sysbench.$thread.$size.report;
+        sysbench --test=oltp --mysql-host=$host  --mysql-user=$user \
+        --mysql-password=$password --mysql-socket=$socket \
+        --mysql-db=students --oltp-table-name=test$size  cleanup;
+
+        cat $resultsdir/thread-$thread/sysbench.$thread.$size.report | \
+        egrep &quot;cat|threads:|transactions:|deadlocks|
+        read/write|min:|avg:|max:|percentile:&quot; | \
+        sed  -e &apos;1 s/Number of threads: //&apos; | \
+        tr -d &quot;\n&quot; | \
+        sed -e &apos;s/Number of threads: /\n/g&apos; \
+        -e &apos;s/[A-Za-z\/]\{1,\}://g&apos; \
+        -e &apos;s/read\/write//g&apos; \
+        -e &apos;s/approx\.  95//g&apos; \
+        -e &apos;s/per sec.)//g&apos; \
+        -e &apos;s/ms//g&apos; \
+        -e &apos;s/(//g&apos;  \
+        -e &apos;s/  */,/g&apos; | awk -v d=$size &apos;{$0=d&quot;,&quot;$0}1&apos; &gt;&gt; stat.txt
+    done
+done
+</code></pre>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/2014/07/25/2014-07-25-sysbench-mysql/#more" class="more-link">Read More</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/07/02/2014-07-02-Bayesian-Genome-Assembly/">
+  <time datetime="2014-07-02T13:51:00.000Z">
+    Jul 2 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2014/07/02/2014-07-02-Bayesian-Genome-Assembly/">Bayesian Genome Assembly and MCMC Assessment</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h4 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h4><p>They first build an assembly graph starting from a de Bruijn graph of the reads. Then they remove all tips and merge all unambiguous paths into single nodes that are annotated by the sequence of merged K-mers. </p>
+<p>The resulting unresolved assembly graph (no longer de Bruijn) is a directed graph that consists only of bubbles and is a minimal representation of the variants that can be inferred from the sequenced data. Concatenating the sequences across the nodes in a particular path through this graph gives a possible assembly sequence.</p>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/2014/07/02/2014-07-02-Bayesian-Genome-Assembly/#more" class="more-link">Read More</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/06/22/2014-06-22-SSPACE-LongRead/">
+  <time datetime="2014-06-22T03:51:00.000Z">
+    Jun 22 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2014/06/22/2014-06-22-SSPACE-LongRead/">SSPACE-LongRead: scaffolding with long reads</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h4 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h4><p>We are happy to say that SSPACE is ready for dealing with the PacBio long reads for scaffolding[^1].</p>
+<p>They proposed a novel hybrid assembly methodology that aims to scaffold pre-assembled contigs in an iterative manner using PacBio RS long read information as a backbone. </p>
+<p>The SSPACE-LongRead software which is designed to upgrade incomplete draft genomes using single molecule sequences. We conclude that the recent advances of the PacBio sequencing technology and chemistry, in combination with the limited computational resources required to run our program, allow to scaffold genomes in a fast and reliable manner.</p>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/2014/06/22/2014-06-22-SSPACE-LongRead/#more" class="more-link">Read More</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/05/17/2014-05-17-circos/">
+  <time datetime="2014-05-16T16:00:00.000Z">
+    May 17 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2014/05/17/2014-05-17-circos/">Circos for Comparative genomics</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h3 id="Synteny-and-Comparative-genomics"><a href="#Synteny-and-Comparative-genomics" class="headerlink" title="Synteny and Comparative genomics"></a>Synteny and Comparative genomics</h3><p>Welcome to see details in my <a href="https://github.com/Buttonwood/Bioinformatics/issues/4" target="_blank" rel="noopener">github issues</a>.</p>
+<p>First, use <a href="http://www.bx.psu.edu/miller_lab/dist/README.lastz-1.02.00/README.lastz-1.02.00a.html" target="_blank" rel="noopener">Lastz</a> for synteny block alignment.</p>
+<p>Then use SVG for synteny block drawing.<br><img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/cg/line.png" alt="line"></p>
+<p>And we found <a href="http://circos.ca/" target="_blank" rel="noopener">Circos</a> more powerful on handing this.</p>
+<p><img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/cg/circos.png" alt="circos"></p>
+<p>说明,本文以下内容多数来自网络资源转载,像原作者致意,感谢他们的原创工作!如想详细了解，请点击衔接，接入原文！</p>
+<h3 id="Circos-Installation"><a href="#Circos-Installation" class="headerlink" title="Circos Installation"></a>Circos Installation</h3><p>For OSX: you can refer to this <a href="http://kylase.github.io/CircosAPI/os-x-installation-guide/" target="_blank" rel="noopener">os-x-installation-guide</a> and <a href="http://pgfe.umassmed.edu/ou/archives/2513" target="_blank" rel="noopener">this</a>.</p>
+<h3 id="Read-this-first"><a href="#Read-this-first" class="headerlink" title="Read this first"></a>Read this first</h3><p><a href="http://pgfe.umassmed.edu/ou/archives/2513" target="_blank" rel="noopener">Circos系列教程一安装</a></p>
+<p><a href="http://pgfe.umassmed.edu/ou/archives/2519" target="_blank" rel="noopener">Circos系列教程二染色体示意图ideograms</a></p>
+<p><a href="http://pgfe.umassmed.edu/ou/archives/2554" target="_blank" rel="noopener">Circos系列教程三突出标记Highlight</a></p>
+<p><a href="http://pgfe.umassmed.edu/ou/archives/2579" target="_blank" rel="noopener">Circos系列教程四连线links</a></p>
+<h3 id="Tutorial"><a href="#Tutorial" class="headerlink" title="Tutorial"></a>Tutorial</h3><p><a href="http://blog.csdn.net/skenoy/article/details/8696402" target="_blank" rel="noopener"> CIRCOS教程翻译 1.1——helloworld</a><br><img src="http://img.my.csdn.net/uploads/201303/20/1363765909_2834.png" alt="1.1"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8697823" target="_blank" rel="noopener">CIRCOS教程翻译 1.2——ticks</a><br><img src="http://img.my.csdn.net/uploads/201303/20/1363778829_5544.png" alt="1.2"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8716127" target="_blank" rel="noopener">CIRCOS教程翻译 1.3 ——染色体的变化</a><br><img src="http://img.my.csdn.net/uploads/201303/25/1364182311_2969.png" alt="1.3"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8716632" target="_blank" rel="noopener">CIRCOS教程翻译 1.4——links和rules</a><br><img src="http://img.my.csdn.net/uploads/201303/25/1364190625_3670.png" alt="1.4"></p>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/2014/05/17/2014-05-17-circos/#more" class="more-link">Read More</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/05/02/2014-05-02-de-novo-assembly-of-highly-heterozygous-genomes/">
+  <time datetime="2014-05-02T03:51:00.000Z">
+    May 2 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2014/05/02/2014-05-02-de-novo-assembly-of-highly-heterozygous-genomes/"> 杂合基因组的组装（De novo assembly of highly heterozygous genomes )</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h4 id="杂合基因组的组装（De-novo-assembly-of-highly-heterozygous-genomes-）"><a href="#杂合基因组的组装（De-novo-assembly-of-highly-heterozygous-genomes-）" class="headerlink" title="杂合基因组的组装（De novo assembly of highly heterozygous genomes ）"></a>杂合基因组的组装（De novo assembly of highly heterozygous genomes ）</h4><p>最近看到一篇文献<br><a href="http://genome.cshlp.org/content/early/2014/04/22/gr.170720.113?top=1" target="_blank" rel="noopener">Efficient de novo assembly of highly heterozygous genomes from whole-genome shotgun short reads </a>。<br>感觉高杂合的大型基因组的组装有了一些可喜的进展，日本人的工作还是很扎实的，有一些值得借鉴和参考的地方。</p>
+<h4 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h4><p>随着测序平台的改进和发展，测序通量已经不是问题，测序价格越来越便宜，对于一些非模式生物或野生物种来说，测定它们的基因组序列对于科学研究意义越来越明显。但是，大多数情况来看，它们通常又具有较高的杂合或者多倍性这些问题，这对于以短reads做组装为主流的<strong><em>de novo</em></strong>项目非常棘手，目前尚缺乏较完善兼具可实践的方案(经费多的实验室除外)。</p>
+<p>一般来说，杂合基因组的解决有两种可行的方案，但都公认为比较费时费力费钱费脑.</p>
+<blockquote>
+<ol>
+<li>Fosmid-based (or Bac-based) hierarchical sequencing;</li>
+<li>Inbred lines ( doubled-monoploid clone).</li>
+</ol>
+</blockquote>
+<p><strong><em>Fosmid或者bac</em></strong>为基础的分层组装需要构建大量的长片段文库，实验工作以及组装拼接都是精细活，像牡蛎<em>oyster</em> (Zhang et al. 2012), 小菜饿<em>diamondback moth</em> (You et al. 2013), and 挪威云杉<em>Norway spruce</em> (Nysted et al. 2013)这些经典案例都值得看一看、读一读。</p>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/2014/05/02/2014-05-02-de-novo-assembly-of-highly-heterozygous-genomes/#more" class="more-link">Read More</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/02/12/2014-02-12-pacbio-sequencing/">
+  <time datetime="2014-02-12T12:32:00.000Z">
+    Feb 12 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2014/02/12/2014-02-12-pacbio-sequencing/">PacBio Sequencing</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>Here is a short talk about <a href="https://docs.google.com/file/d/0B_bKUAo13sMjN3gybEdGS2NyODQ/edit" target="_blank" rel="noopener">PacBio Sequencing</a> by me, any suggestion is welcome!</p>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2013/12/29/2013-12-29-genome-annotation/">
+  <time datetime="2013-12-29T13:59:00.000Z">
+    Dec 29 2013
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2013/12/29/2013-12-29-genome-annotation/">genome annotation</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>Here I draw a genome annotation flow chart. Any suggestion is welcome!</p>
+<h3 id="A-roadmap-for-genome-annotation"><a href="#A-roadmap-for-genome-annotation" class="headerlink" title="A roadmap for genome annotation!"></a>A roadmap for <strong><em>genome annotation</em></strong>!</h3><img src="https://dl.dropboxusercontent.com/u/78977353/Octopress/image/genome/genome-annotation.png">
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+    <article class="photo">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2013/11/18/2013-11-18-genome-assembly/">
+  <time datetime="2013-11-18T15:22:00.000Z">
+    Nov 18 2013
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2013/11/18/2013-11-18-genome-assembly/">genome assembly</a></h1>
+  
+
+  </header>
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      
+        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.001.jpg">
+      
+        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.002.jpg">
+      
+        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.003.jpg">
+      
+        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.004.jpg">
+      
+        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.005.jpg">
+      
+        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.006.jpg">
+      
+        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.007.jpg">
+      
+        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.008.jpg">
+      
+        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.009.jpg">
+      
+        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.010.jpg">
+      
+        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.011.jpg">
+      
+        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.012.jpg">
+      
+        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.013.jpg">
+      
+        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.014.jpg">
+      
+        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.015.jpg">
+      
+        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.016.jpg">
+      
+        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.017.jpg">
+      
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="entry">
+    
+      <p>Here is a short talk about <a href="https://docs.google.com/file/d/0B_bKUAo13sMjWlJSVTk0WE93aDA/edit" target="_blank" rel="noopener">genome assembly</a>.</p>
+<p>And for <strong><em>DBG</em></strong> details, please click on  <a href="https://docs.google.com/file/d/0B_bKUAo13sMjaWRhYVdqZTVuejQ/edit" target="_blank" rel="noopener">DBG</a>.</p>
+<p>Here I updated the images of the slide for you.</p>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2013/08/14/2013-08-14-A-Single-Library/">
+  <time datetime="2013-08-14T11:43:00.000Z">
+    Aug 14 2013
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2013/08/14/2013-08-14-A-Single-Library/"> 单文库基因组组装 (A Single Library for Genome  Assemble) </a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p><a href="1"><em>Illumina</em> 报告</a>中比较了 Reads 长度，coverage，insert size 等对组装结果的影响，可以看到理想状况下，对于简单基因组，30X左右短片段reads加上适量长片段reads可以覆盖足够的基因组区域，并且有较好的N50等指标。</p>
+<p><a href="2">最开始sanger测序</a>可能为了避免重复序列的影响，采用了1k-40k的建库策略，后来soapdenovo在做人类基因组的时候沿用了200，500，2k，5k，10k的测序方法。但是不同基因组具体采用的策略并不一致，但是一般均需要短片段文库（&lt;2k）和长片段文库(&gt;2k)。像Abyss由于做<a href="3">非洲人</a>的时候就只用了42X的210文库数据。        </p>
+<p><a href="4">GAGE评价了一些组装软件的组装效果</a>，有 Effect of multiple libraries on assembly 这一段。结合我自己的项目经验，multilib的策略是为了辅助scaffolding。因为contig的组装主要用到reads见的overlap信息，只要测序随机和均一，并且深度足够，短片段reads可以很好的组装出contig（无N的一致性序列），contig的组装步骤并不设计文库片段信息（insert-size和pair-end关系），后面scaffolding则需要用到文库信息来辅助contig间建立连接关系，而这里最主要的也是需要大雨2k的文库梯度分配。所以像allpath这种软件推荐的就是一个短片段文库加一个大片段文库。金小峰这种单倍体物种，基因组也不太大，考虑到个体小，提取DNA复杂，一只蜜蜂样品不足以构建三个短片段文库（200，500，800），我们可以尽量尝试建1到2个文库，对于contig组装影响不会太大（我曾经组装的单染色体蚂蚁也是由于样品原因，建了一个500的文库，效果也很好）。</p>
+<p>另外我们注意到像<a href="5">fermi这样的最新的组装软件的进展</a>，对人类基因组已经可以一个样品一个库，35X数据做denovo assembly了。</p>
+<p>为了更好的开展后续的分析和讨论工作，后面我还会具体找下已经出来的蜜蜂或蚂蚁的组装文献给大家看看，应该说膜翅目的研究现在还是比较热门的，有很多可参考的借鉴的地方。为了尽快推进这个项目，我们没必要非建3个文库。这是我的意见。<br>[1]:<a href="http://res.illumina.com/documents/products/technotes/technote_denovo_assembly_ecoli.pdf" target="_blank" rel="noopener">http://res.illumina.com/documents/products/technotes/technote_denovo_assembly_ecoli.pdf</a><br>[2]:<a href="http://genome.cshlp.org/content/20/2/265.full" target="_blank" rel="noopener">http://genome.cshlp.org/content/20/2/265.full</a><br>[3]:<a href="http://genome.cshlp.org/content/19/6/1117.full.pdf+html" target="_blank" rel="noopener">http://genome.cshlp.org/content/19/6/1117.full.pdf+html</a><br>[4]:<a href="http://genome.cshlp.org/content/22/3/557.full.pdf" target="_blank" rel="noopener">http://genome.cshlp.org/content/22/3/557.full.pdf</a><br>[5]:<a href="http://bioinformatics.oxfordjournals.org/content/28/14/1838.full.pdf" target="_blank" rel="noopener">http://bioinformatics.oxfordjournals.org/content/28/14/1838.full.pdf</a>    </p>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+
+  <nav id="pagination">
+  
+    <a href="/" class="prev">Prev</a>
+  
+  
+    <a href="/page/3/" class="next">Next</a>
+  
+  <div class="clearfix"></div>
+</nav>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2018 <a href="/">Buttonwood</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'buttonwood' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

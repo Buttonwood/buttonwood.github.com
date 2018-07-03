@@ -1,0 +1,255 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>Sysbench for MySQL Testing | Buttonwood</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Buttonwood">
+  
+  
+    <meta name="description" content="1. For whole testing scriptshost=localhost
+port=3306
+socket=/home/data/mysql/mysql.sock
+user=root
+password=123456
+
+resultsdir=./results-thread
+
+threads=&amp;quot;8 16 32 64 128&amp;quot;
+
+sizes=&amp;quot;1000000">
+  
+  <meta name="description" content="1. For whole testing scriptshost=localhost port=3306 socket=/home/data/mysql/mysql.sock user=root password=123456  resultsdir=./results-thread  threads=&amp;quot;8 16 32 64 128&amp;quot;  sizes=&amp;quot;1000000">
+<meta name="keywords" content="Tools,MySQL,sysbench">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sysbench for MySQL Testing">
+<meta property="og:url" content="http://buttonwood.github.io/2014/07/25/2014-07-25-sysbench-mysql/index.html">
+<meta property="og:site_name" content="Buttonwood">
+<meta property="og:description" content="1. For whole testing scriptshost=localhost port=3306 socket=/home/data/mysql/mysql.sock user=root password=123456  resultsdir=./results-thread  threads=&amp;quot;8 16 32 64 128&amp;quot;  sizes=&amp;quot;1000000">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/1680943/3700027/1d8dea4a-13db-11e4-9043-31028496d885.png">
+<meta property="og:updated_time" content="2018-07-03T02:32:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sysbench for MySQL Testing">
+<meta name="twitter:description" content="1. For whole testing scriptshost=localhost port=3306 socket=/home/data/mysql/mysql.sock user=root password=123456  resultsdir=./results-thread  threads=&amp;quot;8 16 32 64 128&amp;quot;  sizes=&amp;quot;1000000">
+<meta name="twitter:image" content="https://cloud.githubusercontent.com/assets/1680943/3700027/1d8dea4a-13db-11e4-9043-31028496d885.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Buttonwood" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Buttonwood</a></h1>
+    <p><a href="/">Being A Coding Poet. Less Talk, and More Move!</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/about/">About</a></li>
+      
+        <li><a href="/archives/">Archives</a></li>
+      
+        <li><a href="/links/">Links</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/07/25/2014-07-25-sysbench-mysql/">
+  <time datetime="2014-07-25T15:51:00.000Z">
+    Jul 25 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">Sysbench for MySQL Testing</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h3 id="1-For-whole-testing-scripts"><a href="#1-For-whole-testing-scripts" class="headerlink" title="1. For whole testing scripts"></a>1. For whole testing scripts</h3><pre><code>host=localhost
+port=3306
+socket=/home/data/mysql/mysql.sock
+user=root
+password=123456
+
+resultsdir=./results-thread
+
+threads=&quot;8 16 32 64 128&quot;
+
+sizes=&quot;1000000 5000000 10000000 15000000 20000000 25000000 30000000&quot;
+
+
+printf &quot;sizes,threads,transactions,trns p/s,deadlocks, dls p/s,read/write requests,r/w reqs p/s,min,avg,max,99 percentile \n&quot; &gt;&gt; stat.txt
+
+mkdir -p $resultsdir
+
+for thread in $threads;do
+    mkdir $resultsdir/thread-$thread
+    for size in $sizes; do
+        sysbench --test=oltp --mysql-table-engine=innodb \
+        --oltp-table-size=$size  --mysql-socket=$socket \
+        --mysql-user=$user --mysql-host=$host \
+        --mysql-password=$password --mysql-db=students \
+        --oltp-table-name=test$size prepare;
+        sysbench --test=oltp --mysql-table-engine=innodb \
+        --oltp-table-size=$size --mysql-socket=$socket \
+        --mysql-user=$user --mysql-host=$host \
+        --mysql-password=$password --mysql-db=students \
+        --oltp-table-name=test$size  --max-requests=1000 \
+        --num-threads=$thread run | \ 
+        tee -a $resultsdir/thread-$thread/sysbench.$thread.$size.report;
+        sysbench --test=oltp --mysql-host=$host  --mysql-user=$user \
+        --mysql-password=$password --mysql-socket=$socket \
+        --mysql-db=students --oltp-table-name=test$size  cleanup;
+
+        cat $resultsdir/thread-$thread/sysbench.$thread.$size.report | \
+        egrep &quot;cat|threads:|transactions:|deadlocks|
+        read/write|min:|avg:|max:|percentile:&quot; | \
+        sed  -e &apos;1 s/Number of threads: //&apos; | \
+        tr -d &quot;\n&quot; | \
+        sed -e &apos;s/Number of threads: /\n/g&apos; \
+        -e &apos;s/[A-Za-z\/]\{1,\}://g&apos; \
+        -e &apos;s/read\/write//g&apos; \
+        -e &apos;s/approx\.  95//g&apos; \
+        -e &apos;s/per sec.)//g&apos; \
+        -e &apos;s/ms//g&apos; \
+        -e &apos;s/(//g&apos;  \
+        -e &apos;s/  */,/g&apos; | awk -v d=$size &apos;{$0=d&quot;,&quot;$0}1&apos; &gt;&gt; stat.txt
+    done
+done
+</code></pre><a id="more"></a>
+<h3 id="2-Results"><a href="#2-Results" class="headerlink" title="2. Results"></a>2. Results</h3><pre><code>SIZES,THREADS,TRANSACTIONS,TRNS P/S,DEADLOCKS,DLS P/S,READ/WRITE REQUESTS,R/W REQS P/S,MIN,AVG,MAX,99 PERCENTILE
+1000000,8,1000,236.13,0,0.00,19000,4486.45,7.16,33.66,118.17,59.32
+5000000,8,1000,265.81,0,0.00,19000,5050.47,6.35,29.99,99.14,46.96
+10000000,8,1000,379.46,127,48.19,21413,8125.43,3.54,21.01,306.08,34.70
+15000000,8,1000,202.33,0,0.00,19000,3844.31,8.76,39.36,113.15,62.77
+20000000,8,1000,185.34,0,0.00,19000,3521.38,10.48,43.05,111.56,66.92
+25000000,8,1000,171.11,0,0.00,19000,3251.01,7.46,46.69,506.47,74.60
+30000000,8,1000,163.24,0,0.00,19000,3101.55,14.49,48.91,504.90,77.21
+1000000,16,1000,288.82,0,0.00,19000,5487.51,7.82,54.95,168.84,89.33
+5000000,16,1000,270.04,0,0.00,19000,5130.82,19.13,59.02,323.48,92.27
+10000000,16,1000,231.99,0,0.00,19000,4407.90,5.73,68.45,329.40,112.02
+15000000,16,1000,230.78,0,0.00,19000,4384.76,8.29,69.03,233.97,124.21
+20000000,16,1000,170.32,0,0.00,19000,3236.17,9.48,93.60,799.09,158.71
+25000000,16,1000,164.44,0,0.00,19000,3124.34,5.68,96.44,633.64,165.06
+30000000,16,1000,174.87,0,0.00,19000,3322.48,9.50,90.89,520.92,151.65
+1000000,32,1000,316.29,0,0.00,19000,6009.43,7.72,99.23,346.24,172.95
+5000000,32,1000,248.03,0,0.00,19000,4712.60,23.21,125.06,383.60,208.35
+10000000,32,1000,229.40,0,0.00,19000,4358.52,5.39,138.82,598.64,350.74
+15000000,32,1000,211.46,0,0.00,19000,4017.80,13.27,150.13,501.56,284.44
+20000000,32,1000,198.36,0,0.00,19000,3768.77,8.54,159.58,822.41,252.87
+25000000,32,1000,181.85,0,0.00,19000,3455.19,21.85,174.35,891.91,271.78
+30000000,32,1000,156.00,0,0.00,19000,2964.03,9.45,204.21,811.06,339.07
+1000000,64,1000,311.37,0,0.00,19000,5916.07,19.86,198.48,562.27,369.82
+5000000,64,1000,287.12,0,0.00,19000,5455.27,29.12,216.80,843.55,338.67
+10000000,64,1000,222.90,0,0.00,19000,4235.16,13.82,285.81,975.70,773.48
+15000000,64,1000,193.57,0,0.00,19000,3677.74,12.19,327.30,1143.78,846.66
+20000000,64,1000,170.73,0,0.00,19000,3243.88,55.67,370.57,1217.91,1092.95
+25000000,64,1000,157.72,0,0.00,19000,2996.74,11.59,401.83,1680.79,1306.81
+30000000,64,1000,158.19,0,0.00,19000,3005.66,19.20,401.41,1304.60,1107.11
+1000000,128,1000,302.16,0,0.00,19000,5741.04,52.05,408.05,1041.78,772.32
+5000000,128,1000,251.01,0,0.00,19000,4769.20,26.99,489.92,1724.37,781.39
+10000000,128,1000,207.77,0,0.00,19000,3947.55,102.64,604.39,1577.85,1285.85
+15000000,128,1000,149.60,0,0.00,19000,2842.35,146.68,841.09,3348.05,2764.42
+20000000,128,1000,145.41,0,0.00,19000,2762.83,132.31,865.04,3247.91,2620.98
+25000000,128,1000,139.95,0,0.00,19000,2658.97,252.97,896.25,2942.05,2773.54
+30000000,128,1000,115.80,0,0.00,19000,2200.18,221.51,1089.31,4408.08,4141.01 
+</code></pre><h3 id="3-Visulization"><a href="#3-Visulization" class="headerlink" title="3. Visulization"></a>3. Visulization</h3><pre><code>library(&quot;ggplot2&quot;)
+df &lt;- read.csv(&quot;C:\\Users\\tanhao\\Documents\\GitHub\\DM\\mysql\\work\\stat.csv&quot;,head=TRUE)
+ggplot(df, aes(x = factor(sizes), y = trns.p.s, fill=factor(threads))) + geom_bar(stat = &quot;identity&quot;, position=&quot;dodge&quot;)
+</code></pre><p><img src="https://cloud.githubusercontent.com/assets/1680943/3700027/1d8dea4a-13db-11e4-9043-31028496d885.png" alt="image"></p>
+<p>以上数据为一台1核1G主机的性能测试结果.</p>
+<p>欢迎参见<a href="https://github.com/iofdata/DM/issues/5" target="_blank" rel="noopener">Details</a></p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/MySQL/">MySQL</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/MySQL/">MySQL</a>, <a class="tags-link" href="/tags/Tools/">Tools</a>, <a class="tags-link" href="/tags/sysbench/">sysbench</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+<section id="comment"> 
+    <h1 class="title">Comments</h1>
+    <div class="ds-thread" data-title="Sysbench for MySQL Testing"></div> 
+</section>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2018 <a href="/">Buttonwood</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'buttonwood' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

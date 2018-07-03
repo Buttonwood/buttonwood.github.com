@@ -1,0 +1,154 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>Assemble a genome | Buttonwood</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Buttonwood">
+  
+  
+    <meta name="description" content="基因组拼接就是将测序得到的短 reads 还原成更长基因组序列的过程，不同组装软件和组装策略采用的具体算法和细节不尽相同，但总体上都经过如下几步：
+##a) Contig 组装首先，利用 reads 间 overlap 和覆盖度情况，拼接出 contigs 序列；Contigs 组装方法较多，软件丰富，算法实现侧重点不同，具体细节比较麻烦；但从整体上来看，都是先将 reads 间 overlap">
+  
+  <meta name="description" content="基因组拼接就是将测序得到的短 reads 还原成更长基因组序列的过程，不同组装软件和组装策略采用的具体算法和细节不尽相同，但总体上都经过如下几步： ##a) Contig 组装首先，利用 reads 间 overlap 和覆盖度情况，拼接出 contigs 序列；Contigs 组装方法较多，软件丰富，算法实现侧重点不同，具体细节比较麻烦；但从整体上来看，都是先将 reads 间 overlap">
+<meta name="keywords" content="Assemble,Genome,Kmer,DBG,OLC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Assemble a genome">
+<meta property="og:url" content="http://buttonwood.github.io/2013/01/10/2013-01-10-assemble-a-genome/index.html">
+<meta property="og:site_name" content="Buttonwood">
+<meta property="og:description" content="基因组拼接就是将测序得到的短 reads 还原成更长基因组序列的过程，不同组装软件和组装策略采用的具体算法和细节不尽相同，但总体上都经过如下几步： ##a) Contig 组装首先，利用 reads 间 overlap 和覆盖度情况，拼接出 contigs 序列；Contigs 组装方法较多，软件丰富，算法实现侧重点不同，具体细节比较麻烦；但从整体上来看，都是先将 reads 间 overlap">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-03T02:32:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Assemble a genome">
+<meta name="twitter:description" content="基因组拼接就是将测序得到的短 reads 还原成更长基因组序列的过程，不同组装软件和组装策略采用的具体算法和细节不尽相同，但总体上都经过如下几步： ##a) Contig 组装首先，利用 reads 间 overlap 和覆盖度情况，拼接出 contigs 序列；Contigs 组装方法较多，软件丰富，算法实现侧重点不同，具体细节比较麻烦；但从整体上来看，都是先将 reads 间 overlap">
+  
+    <link rel="alternate" href="/atom.xml" title="Buttonwood" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Buttonwood</a></h1>
+    <p><a href="/">Being A Coding Poet. Less Talk, and More Move!</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/about/">About</a></li>
+      
+        <li><a href="/archives/">Archives</a></li>
+      
+        <li><a href="/links/">Links</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2013/01/10/2013-01-10-assemble-a-genome/">
+  <time datetime="2013-01-10T02:04:00.000Z">
+    Jan 10 2013
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">Assemble a genome</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>基因组拼接就是将测序得到的短 <strong>reads</strong> 还原成更长基因组序列的过程，<br>不同组装软件和组装策略采用的具体算法和细节不尽相同，<br>但总体上都经过如下几步：</p>
+<p>##<strong>a) Contig 组装</strong><br>首先，利用 <strong>reads</strong> 间 <strong>overlap</strong> 和覆盖度情况，拼接出 <strong>contigs</strong> 序列；<br><strong>Contigs</strong> 组装方法较多，软件丰富，算法实现侧重点不同，具体细节比较麻烦；<br>但从整体上来看，都是先将 <strong>reads</strong> 间 <strong>overlap</strong> 关系构图，然后具体去简化这个图。<br>短 <strong>reads</strong> 一般采用基于 <strong>Kmer</strong> 的 De Brujin Graph(<strong>DBG</strong>)，<br>传统长 <strong>reads</strong> 一般采用 Overlap-Layout-Consensus（<strong>OLC*</strong>) 或 String Graph（<strong>SG</strong>)。<br><a id="more"></a></p>
+<p>##<strong>b) Scaffold 构建</strong><br>然后，将所有文库测序得到的 <strong>reads</strong> 比对回（map）初步得到的 <strong>contigs</strong>，<br>利用 <strong>reads</strong> 间的 <strong>PE</strong>（Paired-End）关系，将 <strong>contigs</strong> 序列<br>link 成更长的 <strong>scaffolds</strong> 序列，并利用不同梯度插入片段（Insert size）信息估计出 <strong>contig</strong>间距离，<br>用“N”衔接，形成一定的带洞（gaps）的较长的<strong>scaffolds</strong>序列。 </p>
+<p>##<strong>c) Gap Filling 局部组装</strong><br>最后，利用测序的双末端 <strong>reads</strong> 之间的配对关系 <strong>PE</strong>（Paired-End）<br>以及测序数据对已组装的 <strong>contig</strong> 的覆盖(coverage)信息，一对有 <strong>PE</strong> 关系的 <strong>reads</strong><br>刚好其中一条比对到 <strong>contigs</strong>，而另一条根据插入片段长度估计刚好落在旁边的洞内，这样就能对 <strong>scaffolds</strong> 之间空隙进行补洞（局部组装），向两边延长 <strong>contig</strong>。补洞后的 <strong>contigs</strong> 长度可以得到较大提升。 </p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/Bioinformatics/">Bioinformatics</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/Assemble/">Assemble</a>, <a class="tags-link" href="/tags/DBG/">DBG</a>, <a class="tags-link" href="/tags/Genome/">Genome</a>, <a class="tags-link" href="/tags/Kmer/">Kmer</a>, <a class="tags-link" href="/tags/OLC/">OLC</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+<section id="comment"> 
+    <h1 class="title">Comments</h1>
+    <div class="ds-thread" data-title="Assemble a genome"></div> 
+</section>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2018 <a href="/">Buttonwood</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'buttonwood' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

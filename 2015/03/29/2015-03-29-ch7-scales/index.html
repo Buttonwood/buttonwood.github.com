@@ -1,0 +1,184 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>Scales | Buttonwood</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Buttonwood">
+  
+  
+    <meta name="description" content="1. Scales“Scales are functions that map from an input domain to an output range.”
+An input domain and an output range, visualized as parallel axes.
+
+Normalization
+
+123456var scale = d3.scale.linear()">
+  
+  <meta name="description" content="1. Scales“Scales are functions that map from an input domain to an output range.” An input domain and an output range, visualized as parallel axes.  Normalization  123456var scale = d3.scale.linear()">
+<meta name="keywords" content="D3.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scales">
+<meta property="og:url" content="http://buttonwood.github.io/2015/03/29/2015-03-29-ch7-scales/index.html">
+<meta property="og:site_name" content="Buttonwood">
+<meta property="og:description" content="1. Scales“Scales are functions that map from an input domain to an output range.” An input domain and an output range, visualized as parallel axes.  Normalization  123456var scale = d3.scale.linear()">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-03T02:32:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Scales">
+<meta name="twitter:description" content="1. Scales“Scales are functions that map from an input domain to an output range.” An input domain and an output range, visualized as parallel axes.  Normalization  123456var scale = d3.scale.linear()">
+  
+    <link rel="alternate" href="/atom.xml" title="Buttonwood" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Buttonwood</a></h1>
+    <p><a href="/">Being A Coding Poet. Less Talk, and More Move!</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/about/">About</a></li>
+      
+        <li><a href="/archives/">Archives</a></li>
+      
+        <li><a href="/links/">Links</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/03/29/2015-03-29-ch7-scales/">
+  <time datetime="2015-03-29T14:51:00.000Z">
+    Mar 29 2015
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">Scales</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h4 id="1-Scales"><a href="#1-Scales" class="headerlink" title="1. Scales"></a>1. Scales</h4><p>“Scales are functions that map from an input domain to an output range.”</p>
+<p>An input domain and an output range, visualized as parallel axes.</p>
+<ul>
+<li>Normalization</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var scale = d3.scale.linear()</span><br><span class="line">    .domain([100, 500])</span><br><span class="line">    .range([10, 350]);</span><br><span class="line">scale(100);  //Returns 10</span><br><span class="line">scale(300);  //Returns 180</span><br><span class="line">scale(500);  //Returns 350</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var dataset = [</span><br><span class="line">    [5, 20], [480, 90], [250, 50], [100, 33], [330, 95],</span><br><span class="line">    [410, 12], [475, 44], [25, 67], [85, 21], [220, 88]</span><br><span class="line">    ];</span><br><span class="line">d3.max(dataset, function(d) &#123;</span><br><span class="line">    return d[0];</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var xScale = d3.scale.linear()</span><br><span class="line">    .domain([0, d3.max(dataset, function(d) &#123; return d[0]; &#125;)])</span><br><span class="line">    .range([0, w]);</span><br><span class="line">var yScale = d3.scale.linear()</span><br><span class="line">    .domain([0, d3.max(dataset, function(d) &#123; return d[1]; &#125;)])</span><br><span class="line">    .range([0, h]); // .range([h, 0]); //reversed</span><br><span class="line">//Returns scaled value</span><br><span class="line">.attr(&quot;x&quot;, function(d) &#123;</span><br><span class="line">    return xScale(d[0]);</span><br><span class="line">&#125;)</span><br><span class="line">.attr(&quot;y&quot;, function(d) &#123;</span><br><span class="line">    return yScale(d[1]);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var padding = 20;</span><br><span class="line">.range([padding, w - padding]);</span><br><span class="line">.range([padding, w - padding * 2]);</span><br><span class="line">.range([h - padding, padding]);</span><br></pre></td></tr></table></figure>
+<h4 id="2-Other-Methods-for-d3-scale-linear"><a href="#2-Other-Methods-for-d3-scale-linear" class="headerlink" title="2. Other Methods for d3.scale.linear()"></a>2. Other Methods for <code>d3.scale.linear()</code></h4><ul>
+<li>nice()</li>
+<li>rangeRound()</li>
+<li>clamp()</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var scale = d3.scale.linear()</span><br><span class="line">                    .domain([0.123, 4.567])</span><br><span class="line">                    .range([0, 500])</span><br><span class="line">                    .nice();</span><br></pre></td></tr></table></figure>
+<h4 id="3-Other-Scales"><a href="#3-Other-Scales" class="headerlink" title="3. Other Scales"></a>3. Other Scales</h4><ul>
+<li>sqrt</li>
+<li>pow</li>
+<li>log</li>
+<li>quantize</li>
+<li>quantile</li>
+<li>ordinal</li>
+<li>d3.time.scale()</li>
+<li>d3.scale.category10()</li>
+<li>d3.scale.category20()</li>
+<li>d3.scale.category20b()</li>
+<li>d3.scale.category20c()</li>
+</ul>
+<p><a href="https://github.com/mbostock/d3/wiki/Scales" target="_blank" rel="noopener">Scales Wiki</a></p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/D3-js/">D3.js</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/D3-js/">D3.js</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+<section id="comment"> 
+    <h1 class="title">Comments</h1>
+    <div class="ds-thread" data-title="Scales"></div> 
+</section>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2018 <a href="/">Buttonwood</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'buttonwood' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

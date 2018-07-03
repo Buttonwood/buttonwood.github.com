@@ -1,0 +1,359 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>Buttonwood</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Buttonwood">
+  
+  
+  <meta name="description" content="Buttonwood | Data Mining | python | perl | Bioinformatics">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Buttonwood">
+<meta property="og:url" content="http://buttonwood.github.io/page/3/index.html">
+<meta property="og:site_name" content="Buttonwood">
+<meta property="og:description" content="Buttonwood | Data Mining | python | perl | Bioinformatics">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Buttonwood">
+<meta name="twitter:description" content="Buttonwood | Data Mining | python | perl | Bioinformatics">
+  
+    <link rel="alternate" href="/atom.xml" title="Buttonwood" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Buttonwood</a></h1>
+    <p><a href="/">Being A Coding Poet. Less Talk, and More Move!</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/about/">About</a></li>
+      
+        <li><a href="/archives/">Archives</a></li>
+      
+        <li><a href="/links/">Links</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content">
+
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2013/03/20/2013-03-20-install-matplotlib-is-a-nightmare/">
+  <time datetime="2013-03-20T14:51:00.000Z">
+    Mar 20 2013
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2013/03/20/2013-03-20-install-matplotlib-is-a-nightmare/">Install matplotlib is a nightmare</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>Building <strong><em>matplotlib</em></strong> on <strong><em>OSX</em></strong> has proved to be a nightmare because of the different types of zlib, png and freetype that may be on your system.            </p>
+<p>The recommended and supported way to build is to use a third-party<br>package manager to install the required dependencies, and then<br>install matplotlib from source using the setup.py script. Two widely<br>used package managers are homebrew and MacPorts. The following<br>example illustrates how to install libpng and freetype using<br>homebrew.</p>
+<p>Example usage::     </p>
+<pre><code>brew install libpng freetype
+</code></pre><p>If you are using MacPorts, execute the following instead:</p>
+<p>Example usage::</p>
+<pre><code>port install libpng freetype
+</code></pre><p>To install matplotlib from source, execute:</p>
+<p>Example usage::</p>
+<pre><code>python setup.py install
+</code></pre><p>结果freetype报错:</p>
+<pre><code>/usr/local/include/ft2build.h:56:10: fatal error: ‘freetype/config/ftheader.h’ file not found
+</code></pre><p>google 之在<a href="http://stackoverflow.com/questions/6800488/installing-matplotlib-in-mac-osx-lion" target="_blank" rel="noopener">stackoverflow</a><br>仍然不成功；</p>
+<p>最后到处试试，终于在这篇博客看到；<br><a href="http://blog.caoyuan.me/2012/08/matplotlib-error-mac-os-x/" target="_blank" rel="noopener">http://blog.caoyuan.me/2012/08/matplotlib-error-mac-os-x/
+</a></p>
+<p>最后终于成功！</p>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2013/03/06/2013-03-06-i-am-coming-back/">
+  <time datetime="2013-03-06T14:21:00.000Z">
+    Mar 6 2013
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2013/03/06/2013-03-06-i-am-coming-back/">I am coming back</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p><strong>Cuz</strong> I was busy these days, I spent a lot of time for updating these beautiful theme<br>for my blog. I like it very much!<br>And here I am testing some code insertion.<br>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/2013/03/06/2013-03-06-i-am-coming-back/#more" class="more-link">Read More</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2013/01/10/2013-01-10-assemble-a-genome/">
+  <time datetime="2013-01-10T02:04:00.000Z">
+    Jan 10 2013
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2013/01/10/2013-01-10-assemble-a-genome/">Assemble a genome</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>基因组拼接就是将测序得到的短 <strong>reads</strong> 还原成更长基因组序列的过程，<br>不同组装软件和组装策略采用的具体算法和细节不尽相同，<br>但总体上都经过如下几步：</p>
+<p>##<strong>a) Contig 组装</strong><br>首先，利用 <strong>reads</strong> 间 <strong>overlap</strong> 和覆盖度情况，拼接出 <strong>contigs</strong> 序列；<br><strong>Contigs</strong> 组装方法较多，软件丰富，算法实现侧重点不同，具体细节比较麻烦；<br>但从整体上来看，都是先将 <strong>reads</strong> 间 <strong>overlap</strong> 关系构图，然后具体去简化这个图。<br>短 <strong>reads</strong> 一般采用基于 <strong>Kmer</strong> 的 De Brujin Graph(<strong>DBG</strong>)，<br>传统长 <strong>reads</strong> 一般采用 Overlap-Layout-Consensus（<strong>OLC*</strong>) 或 String Graph（<strong>SG</strong>)。<br>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/2013/01/10/2013-01-10-assemble-a-genome/#more" class="more-link">Read More</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2013/01/04/2013-01-04-about-me/">
+  <time datetime="2013-01-04T07:08:44.000Z">
+    Jan 4 2013
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2013/01/04/2013-01-04-about-me/">About Me</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h3 id="About-Me"><a href="#About-Me" class="headerlink" title="About Me !"></a>About Me !</h3><p>I’m a bioinformatic engineer and amateur programmer, and here is a short introduction about me and this blog, thanks for your reading!</p>
+<p>I’m engaged in <strong>genomics research</strong>, including <strong><em>genome assembly/annotation/evolution</em></strong> and <strong><em>comparative genomics</em></strong>.</p>
+<p>As a mathematics graduate, I’m also interested in interdisciplinary work, specifically <strong>data mining</strong> and <strong>visualization</strong>. And I hope we can exchange our ideas and experiences about  <strong>Data Mining</strong> through this blog.</p>
+<p>I mostly work in <strong>python/perl/R</strong> on OSX and Linux for most of my work,  I also dabble in <strong>C/C++/Shell</strong>. And I am trying to learn <a href="http://d3js.org/" target="_blank" rel="noopener">D3.js</a> and <a href="http://www.processing.org/" target="_blank" rel="noopener">processing</a> for my hobby of <strong>Data Visualization</strong> now.</p>
+<p>Thanks for following me: <a href="http://buttonwood.github.io">@Github</a> and <a href="http://weibo.com/buttonwood" target="_blank" rel="noopener">@Weibo</a>.</p>
+<p>I’m living in Wuhan, a city near the Yangtze River in China. It’s beautiful besides it’s bad weather(long hot summer and cold winter), I spent my college life there and I love my friends there forever.</p>
+<p>Besides programming, I exercise and read books regularly. To be a stronger and better version of myself!</p>
+<h3 id="About-this-blog"><a href="#About-this-blog" class="headerlink" title="About this blog !"></a>About this blog !</h3><p>This blog is proudly powered by <a href="http://hexo.io/" target="_blank" rel="noopener">Hexo</a>, which takes great advantage of <a href="http://nodejs.org/" target="_blank" rel="noopener">Node.js</a>.</p>
+
+<p>And it is only for my scattered ideas of reading and programming, there are no business attempts.</p>
+<p>Any suggestions about this blog and topics talked there are welcome.</p>
+<p>Like the TED said: <strong><em>Ideas are worth spreading and sharing!</em></strong> Many THX!</p>
+<h3 id="Time-axis"><a href="#Time-axis" class="headerlink" title="Time axis !"></a>Time axis !</h3><table>
+<thead>
+<tr>
+<th>Time</th>
+<th>Department/Works</th>
+<th>Company/University</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><em>2012-Now</em></strong></td>
+<td>You Guess！</td>
+<td>You Guess！</td>
+</tr>
+<tr>
+<td><strong><em>2010-2012</em></strong></td>
+<td>Bioinformatics Engineer/Analyst</td>
+<td><strong><em><a href="http://www.genomics.cn/index" target="_blank" rel="noopener">BGI</a></em></strong></td>
+</tr>
+<tr>
+<td><strong><em>2006-2010</em></strong></td>
+<td>Student in College of Mathematics And Statistics</td>
+<td><strong><em><a href="http://maths.hust.edu.cn/new/index.asp" target="_blank" rel="noopener">HUST</a></em></strong></td>
+</tr>
+</tbody>
+</table>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2012/12/28/2012-12-28-about-this-blog/">
+  <time datetime="2012-12-28T00:21:00.000Z">
+    Dec 28 2012
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2012/12/28/2012-12-28-about-this-blog/">About This Blog!</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>##1.Bulletin Board<br>Hi, I’m <em><a href="http://weibo.com/buttonwood" target="_blank" rel="noopener">Buttonwood</a>!</em> This is my first blog on <a href="https://github.com" target="_blank" rel="noopener">github</a>.</p>
+<p><em>Writing blogs like Hackers!</em></p>
+<p>This is really very very cool!  And I’ve learned lots of things from it.</p>
+<p>Yes, after days of struggling, my  <a href="http://buttonwood.github.com" target="_blank" rel="noopener"><strong><em>Techblog</em></strong></a> is online at  last!<br>Thx to the Internet and we‘re in an Open Society as well as  A Boom Time.</p>
+<p>It is a personnal blog focus on new technology and thoughts, and also for  summing up the practical experience of my work  and life.    </p>
+<p>It is nonbusiness and all right reserved.     </p>
+<p>Besides, this is an individual experiment and my personal deed，it has nothing to do  with any company、organization or institution.     </p>
+<p>Any suggestion about this blog is welcome, and I’ll keep on updating.</p>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/2012/12/28/2012-12-28-about-this-blog/#more" class="more-link">Read More</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+
+  <nav id="pagination">
+  
+    <a href="/page/2/" class="prev">Prev</a>
+  
+  
+  <div class="clearfix"></div>
+</nav>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2018 <a href="/">Buttonwood</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'buttonwood' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>
