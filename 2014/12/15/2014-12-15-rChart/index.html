@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <meta charset="utf-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   
   <title>rChart and morris.js | Buttonwood</title>
@@ -11,22 +11,22 @@
   
   
     <meta name="description" content="1. Using rChart and morris.js for time series visualizationHere are the codes!
-library(&amp;apos;rCharts&amp;apos;, &amp;apos;ramnathv&amp;apos;)
-df &amp;lt;- read.csv(&amp;quot;type.1h.csv&amp;quot;,header=FALSE,stringsAsFactor">
+library(&amp;#39;rCharts&amp;#39;, &amp;#39;ramnathv&amp;#39;)
+df &amp;lt;- read.csv(&amp;quot;type.1h.csv&amp;quot;,header=FALSE,stringsAsFactors=FA">
   
-  <meta name="description" content="1. Using rChart and morris.js for time series visualizationHere are the codes! library(&amp;apos;rCharts&amp;apos;, &amp;apos;ramnathv&amp;apos;) df &amp;lt;- read.csv(&amp;quot;type.1h.csv&amp;quot;,header=FALSE,stringsAsFactor">
+  <meta name="description" content="1. Using rChart and morris.js for time series visualizationHere are the codes! library(&amp;#39;rCharts&amp;#39;, &amp;#39;ramnathv&amp;#39;) df &amp;lt;- read.csv(&amp;quot;type.1h.csv&amp;quot;,header=FALSE,stringsAsFactors=FA">
 <meta name="keywords" content="R">
 <meta property="og:type" content="article">
 <meta property="og:title" content="rChart and morris.js">
 <meta property="og:url" content="http://buttonwood.github.io/2014/12/15/2014-12-15-rChart/index.html">
 <meta property="og:site_name" content="Buttonwood">
-<meta property="og:description" content="1. Using rChart and morris.js for time series visualizationHere are the codes! library(&amp;apos;rCharts&amp;apos;, &amp;apos;ramnathv&amp;apos;) df &amp;lt;- read.csv(&amp;quot;type.1h.csv&amp;quot;,header=FALSE,stringsAsFactor">
+<meta property="og:description" content="1. Using rChart and morris.js for time series visualizationHere are the codes! library(&amp;#39;rCharts&amp;#39;, &amp;#39;ramnathv&amp;#39;) df &amp;lt;- read.csv(&amp;quot;type.1h.csv&amp;quot;,header=FALSE,stringsAsFactors=FA">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://ww3.sinaimg.cn/mw690/6fbc15dcgw1enahmlkcp1j20n20b941c.jpg">
 <meta property="og:updated_time" content="2018-07-03T02:32:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="rChart and morris.js">
-<meta name="twitter:description" content="1. Using rChart and morris.js for time series visualizationHere are the codes! library(&amp;apos;rCharts&amp;apos;, &amp;apos;ramnathv&amp;apos;) df &amp;lt;- read.csv(&amp;quot;type.1h.csv&amp;quot;,header=FALSE,stringsAsFactor">
+<meta name="twitter:description" content="1. Using rChart and morris.js for time series visualizationHere are the codes! library(&amp;#39;rCharts&amp;#39;, &amp;#39;ramnathv&amp;#39;) df &amp;lt;- read.csv(&amp;quot;type.1h.csv&amp;quot;,header=FALSE,stringsAsFactors=FA">
 <meta name="twitter:image" content="http://ww3.sinaimg.cn/mw690/6fbc15dcgw1enahmlkcp1j20n20b941c.jpg">
   
     <link rel="alternate" href="/atom.xml" title="Buttonwood" type="application/atom+xml">
@@ -35,12 +35,12 @@ df &amp;lt;- read.csv(&amp;quot;type.1h.csv&amp;quot;,header=FALSE,stringsAsFact
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
   
   <link rel="stylesheet" href="/css/style.css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 </head>
 
 <body>
-  <div class="wrapper">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="wrapper">
     <header id="header">
   <div class="title">
     <h1><a href="/">Buttonwood</a></h1>
@@ -83,7 +83,7 @@ df &amp;lt;- read.csv(&amp;quot;type.1h.csv&amp;quot;,header=FALSE,stringsAsFact
   <div class="entry">
     
       <h3 id="1-Using-rChart-and-morris-js-for-time-series-visualization"><a href="#1-Using-rChart-and-morris-js-for-time-series-visualization" class="headerlink" title="1. Using rChart and morris.js for time series visualization"></a>1. Using <code>rChart</code> and <code>morris.js</code> for time series visualization</h3><p>Here are the codes!</p>
-<pre><code>library(&apos;rCharts&apos;, &apos;ramnathv&apos;)
+<pre><code>library(&#39;rCharts&#39;, &#39;ramnathv&#39;)
 df &lt;- read.csv(&quot;type.1h.csv&quot;,header=FALSE,stringsAsFactors=FALSE)
 colnames(df) &lt;- c(&quot;date&quot;,&quot;1&quot;, &quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;,&quot;8&quot;,&quot;9&quot;,&quot;10&quot;)
 transform(df, date = as.character(date))
@@ -94,8 +94,8 @@ m1
 #base64enc
 # install.packages(&quot;base64enc&quot;)
 library(&quot;base64enc&quot;)
-m1$save(&apos;graph1.html&apos;, &apos;inline&apos;, cdn=TRUE)
-#m1$save(&apos;graph1.html&apos;, &apos;inline&apos;, standalone=TRUE)
+m1$save(&#39;graph1.html&#39;, &#39;inline&#39;, cdn=TRUE)
+#m1$save(&#39;graph1.html&#39;, &#39;inline&#39;, standalone=TRUE)
 </code></pre><h4 id="2-Graph"><a href="#2-Graph" class="headerlink" title="2. Graph"></a>2. Graph</h4><p>Here, we can see this is a test graph!</p>
 <p>Here is a test image!<br><img src="http://ww3.sinaimg.cn/mw690/6fbc15dcgw1enahmlkcp1j20n20b941c.jpg" alt=""></p>
 <p>Here is a test page!<br><a href="../../../../fish/graph1.html">graph1.html</a></p>
@@ -165,6 +165,23 @@ m1$save(&apos;graph1.html&apos;, &apos;inline&apos;, cdn=TRUE)
     $('.fancybox').fancybox();
   })(jQuery);
 </script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </body>
 </html>

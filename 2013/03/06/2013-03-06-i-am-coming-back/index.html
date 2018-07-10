@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <meta charset="utf-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   
   <title>I am coming back | Buttonwood</title>
@@ -31,12 +31,12 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
   
   <link rel="stylesheet" href="/css/style.css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 </head>
 
 <body>
-  <div class="wrapper">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="wrapper">
     <header id="header">
   <div class="title">
     <h1><a href="/">Buttonwood</a></h1>
@@ -80,12 +80,12 @@
     
       <p><strong>Cuz</strong> I was busy these days, I spent a lot of time for updating these beautiful theme<br>for my blog. I like it very much!<br>And here I am testing some code insertion.<br><a id="more"></a></p>
 <p>For <strong><em>cpp</em></strong> coding:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int a;</span><br><span class="line">long int b;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">int</span> b;</span><br></pre></td></tr></table></figure>
 <p>For <strong><em>R</em></strong> coding:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data &lt;- read.table(&quot;data.cvs&quot;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data &lt;- <span class="built_in">read</span>.<span class="built_in">table</span>(<span class="string">"data.cvs"</span>)</span><br></pre></td></tr></table></figure>
 <p>This is just a test post and thanks for reading!</p>
 <hr>
-<p><strong>Follow me</strong> <em><a href="mailto:&#x74;&#97;&#x6e;&#104;&#x61;&#111;&#x32;&#x30;&#49;&#51;&#64;&#x6d;&#x65;&#46;&#99;&#x6f;&#109;" target="_blank" rel="noopener">&#x74;&#97;&#x6e;&#104;&#x61;&#111;&#x32;&#x30;&#49;&#51;&#64;&#x6d;&#x65;&#46;&#99;&#x6f;&#109;</a></em> or <em><a href="http://weibo.com/buttonwood" target="_blank" rel="noopener">@Buttonwood</a></em></p>
+<p><strong>Follow me</strong> <em><a href="&#109;&#97;&#x69;&#108;&#116;&#x6f;&#x3a;&#116;&#97;&#x6e;&#104;&#97;&#111;&#50;&#48;&#x31;&#51;&#64;&#109;&#x65;&#x2e;&#99;&#x6f;&#109;">&#116;&#97;&#x6e;&#104;&#97;&#111;&#50;&#48;&#x31;&#51;&#64;&#109;&#x65;&#x2e;&#99;&#x6f;&#109;</a></em> or <em><a href="http://weibo.com/buttonwood" target="_blank" rel="noopener">@Buttonwood</a></em></p>
 
     
   </div>
@@ -152,6 +152,23 @@
     $('.fancybox').fancybox();
   })(jQuery);
 </script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </body>
 </html>

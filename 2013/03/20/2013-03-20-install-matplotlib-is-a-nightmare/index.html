@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <meta charset="utf-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   
   <title>Install matplotlib is a nightmare | Buttonwood</title>
@@ -32,12 +32,12 @@ The recommended and supported way to build is t">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
   
   <link rel="stylesheet" href="/css/style.css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 </head>
 
 <body>
-  <div class="wrapper">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="wrapper">
     <header id="header">
   <div class="title">
     <h1><a href="/">Buttonwood</a></h1>
@@ -88,7 +88,7 @@ The recommended and supported way to build is t">
 <pre><code>port install libpng freetype
 </code></pre><p>To install matplotlib from source, execute:</p>
 <p>Example usage::</p>
-<pre><code>python setup.py install
+<pre><code>  python setup.py install
 </code></pre><p>结果freetype报错:</p>
 <pre><code>/usr/local/include/ft2build.h:56:10: fatal error: ‘freetype/config/ftheader.h’ file not found
 </code></pre><p>google 之在<a href="http://stackoverflow.com/questions/6800488/installing-matplotlib-in-mac-osx-lion" target="_blank" rel="noopener">stackoverflow</a><br>仍然不成功；</p>
@@ -161,6 +161,23 @@ The recommended and supported way to build is t">
     $('.fancybox').fancybox();
   })(jQuery);
 </script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </body>
 </html>

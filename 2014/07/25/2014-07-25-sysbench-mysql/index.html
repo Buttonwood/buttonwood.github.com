@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <meta charset="utf-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   
   <title>Sysbench for MySQL Testing | Buttonwood</title>
@@ -10,31 +10,29 @@
     <meta name="author" content="Buttonwood">
   
   
-    <meta name="description" content="1. For whole testing scriptshost=localhost
-port=3306
-socket=/home/data/mysql/mysql.sock
-user=root
-password=123456
+    <meta name="description" content="1. For whole testing scripts    host=localhost
+    port=3306
+    socket=/home/data/mysql/mysql.sock
+    user=root
+    password=123456
 
-resultsdir=./results-thread
+    resultsdir=./results-thread
 
-threads=&amp;quot;8 16 32 64 128&amp;quot;
-
-sizes=&amp;quot;1000000">
+    threads=&amp;quot;8 16 32 64 128">
   
-  <meta name="description" content="1. For whole testing scriptshost=localhost port=3306 socket=/home/data/mysql/mysql.sock user=root password=123456  resultsdir=./results-thread  threads=&amp;quot;8 16 32 64 128&amp;quot;  sizes=&amp;quot;1000000">
+  <meta name="description" content="1. For whole testing scripts    host=localhost     port=3306     socket=/home/data/mysql/mysql.sock     user=root     password=123456      resultsdir=./results-thread      threads=&amp;quot;8 16 32 64 128">
 <meta name="keywords" content="Tools,MySQL,sysbench">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Sysbench for MySQL Testing">
 <meta property="og:url" content="http://buttonwood.github.io/2014/07/25/2014-07-25-sysbench-mysql/index.html">
 <meta property="og:site_name" content="Buttonwood">
-<meta property="og:description" content="1. For whole testing scriptshost=localhost port=3306 socket=/home/data/mysql/mysql.sock user=root password=123456  resultsdir=./results-thread  threads=&amp;quot;8 16 32 64 128&amp;quot;  sizes=&amp;quot;1000000">
+<meta property="og:description" content="1. For whole testing scripts    host=localhost     port=3306     socket=/home/data/mysql/mysql.sock     user=root     password=123456      resultsdir=./results-thread      threads=&amp;quot;8 16 32 64 128">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://cloud.githubusercontent.com/assets/1680943/3700027/1d8dea4a-13db-11e4-9043-31028496d885.png">
 <meta property="og:updated_time" content="2018-07-03T02:32:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Sysbench for MySQL Testing">
-<meta name="twitter:description" content="1. For whole testing scriptshost=localhost port=3306 socket=/home/data/mysql/mysql.sock user=root password=123456  resultsdir=./results-thread  threads=&amp;quot;8 16 32 64 128&amp;quot;  sizes=&amp;quot;1000000">
+<meta name="twitter:description" content="1. For whole testing scripts    host=localhost     port=3306     socket=/home/data/mysql/mysql.sock     user=root     password=123456      resultsdir=./results-thread      threads=&amp;quot;8 16 32 64 128">
 <meta name="twitter:image" content="https://cloud.githubusercontent.com/assets/1680943/3700027/1d8dea4a-13db-11e4-9043-31028496d885.png">
   
     <link rel="alternate" href="/atom.xml" title="Buttonwood" type="application/atom+xml">
@@ -43,12 +41,12 @@ sizes=&amp;quot;1000000">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
   
   <link rel="stylesheet" href="/css/style.css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 </head>
 
 <body>
-  <div class="wrapper">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="wrapper">
     <header id="header">
   <div class="title">
     <h1><a href="/">Buttonwood</a></h1>
@@ -90,57 +88,57 @@ sizes=&amp;quot;1000000">
   
   <div class="entry">
     
-      <h3 id="1-For-whole-testing-scripts"><a href="#1-For-whole-testing-scripts" class="headerlink" title="1. For whole testing scripts"></a>1. For whole testing scripts</h3><pre><code>host=localhost
-port=3306
-socket=/home/data/mysql/mysql.sock
-user=root
-password=123456
+      <h3 id="1-For-whole-testing-scripts"><a href="#1-For-whole-testing-scripts" class="headerlink" title="1. For whole testing scripts"></a>1. For whole testing scripts</h3><pre><code>    host=localhost
+    port=3306
+    socket=/home/data/mysql/mysql.sock
+    user=root
+    password=123456
 
-resultsdir=./results-thread
+    resultsdir=./results-thread
 
-threads=&quot;8 16 32 64 128&quot;
+    threads=&quot;8 16 32 64 128&quot;
 
-sizes=&quot;1000000 5000000 10000000 15000000 20000000 25000000 30000000&quot;
+    sizes=&quot;1000000 5000000 10000000 15000000 20000000 25000000 30000000&quot;
 
 
-printf &quot;sizes,threads,transactions,trns p/s,deadlocks, dls p/s,read/write requests,r/w reqs p/s,min,avg,max,99 percentile \n&quot; &gt;&gt; stat.txt
+    printf &quot;sizes,threads,transactions,trns p/s,deadlocks, dls p/s,read/write requests,r/w reqs p/s,min,avg,max,99 percentile \n&quot; &gt;&gt; stat.txt
 
-mkdir -p $resultsdir
+    mkdir -p $resultsdir
 
-for thread in $threads;do
-    mkdir $resultsdir/thread-$thread
-    for size in $sizes; do
-        sysbench --test=oltp --mysql-table-engine=innodb \
-        --oltp-table-size=$size  --mysql-socket=$socket \
-        --mysql-user=$user --mysql-host=$host \
-        --mysql-password=$password --mysql-db=students \
-        --oltp-table-name=test$size prepare;
-        sysbench --test=oltp --mysql-table-engine=innodb \
-        --oltp-table-size=$size --mysql-socket=$socket \
-        --mysql-user=$user --mysql-host=$host \
-        --mysql-password=$password --mysql-db=students \
-        --oltp-table-name=test$size  --max-requests=1000 \
-        --num-threads=$thread run | \ 
-        tee -a $resultsdir/thread-$thread/sysbench.$thread.$size.report;
-        sysbench --test=oltp --mysql-host=$host  --mysql-user=$user \
-        --mysql-password=$password --mysql-socket=$socket \
-        --mysql-db=students --oltp-table-name=test$size  cleanup;
+    for thread in $threads;do
+        mkdir $resultsdir/thread-$thread
+        for size in $sizes; do
+            sysbench --test=oltp --mysql-table-engine=innodb \
+            --oltp-table-size=$size  --mysql-socket=$socket \
+            --mysql-user=$user --mysql-host=$host \
+            --mysql-password=$password --mysql-db=students \
+            --oltp-table-name=test$size prepare;
+            sysbench --test=oltp --mysql-table-engine=innodb \
+            --oltp-table-size=$size --mysql-socket=$socket \
+            --mysql-user=$user --mysql-host=$host \
+            --mysql-password=$password --mysql-db=students \
+            --oltp-table-name=test$size  --max-requests=1000 \
+            --num-threads=$thread run | \ 
+            tee -a $resultsdir/thread-$thread/sysbench.$thread.$size.report;
+            sysbench --test=oltp --mysql-host=$host  --mysql-user=$user \
+            --mysql-password=$password --mysql-socket=$socket \
+            --mysql-db=students --oltp-table-name=test$size  cleanup;
 
-        cat $resultsdir/thread-$thread/sysbench.$thread.$size.report | \
-        egrep &quot;cat|threads:|transactions:|deadlocks|
-        read/write|min:|avg:|max:|percentile:&quot; | \
-        sed  -e &apos;1 s/Number of threads: //&apos; | \
-        tr -d &quot;\n&quot; | \
-        sed -e &apos;s/Number of threads: /\n/g&apos; \
-        -e &apos;s/[A-Za-z\/]\{1,\}://g&apos; \
-        -e &apos;s/read\/write//g&apos; \
-        -e &apos;s/approx\.  95//g&apos; \
-        -e &apos;s/per sec.)//g&apos; \
-        -e &apos;s/ms//g&apos; \
-        -e &apos;s/(//g&apos;  \
-        -e &apos;s/  */,/g&apos; | awk -v d=$size &apos;{$0=d&quot;,&quot;$0}1&apos; &gt;&gt; stat.txt
+            cat $resultsdir/thread-$thread/sysbench.$thread.$size.report | \
+            egrep &quot;cat|threads:|transactions:|deadlocks|
+            read/write|min:|avg:|max:|percentile:&quot; | \
+            sed  -e &#39;1 s/Number of threads: //&#39; | \
+            tr -d &quot;\n&quot; | \
+            sed -e &#39;s/Number of threads: /\n/g&#39; \
+            -e &#39;s/[A-Za-z\/]\{1,\}://g&#39; \
+            -e &#39;s/read\/write//g&#39; \
+            -e &#39;s/approx\.  95//g&#39; \
+            -e &#39;s/per sec.)//g&#39; \
+            -e &#39;s/ms//g&#39; \
+            -e &#39;s/(//g&#39;  \
+            -e &#39;s/  */,/g&#39; | awk -v d=$size &#39;{$0=d&quot;,&quot;$0}1&#39; &gt;&gt; stat.txt
+        done
     done
-done
 </code></pre><a id="more"></a>
 <h3 id="2-Results"><a href="#2-Results" class="headerlink" title="2. Results"></a>2. Results</h3><pre><code>SIZES,THREADS,TRANSACTIONS,TRNS P/S,DEADLOCKS,DLS P/S,READ/WRITE REQUESTS,R/W REQS P/S,MIN,AVG,MAX,99 PERCENTILE
 1000000,8,1000,236.13,0,0.00,19000,4486.45,7.16,33.66,118.17,59.32
@@ -250,6 +248,23 @@ ggplot(df, aes(x = factor(sizes), y = trns.p.s, fill=factor(threads))) + geom_ba
     $('.fancybox').fancybox();
   })(jQuery);
 </script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </body>
 </html>

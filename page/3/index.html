@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <meta charset="utf-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   
   <title>Buttonwood</title>
@@ -27,12 +27,12 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
   
   <link rel="stylesheet" href="/css/style.css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 </head>
 
 <body>
-  <div class="wrapper">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="wrapper">
     <header id="header">
   <div class="title">
     <h1><a href="/">Buttonwood</a></h1>
@@ -65,6 +65,45 @@
   <header>
     
       <div class="icon"></div>
+      <a href="/2013/08/14/2013-08-14-A-Single-Library/">
+  <time datetime="2013-08-14T11:43:00.000Z">
+    Aug 14 2013
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2013/08/14/2013-08-14-A-Single-Library/"> 单文库基因组组装 (A Single Library for Genome  Assemble) </a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p><a href="1"><em>Illumina</em> 报告</a>中比较了 Reads 长度，coverage，insert size 等对组装结果的影响，可以看到理想状况下，对于简单基因组，30X左右短片段reads加上适量长片段reads可以覆盖足够的基因组区域，并且有较好的N50等指标。</p>
+<p><a href="2">最开始sanger测序</a>可能为了避免重复序列的影响，采用了1k-40k的建库策略，后来soapdenovo在做人类基因组的时候沿用了200，500，2k，5k，10k的测序方法。但是不同基因组具体采用的策略并不一致，但是一般均需要短片段文库（<2k）和长片段文库(>2k)。像Abyss由于做<a href="3">非洲人</a>的时候就只用了42X的210文库数据。        </2k）和长片段文库(></p>
+<p><a href="4">GAGE评价了一些组装软件的组装效果</a>，有 Effect of multiple libraries on assembly 这一段。结合我自己的项目经验，multilib的策略是为了辅助scaffolding。因为contig的组装主要用到reads见的overlap信息，只要测序随机和均一，并且深度足够，短片段reads可以很好的组装出contig（无N的一致性序列），contig的组装步骤并不设计文库片段信息（insert-size和pair-end关系），后面scaffolding则需要用到文库信息来辅助contig间建立连接关系，而这里最主要的也是需要大雨2k的文库梯度分配。所以像allpath这种软件推荐的就是一个短片段文库加一个大片段文库。金小峰这种单倍体物种，基因组也不太大，考虑到个体小，提取DNA复杂，一只蜜蜂样品不足以构建三个短片段文库（200，500，800），我们可以尽量尝试建1到2个文库，对于contig组装影响不会太大（我曾经组装的单染色体蚂蚁也是由于样品原因，建了一个500的文库，效果也很好）。</p>
+<p>另外我们注意到像<a href="5">fermi这样的最新的组装软件的进展</a>，对人类基因组已经可以一个样品一个库，35X数据做denovo assembly了。</p>
+<p>为了更好的开展后续的分析和讨论工作，后面我还会具体找下已经出来的蜜蜂或蚂蚁的组装文献给大家看看，应该说膜翅目的研究现在还是比较热门的，有很多可参考的借鉴的地方。为了尽快推进这个项目，我们没必要非建3个文库。这是我的意见。    </p>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
       <a href="/2013/03/20/2013-03-20-install-matplotlib-is-a-nightmare/">
   <time datetime="2013-03-20T14:51:00.000Z">
     Mar 20 2013
@@ -89,7 +128,7 @@
 <pre><code>port install libpng freetype
 </code></pre><p>To install matplotlib from source, execute:</p>
 <p>Example usage::</p>
-<pre><code>python setup.py install
+<pre><code>  python setup.py install
 </code></pre><p>结果freetype报错:</p>
 <pre><code>/usr/local/include/ft2build.h:56:10: fatal error: ‘freetype/config/ftheader.h’ file not found
 </code></pre><p>google 之在<a href="http://stackoverflow.com/questions/6800488/installing-matplotlib-in-mac-osx-lion" target="_blank" rel="noopener">stackoverflow</a><br>仍然不成功；</p>
@@ -169,7 +208,7 @@
   <div class="entry">
     
       <p>基因组拼接就是将测序得到的短 <strong>reads</strong> 还原成更长基因组序列的过程，<br>不同组装软件和组装策略采用的具体算法和细节不尽相同，<br>但总体上都经过如下几步：</p>
-<p>##<strong>a) Contig 组装</strong><br>首先，利用 <strong>reads</strong> 间 <strong>overlap</strong> 和覆盖度情况，拼接出 <strong>contigs</strong> 序列；<br><strong>Contigs</strong> 组装方法较多，软件丰富，算法实现侧重点不同，具体细节比较麻烦；<br>但从整体上来看，都是先将 <strong>reads</strong> 间 <strong>overlap</strong> 关系构图，然后具体去简化这个图。<br>短 <strong>reads</strong> 一般采用基于 <strong>Kmer</strong> 的 De Brujin Graph(<strong>DBG</strong>)，<br>传统长 <strong>reads</strong> 一般采用 Overlap-Layout-Consensus（<strong>OLC*</strong>) 或 String Graph（<strong>SG</strong>)。<br>
+<h2 id="a-Contig-组装"><a href="#a-Contig-组装" class="headerlink" title="a) Contig 组装"></a><strong>a) Contig 组装</strong></h2><p>首先，利用 <strong>reads</strong> 间 <strong>overlap</strong> 和覆盖度情况，拼接出 <strong>contigs</strong> 序列；<br><strong>Contigs</strong> 组装方法较多，软件丰富，算法实现侧重点不同，具体细节比较麻烦；<br>但从整体上来看，都是先将 <strong>reads</strong> 间 <strong>overlap</strong> 关系构图，然后具体去简化这个图。<br>短 <strong>reads</strong> 一般采用基于 <strong>Kmer</strong> 的 De Brujin Graph(<strong>DBG</strong>)，<br>传统长 <strong>reads</strong> 一般采用 Overlap-Layout-Consensus（<strong>OLC*</strong>) 或 String Graph（<strong>SG</strong>)。<br>
     
   </div>
   <footer class="end-sep">
@@ -219,7 +258,8 @@
 <p>And it is only for my scattered ideas of reading and programming, there are no business attempts.</p>
 <p>Any suggestions about this blog and topics talked there are welcome.</p>
 <p>Like the TED said: <strong><em>Ideas are worth spreading and sharing!</em></strong> Many THX!</p>
-<h3 id="Time-axis"><a href="#Time-axis" class="headerlink" title="Time axis !"></a>Time axis !</h3><table>
+<h3 id="Time-axis"><a href="#Time-axis" class="headerlink" title="Time axis !"></a>Time axis !</h3><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>Time</th>
@@ -245,6 +285,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 
     
   </div>
@@ -279,7 +320,7 @@
   
   <div class="entry">
     
-      <p>##1.Bulletin Board<br>Hi, I’m <em><a href="http://weibo.com/buttonwood" target="_blank" rel="noopener">Buttonwood</a>!</em> This is my first blog on <a href="https://github.com" target="_blank" rel="noopener">github</a>.</p>
+      <h2 id="1-Bulletin-Board"><a href="#1-Bulletin-Board" class="headerlink" title="1.Bulletin Board"></a>1.Bulletin Board</h2><p>Hi, I’m <em><a href="http://weibo.com/buttonwood" target="_blank" rel="noopener">Buttonwood</a>!</em> This is my first blog on <a href="https://github.com" target="_blank" rel="noopener">github</a>.</p>
 <p><em>Writing blogs like Hackers!</em></p>
 <p>This is really very very cool!  And I’ve learned lots of things from it.</p>
 <p>Yes, after days of struggling, my  <a href="http://buttonwood.github.com" target="_blank" rel="noopener"><strong><em>Techblog</em></strong></a> is online at  last!<br>Thx to the Internet and we‘re in an Open Society as well as  A Boom Time.</p>
@@ -354,6 +395,23 @@
     $('.fancybox').fancybox();
   })(jQuery);
 </script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </body>
 </html>

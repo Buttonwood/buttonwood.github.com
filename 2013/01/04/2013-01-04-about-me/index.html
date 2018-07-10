@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <meta charset="utf-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   
   <title>About Me | Buttonwood</title>
@@ -32,12 +32,12 @@ I’m engaged in genomics research, including genome asse">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
   
   <link rel="stylesheet" href="/css/style.css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 </head>
 
 <body>
-  <div class="wrapper">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="wrapper">
     <header id="header">
   <div class="title">
     <h1><a href="/">Buttonwood</a></h1>
@@ -91,7 +91,8 @@ I’m engaged in genomics research, including genome asse">
 <p>And it is only for my scattered ideas of reading and programming, there are no business attempts.</p>
 <p>Any suggestions about this blog and topics talked there are welcome.</p>
 <p>Like the TED said: <strong><em>Ideas are worth spreading and sharing!</em></strong> Many THX!</p>
-<h3 id="Time-axis"><a href="#Time-axis" class="headerlink" title="Time axis !"></a>Time axis !</h3><table>
+<h3 id="Time-axis"><a href="#Time-axis" class="headerlink" title="Time axis !"></a>Time axis !</h3><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>Time</th>
@@ -117,6 +118,7 @@ I’m engaged in genomics research, including genome asse">
 </tr>
 </tbody>
 </table>
+</div>
 
     
   </div>
@@ -179,6 +181,23 @@ I’m engaged in genomics research, including genome asse">
     $('.fancybox').fancybox();
   })(jQuery);
 </script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </body>
 </html>

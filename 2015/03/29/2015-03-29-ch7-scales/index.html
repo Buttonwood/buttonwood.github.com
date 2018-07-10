@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <meta charset="utf-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   
   <title>Scales | Buttonwood</title>
@@ -36,12 +36,12 @@ Normalization
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
   
   <link rel="stylesheet" href="/css/style.css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 </head>
 
 <body>
-  <div class="wrapper">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="wrapper">
     <header id="header">
   <div class="title">
     <h1><a href="/">Buttonwood</a></h1>
@@ -88,17 +88,17 @@ Normalization
 <ul>
 <li>Normalization</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var scale = d3.scale.linear()</span><br><span class="line">    .domain([100, 500])</span><br><span class="line">    .range([10, 350]);</span><br><span class="line">scale(100);  //Returns 10</span><br><span class="line">scale(300);  //Returns 180</span><br><span class="line">scale(500);  //Returns 350</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var dataset = [</span><br><span class="line">    [5, 20], [480, 90], [250, 50], [100, 33], [330, 95],</span><br><span class="line">    [410, 12], [475, 44], [25, 67], [85, 21], [220, 88]</span><br><span class="line">    ];</span><br><span class="line">d3.max(dataset, function(d) &#123;</span><br><span class="line">    return d[0];</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var scale = d3.scale.linear()</span><br><span class="line">    .domain([<span class="number">100</span>, <span class="number">500</span>])</span><br><span class="line">    .range([<span class="number">10</span>, <span class="number">350</span>]);</span><br><span class="line">scale(<span class="number">100</span>);  <span class="comment">//Returns 10</span></span><br><span class="line">scale(<span class="number">300</span>);  <span class="comment">//Returns 180</span></span><br><span class="line">scale(<span class="number">500</span>);  <span class="comment">//Returns 350</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var dataset = [</span><br><span class="line">    [<span class="number">5</span>, <span class="number">20</span>], [<span class="number">480</span>, <span class="number">90</span>], [<span class="number">250</span>, <span class="number">50</span>], [<span class="number">100</span>, <span class="number">33</span>], [<span class="number">330</span>, <span class="number">95</span>],</span><br><span class="line">    [<span class="number">410</span>, <span class="number">12</span>], [<span class="number">475</span>, <span class="number">44</span>], [<span class="number">25</span>, <span class="number">67</span>], [<span class="number">85</span>, <span class="number">21</span>], [<span class="number">220</span>, <span class="number">88</span>]</span><br><span class="line">    ];</span><br><span class="line">d3.max(dataset, function(d) &#123;</span><br><span class="line">    return d[<span class="number">0</span>];</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var xScale = d3.scale.linear()</span><br><span class="line">    .domain([0, d3.max(dataset, function(d) &#123; return d[0]; &#125;)])</span><br><span class="line">    .range([0, w]);</span><br><span class="line">var yScale = d3.scale.linear()</span><br><span class="line">    .domain([0, d3.max(dataset, function(d) &#123; return d[1]; &#125;)])</span><br><span class="line">    .range([0, h]); // .range([h, 0]); //reversed</span><br><span class="line">//Returns scaled value</span><br><span class="line">.attr(&quot;x&quot;, function(d) &#123;</span><br><span class="line">    return xScale(d[0]);</span><br><span class="line">&#125;)</span><br><span class="line">.attr(&quot;y&quot;, function(d) &#123;</span><br><span class="line">    return yScale(d[1]);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var padding = 20;</span><br><span class="line">.range([padding, w - padding]);</span><br><span class="line">.range([padding, w - padding * 2]);</span><br><span class="line">.range([h - padding, padding]);</span><br></pre></td></tr></table></figure>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var xScale = d3.<span class="built_in">scale</span>.linear()</span><br><span class="line">    .domain([<span class="number">0</span>, d3.<span class="built_in">max</span>(dataset, <span class="function"><span class="keyword">function</span><span class="params">(d)</span></span> &#123; <span class="keyword">return</span> d[<span class="number">0</span>]; &#125;)])</span><br><span class="line">    .<span class="built_in">range</span>([<span class="number">0</span>, w]);</span><br><span class="line">var yScale = d3.<span class="built_in">scale</span>.linear()</span><br><span class="line">    .domain([<span class="number">0</span>, d3.<span class="built_in">max</span>(dataset, <span class="function"><span class="keyword">function</span><span class="params">(d)</span></span> &#123; <span class="keyword">return</span> d[<span class="number">1</span>]; &#125;)])</span><br><span class="line">    .<span class="built_in">range</span>([<span class="number">0</span>, h]); // .<span class="built_in">range</span>([h, <span class="number">0</span>]); //reversed</span><br><span class="line">//Returns scaled <span class="keyword">value</span></span><br><span class="line">.attr(<span class="string">"x"</span>, <span class="function"><span class="keyword">function</span><span class="params">(d)</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> xScale(d[<span class="number">0</span>]);</span><br><span class="line">&#125;)</span><br><span class="line">.attr(<span class="string">"y"</span>, <span class="function"><span class="keyword">function</span><span class="params">(d)</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> yScale(d[<span class="number">1</span>]);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">var</span> <span class="attribute">padding</span> = <span class="number">20</span>;</span><br><span class="line">.range([<span class="attribute">padding</span>, w - padding]);</span><br><span class="line">.range([<span class="attribute">padding</span>, w - padding * <span class="number">2</span>]);</span><br><span class="line">.range([h - <span class="attribute">padding</span>, padding]);</span><br></pre></td></tr></table></figure>
 <h4 id="2-Other-Methods-for-d3-scale-linear"><a href="#2-Other-Methods-for-d3-scale-linear" class="headerlink" title="2. Other Methods for d3.scale.linear()"></a>2. Other Methods for <code>d3.scale.linear()</code></h4><ul>
 <li>nice()</li>
 <li>rangeRound()</li>
 <li>clamp()</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var scale = d3.scale.linear()</span><br><span class="line">                    .domain([0.123, 4.567])</span><br><span class="line">                    .range([0, 500])</span><br><span class="line">                    .nice();</span><br></pre></td></tr></table></figure>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">var</span> <span class="built_in">scale</span> = d3.<span class="built_in">scale</span>.<span class="built_in">linear</span>()</span><br><span class="line">                    .<span class="built_in">domain</span>([<span class="number">0.123</span>, <span class="number">4.567</span>])</span><br><span class="line">                    .<span class="built_in">range</span>([<span class="number">0</span>, <span class="number">500</span>])</span><br><span class="line">                    .nice();</span><br></pre></td></tr></table></figure>
 <h4 id="3-Other-Scales"><a href="#3-Other-Scales" class="headerlink" title="3. Other Scales"></a>3. Other Scales</h4><ul>
 <li>sqrt</li>
 <li>pow</li>
@@ -179,6 +179,23 @@ Normalization
     $('.fancybox').fancybox();
   })(jQuery);
 </script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </body>
 </html>
