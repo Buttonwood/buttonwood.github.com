@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>oracle 11g installation | Buttonwood</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Buttonwood">
+  
+  
+    <meta name="description" content="1.    安装依赖包12345678rpm -qa | grep  pdksh-5.2.14-36.el5rpm -ivh /int/rpm-ol6.6/libaio-devel-0.3.107-10.el6.x86_64.rpmrpm -ivh /int/rpm-ol6.6/unixODBC-2.2.14-14.el6.x86_64.rpmrpm -ivh /int/rpm-ol6.6/uni">
+  
+  <meta name="description" content="1.    安装依赖包12345678rpm -qa | grep  pdksh-5.2.14-36.el5rpm -ivh /int/rpm-ol6.6/libaio-devel-0.3.107-10.el6.x86_64.rpmrpm -ivh /int/rpm-ol6.6/unixODBC-2.2.14-14.el6.x86_64.rpmrpm -ivh /int/rpm-ol6.6/uni">
+<meta name="keywords" content="DB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="oracle 11g installation">
+<meta property="og:url" content="http://buttonwood.github.io/2018/06/01/2018-06-01-oracle-11g-installation/index.html">
+<meta property="og:site_name" content="Buttonwood">
+<meta property="og:description" content="1.    安装依赖包12345678rpm -qa | grep  pdksh-5.2.14-36.el5rpm -ivh /int/rpm-ol6.6/libaio-devel-0.3.107-10.el6.x86_64.rpmrpm -ivh /int/rpm-ol6.6/unixODBC-2.2.14-14.el6.x86_64.rpmrpm -ivh /int/rpm-ol6.6/uni">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-25T11:21:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="oracle 11g installation">
+<meta name="twitter:description" content="1.    安装依赖包12345678rpm -qa | grep  pdksh-5.2.14-36.el5rpm -ivh /int/rpm-ol6.6/libaio-devel-0.3.107-10.el6.x86_64.rpmrpm -ivh /int/rpm-ol6.6/unixODBC-2.2.14-14.el6.x86_64.rpmrpm -ivh /int/rpm-ol6.6/uni">
+  
+    <link rel="alternate" href="/atom.xml" title="Buttonwood" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+</head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Buttonwood</a></h1>
+    <p><a href="/">Being A Coding Poet. Less Talk, and More Move!</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/about/">About</a></li>
+      
+        <li><a href="/archives/">Archives</a></li>
+      
+        <li><a href="/links/">Links</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2018/06/01/2018-06-01-oracle-11g-installation/">
+  <time datetime="2018-06-01T13:51:00.000Z">
+    Jun 1 2018
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">oracle 11g installation</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h3 id="1-安装依赖包"><a href="#1-安装依赖包" class="headerlink" title="1.    安装依赖包"></a>1.    安装依赖包</h3><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | grep  pdksh<span class="number">-5.2</span><span class="number">.14</span><span class="number">-36.</span>el5</span><br><span class="line"></span><br><span class="line">rpm -ivh /int/rpm-ol6<span class="number">.6</span>/libaio-devel<span class="number">-0.3</span><span class="number">.107</span><span class="number">-10.</span>el6.x86_64.rpm</span><br><span class="line">rpm -ivh /int/rpm-ol6<span class="number">.6</span>/unixODBC<span class="number">-2.2</span><span class="number">.14</span><span class="number">-14.</span>el6.x86_64.rpm</span><br><span class="line">rpm -ivh /int/rpm-ol6<span class="number">.6</span>/unixODBC-devel<span class="number">-2.2</span><span class="number">.14</span><span class="number">-14.</span>el6.x86_64.rpm</span><br><span class="line"></span><br><span class="line">rpm -ivh /int/rpm-ol6<span class="number">.6</span>/telnet<span class="number">-0.17</span><span class="number">-48.</span>el6.x86_64.rpm</span><br><span class="line">rpm -ivh /int/rpm-ol6<span class="number">.6</span>/telnet-server<span class="number">-0.17</span><span class="number">-48.</span>el6.x86_64.rpm</span><br></pre></td></tr></table></figure>
+<h3 id="2-更改系统配置"><a href="#2-更改系统配置" class="headerlink" title="2. 更改系统配置"></a>2. 更改系统配置</h3><h4 id="2-1"><a href="#2-1" class="headerlink" title="2.1"></a>2.1</h4><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/sysconfig/selinux</span><br><span class="line">SELINUX=disabled</span><br></pre></td></tr></table></figure>
+<h4 id="2-2"><a href="#2-2" class="headerlink" title="2.2"></a>2.2</h4><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/sysctl.conf</span><br><span class="line">kernel.sem = <span class="number">250</span> <span class="number">32000</span> <span class="number">100</span> <span class="number">128</span></span><br><span class="line">net.ipv4.ip_local_port_range = <span class="number">9000</span> <span class="number">65500</span></span><br><span class="line">net.core.rmem_default = <span class="number">262144</span></span><br><span class="line">net.core.rmem_max = <span class="number">4194304</span></span><br><span class="line">net.core.wmem_default = <span class="number">262144</span></span><br><span class="line">net.core.wmem_max = <span class="number">1048576</span></span><br><span class="line">fs.aio-max-nr = <span class="number">1048576</span></span><br><span class="line">fs.file-max = <span class="number">6815744</span></span><br><span class="line"># 生效</span><br><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
+<h4 id="2-3"><a href="#2-3" class="headerlink" title="2.3"></a>2.3</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">vim</span> /etc/pam.d/login</span><br><span class="line">session     required    pam_limits.<span class="keyword">so</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-4"><a href="#2-4" class="headerlink" title="2.4"></a>2.4</h4><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/security/limits.conf</span><br><span class="line">oracle         soft    nproc    <span class="number">10000</span></span><br><span class="line">oracle         hard    nproc    <span class="number">16384</span></span><br><span class="line">oracle         soft    nofile   <span class="number">52768</span></span><br><span class="line">oracle         hard    nofile   <span class="number">6553</span></span><br><span class="line">root soft nproc <span class="number">2047</span></span><br><span class="line">root hard nproc <span class="number">16384</span></span><br><span class="line">root soft nofile <span class="number">1024</span></span><br><span class="line">root hard nofile <span class="number">65536</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-5-创建相关用户组"><a href="#2-5-创建相关用户组" class="headerlink" title="2.5 创建相关用户组"></a>2.5 创建相关用户组</h4><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">groupadd</span> oinstall </span><br><span class="line"><span class="title">groupadd</span> dba </span><br><span class="line"><span class="title">useradd</span> -g oinstall -<span class="type">G</span> dba oracle </span><br><span class="line"><span class="title">passwd</span> oracle // oracle</span><br><span class="line"></span><br><span class="line"><span class="title">id</span> oracle</span><br><span class="line"><span class="title">mkdir</span> -p /<span class="class"><span class="keyword">data</span>/app/oracle</span></span><br><span class="line"><span class="title">mkdir</span> -p /<span class="class"><span class="keyword">data</span>/app/oraInventory</span></span><br><span class="line"><span class="title">chown</span> -<span class="type">R</span> oracle:oinstall /<span class="class"><span class="keyword">data</span>/app/</span></span><br><span class="line"><span class="title">chmod</span> -<span class="type">R</span> <span class="number">755</span> /<span class="class"><span class="keyword">data</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="2-6-oracle用户生效"><a href="#2-6-oracle用户生效" class="headerlink" title="2.6 oracle用户生效"></a>2.6 oracle用户生效</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">vim /home/oracle/.bash_profile</span><br><span class="line">umask 022  </span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">ORACLE_BASE</span>=/data/app  </span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">ORACLE_HOME</span>=/data/app/oracle/product/11.2.0/db_1</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">ORACLE_SID</span>=orcl  </span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">LANG</span>=en_US.UTF-8</span><br><span class="line"><span class="comment">#export NLS_LANG="SIMPLIFIED CHINESE_CHINA.ZHS16GBK"</span></span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">NLS_LANG</span>=<span class="string">"american_america.zhs16gbk"</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-7-全局生效"><a href="#2-7-全局生效" class="headerlink" title="2.7 全局生效"></a>2.7 全局生效</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">PATH</span>=<span class="variable">$PATH</span>:/data/app/oracle/product/11.2.0/db_1/bin</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">ORACLE_BASE</span>=/data/app  </span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">ORACLE_HOME</span>=/data/app/oracle/product/11.2.0/db_1</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">ORACLE_SID</span>=orcl  </span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">LANG</span>=en_US.UTF-8</span><br><span class="line"><span class="comment">#export NLS_LANG="SIMPLIFIED CHINESE_CHINA.ZHS16GBK" </span></span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">NLS_LANG</span>=<span class="string">"american_america.zhs16gbk"</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-静默安装"><a href="#3-静默安装" class="headerlink" title="3. 静默安装"></a>3. 静默安装</h3><h4 id="3-1"><a href="#3-1" class="headerlink" title="3.1"></a>3.1</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">vim response/db_install.rsp</span><br><span class="line">oracle<span class="selector-class">.install</span><span class="selector-class">.responseFileVersion</span>=/oracle/install/rspfmt_dbinstall_response_schema_v11_2_0</span><br><span class="line">oracle<span class="selector-class">.install</span><span class="selector-class">.option</span>=INSTALL_DB_SWONLY</span><br><span class="line">ORACLE_HOSTNAME=D65012</span><br><span class="line">INVENTORY_LOCATION=/data/app/oraInventory</span><br><span class="line">SELECTED_LANGUAGES=en,zh_CN,zh_TW</span><br><span class="line">ORACLE_HOME=/data/app/oracle/product/<span class="number">11.2</span>.<span class="number">0</span>/db_1</span><br><span class="line">ORACLE_BASE=/data/app</span><br><span class="line">oracle<span class="selector-class">.install</span><span class="selector-class">.db</span><span class="selector-class">.InstallEdition</span>=EE</span><br><span class="line">oracle<span class="selector-class">.install</span><span class="selector-class">.db</span><span class="selector-class">.isCustomInstall</span>=false</span><br><span class="line">oracle<span class="selector-class">.install</span><span class="selector-class">.db</span><span class="selector-class">.DBA_GROUP</span>=dba</span><br><span class="line">oracle<span class="selector-class">.install</span><span class="selector-class">.db</span><span class="selector-class">.OPER_GROUP</span>=oinstall</span><br><span class="line">oracle<span class="selector-class">.install</span><span class="selector-class">.db</span><span class="selector-class">.config</span><span class="selector-class">.starterdb</span><span class="selector-class">.type</span>=GENERAL_PURPOSE</span><br><span class="line">oracle<span class="selector-class">.install</span><span class="selector-class">.db</span><span class="selector-class">.config</span><span class="selector-class">.starterdb</span><span class="selector-class">.globalDBName</span>=ocrl</span><br><span class="line">oracle<span class="selector-class">.install</span><span class="selector-class">.db</span><span class="selector-class">.config</span><span class="selector-class">.starterdb</span><span class="selector-class">.SID</span>=ocrl</span><br><span class="line">oracle<span class="selector-class">.install</span><span class="selector-class">.db</span><span class="selector-class">.config</span><span class="selector-class">.starterdb</span><span class="selector-class">.characterSet</span>=AL32UTF8</span><br><span class="line">oracle<span class="selector-class">.install</span><span class="selector-class">.db</span><span class="selector-class">.config</span><span class="selector-class">.starterdb</span><span class="selector-class">.memoryOption</span>=true</span><br><span class="line">oracle<span class="selector-class">.install</span><span class="selector-class">.db</span><span class="selector-class">.config</span><span class="selector-class">.starterdb</span><span class="selector-class">.memoryLimit</span>=<span class="number">4069</span></span><br><span class="line">oracle<span class="selector-class">.install</span><span class="selector-class">.db</span><span class="selector-class">.config</span><span class="selector-class">.starterdb</span><span class="selector-class">.installExampleSchemas</span>=false</span><br><span class="line">oracle<span class="selector-class">.install</span><span class="selector-class">.db</span><span class="selector-class">.config</span><span class="selector-class">.starterdb</span><span class="selector-class">.enableSecuritySettings</span>=true</span><br><span class="line">oracle<span class="selector-class">.install</span><span class="selector-class">.db</span><span class="selector-class">.config</span><span class="selector-class">.starterdb</span><span class="selector-class">.password</span><span class="selector-class">.ALL</span>=oracle</span><br><span class="line">oracle<span class="selector-class">.install</span><span class="selector-class">.db</span><span class="selector-class">.config</span><span class="selector-class">.starterdb</span><span class="selector-class">.control</span>=DB_CONTROL</span><br><span class="line">oracle<span class="selector-class">.install</span><span class="selector-class">.db</span><span class="selector-class">.config</span><span class="selector-class">.starterdb</span><span class="selector-class">.dbcontrol</span>.\</span><br><span class="line">enableEmailNotification=false</span><br><span class="line">oracle<span class="selector-class">.install</span><span class="selector-class">.db</span><span class="selector-class">.config</span><span class="selector-class">.starterdb</span><span class="selector-class">.automatedBackup</span><span class="selector-class">.enable</span>=false</span><br><span class="line">SECURITY_UPDATES_VIA_MYORACLESUPPORT=false</span><br><span class="line">DECLINE_SECURITY_UPDATES=true</span><br></pre></td></tr></table></figure>
+<h4 id="3-2"><a href="#3-2" class="headerlink" title="3.2"></a>3.2</h4><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim <span class="regexp">/home/</span>oracle/oraInst.loc</span><br><span class="line">inventory_loc=<span class="regexp">/data/</span>app/oraInventory</span><br><span class="line">inst_group=oinstall</span><br><span class="line"></span><br><span class="line">chown <span class="string">oracle:</span>oinstall <span class="regexp">/home/</span>oracle/oraInst.loc</span><br><span class="line">chmod <span class="number">664</span> <span class="regexp">/home/</span>oracle/oraInst.loc</span><br></pre></td></tr></table></figure>
+<h4 id="3-3"><a href="#3-3" class="headerlink" title="3.3"></a>3.3</h4><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">su oracle</span><br><span class="line">[oracle<span class="meta">@D</span>65012 database]$  ./runInstaller -silent \</span><br><span class="line">-responseFile <span class="regexp">/home/</span>oracle<span class="regexp">/database/</span>response/db_install.rsp \</span><br><span class="line">-invPtrLoc <span class="regexp">/home/</span>oracle/oraInst.loc \</span><br><span class="line">-ignoreSysPrereqs -ignorePrereq</span><br><span class="line"></span><br><span class="line">su root</span><br><span class="line">sh <span class="regexp">/data/</span>app<span class="regexp">/oracle/</span>product<span class="regexp">/11.2.0/</span>db_1/root.sh</span><br></pre></td></tr></table></figure>
+<h4 id="3-4-创建数据库实例"><a href="#3-4-创建数据库实例" class="headerlink" title="3.4 创建数据库实例"></a>3.4 创建数据库实例</h4><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">vi response/dbca.rsp</span><br><span class="line">[GENERAL]</span><br><span class="line">RESPONSEFILE_VERSION = <span class="string">"11.2.0"</span></span><br><span class="line">OPERATION_TYPE = <span class="string">"createDatabase"</span></span><br><span class="line">[CREATEDATABASE]</span><br><span class="line">GDBNAME = <span class="string">"D65012"</span></span><br><span class="line">SID = <span class="string">"orcl"</span></span><br><span class="line">TEMPLATENAME = <span class="string">"General_Purpose.dbc"</span></span><br><span class="line">SYSPASSWORD = <span class="string">"sys"</span></span><br><span class="line">SYSTEMPASSWORD = <span class="string">"sys"</span></span><br><span class="line">DATAFILEDESTINATION = /data/app/oracle/oradata</span><br><span class="line">CHARACTERSET = <span class="string">"ZHS16GBK"</span></span><br><span class="line">TOTALMEMORY = <span class="string">"4096"</span></span><br><span class="line"></span><br><span class="line">[oracle@D65012 response]$ dbca -silent -responseFile \</span><br><span class="line">/home/oracle/database/response/dbca.rsp</span><br></pre></td></tr></table></figure>
+<h4 id="3-5-监听"><a href="#3-5-监听" class="headerlink" title="3.5 监听"></a>3.5 监听</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netca <span class="regexp">/silent /</span>responsefile <span class="regexp">/home/</span>oracle<span class="regexp">/database/</span>response<span class="regexp">/netca.rsp</span></span><br></pre></td></tr></table></figure>
+<h5 id="3-5-1-listener-ora"><a href="#3-5-1-listener-ora" class="headerlink" title="3.5.1 listener.ora"></a>3.5.1 listener.ora</h5><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">vim <span class="string">/data/app/oracle/product/11.2.0/db_1/network/admin/listener.ora</span></span><br><span class="line">LISTENER =</span><br><span class="line">  <span class="params">(<span class="attr">DESCRIPTION_LIST</span> =</span></span><br><span class="line"><span class="params">    (<span class="attr">DESCRIPTION</span> =</span></span><br><span class="line"><span class="params">      (<span class="attr">ADDRESS</span> = (<span class="attr">PROTOCOL</span> = IPC)</span><span class="params">(<span class="attr">KEY</span> = EXTPROC1521)</span>)</span><br><span class="line">      <span class="params">(<span class="attr">ADDRESS</span> = (<span class="attr">PROTOCOL</span> = TCP)</span><span class="params">(<span class="attr">HOST</span> = D65012)</span><span class="params">(<span class="attr">PORT</span> = 1521)</span>)</span><br><span class="line">      <span class="params">(<span class="attr">ADDRESS_LIST</span> =</span></span><br><span class="line"><span class="params">        (<span class="attr">ADDRESS</span> = (<span class="attr">PROTOCOL</span> = IPC)</span><span class="params">(<span class="attr">KEY</span> = EXTPROC)</span>)</span><br><span class="line">      )</span><br><span class="line">    )</span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line">ADR_BASE_LISTENER = <span class="string">/data/app</span></span><br></pre></td></tr></table></figure>
+<h5 id="3-5-2-tnsnames-ora"><a href="#3-5-2-tnsnames-ora" class="headerlink" title="3.5.2 tnsnames.ora"></a>3.5.2 tnsnames.ora</h5><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">vim /data/app/oracle/product/<span class="number">11.2</span>.<span class="number">0</span>/db_1/network/admin/tnsnames.ora</span><br><span class="line"><span class="attr">LISTENER_D65012</span> =</span><br><span class="line">  (<span class="attr">ADDRESS</span> = (<span class="attr">PROTOCOL</span> = TCP)(<span class="attr">HOST</span> = <span class="number">10.119</span>.<span class="number">1.126</span>)(<span class="attr">PORT</span> = <span class="number">1521</span>))</span><br><span class="line"></span><br><span class="line"><span class="attr">D65012</span>  =</span><br><span class="line">  (<span class="attr">DESCRIPTION</span> =</span><br><span class="line">    (<span class="attr">ADDRESS</span> = (<span class="attr">PROTOCOL</span> = TCP)(<span class="attr">HOST</span> = <span class="number">10.119</span>.<span class="number">1.126</span>)(<span class="attr">PORT</span> = <span class="number">1521</span>))</span><br><span class="line">    (<span class="attr">CONNECT_DATA</span> =</span><br><span class="line">      (<span class="attr">SERVER</span> = DEDICATED)</span><br><span class="line">      (<span class="attr">SERVICE_NAME</span> = D65012)</span><br><span class="line">      (<span class="attr">UR=A)</span></span><br><span class="line">    )</span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
+<h5 id="3-5-3-lsnrctl"><a href="#3-5-3-lsnrctl" class="headerlink" title="3.5.3 lsnrctl"></a>3.5.3 lsnrctl</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lsnrctl <span class="keyword">start</span> </span><br><span class="line">lsnrctl <span class="keyword">status</span></span><br><span class="line">lsnrctl <span class="keyword">stop</span></span><br></pre></td></tr></table></figure>
+<h5 id="3-5-4-mount"><a href="#3-5-4-mount" class="headerlink" title="3.5.4  mount"></a>3.5.4  mount</h5><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sqlplus /nolog</span><br><span class="line">SQL&gt; conn / as sysdba;</span><br><span class="line">SQL&gt; alter<span class="built_in"> user system </span>identified by <span class="string">"oracle"</span>;</span><br><span class="line">SQL&gt; alter<span class="built_in"> user </span>sys identified by <span class="string">"oracle"</span>;</span><br><span class="line"></span><br><span class="line">SQL&gt; alter database mount;</span><br><span class="line">SQL&gt; alter database open;</span><br><span class="line">SQL&gt; show parameter service_name;</span><br><span class="line"></span><br><span class="line">SQL&gt; shutdown immediate; </span><br><span class="line">SQL&gt; startup;</span><br></pre></td></tr></table></figure>
+<h5 id="3-5-5-apps"><a href="#3-5-5-apps" class="headerlink" title="3.5.5 apps"></a>3.5.5 apps</h5><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; create<span class="built_in"> user </span>apps identified by <span class="string">"apps"</span>;</span><br><span class="line">SQL&gt; grant connect,resource <span class="keyword">to</span> apps;</span><br><span class="line"></span><br><span class="line">sqlplus apps/apps@localhost/helowin</span><br><span class="line">sqlplus sys/oracle@D65012/D65012 as sysdba</span><br></pre></td></tr></table></figure>
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><ul>
+<li><a href="https://blog.csdn.net/jameshadoop/article/details/48223645" target="_blank" rel="noopener">https://blog.csdn.net/jameshadoop/article/details/48223645</a></li>
+<li><a href="https://blog.csdn.net/jameshadoop/article/details/48086933" target="_blank" rel="noopener">https://blog.csdn.net/jameshadoop/article/details/48086933</a></li>
+<li><a href="http://www.dbaexpert.com/blog/create-oracle-12c-rac-databases-in-silent-mode/" target="_blank" rel="noopener">http://www.dbaexpert.com/blog/create-oracle-12c-rac-databases-in-silent-mode/</a></li>
+<li><a href="https://docs.oracle.com/cd/E11882_01/em.112/e12255/c_oui_appendix.htm#OUICG379" target="_blank" rel="noopener">https://docs.oracle.com/cd/E11882_01/em.112/e12255/c_oui_appendix.htm#OUICG379</a></li>
+</ul>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/DB/">DB</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/DB/">DB</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+<section id="comment"> 
+    <h1 class="title">Comments</h1>
+    <div class="ds-thread" data-title="oracle 11g installation"></div> 
+</section>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2018 <a href="/">Buttonwood</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'buttonwood' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

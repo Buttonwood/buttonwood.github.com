@@ -65,6 +65,44 @@
   <header>
     
       <div class="icon"></div>
+      <a href="/2014/12/31/2014-12-31-gitlab/">
+  <time datetime="2014-12-31T02:51:00.000Z">
+    Dec 31 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2014/12/31/2014-12-31-gitlab/">使用gitlab搭建代码仓库</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>我来之前，公司一直用windows server搭建的svn托管代码，每次都要手动远程登陆到服务器然后后台授权。我看网上很多类github的平台，于是选了gitlab实验推荐大家迁移到git上来。</p>
+<h3 id="1-搭建脚本很简单，下载安装包，启动即可。"><a href="#1-搭建脚本很简单，下载安装包，启动即可。" class="headerlink" title="1. 搭建脚本很简单，下载安装包，启动即可。"></a>1. 搭建脚本很简单，下载安装包，启动即可。</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">curl -O https:<span class="comment">//downloads-packages.s3.amazonaws.com/centos-6.6/gitlab-7.6.1_omnibus.5.3.0.ci.1-1.el6.x86_64.rpm</span></span><br><span class="line"></span><br><span class="line">yum install openssh-server postfix cronie</span><br><span class="line"></span><br><span class="line">service postfix start &amp;&amp; chkconfig postfix on</span><br><span class="line"></span><br><span class="line">rpm -<span class="selector-tag">i</span> gitlab-<span class="number">7.6</span>.<span class="number">1</span>_omnibus.<span class="number">5.3</span>.<span class="number">0</span><span class="selector-class">.ci</span>.<span class="number">1</span>-<span class="number">1</span><span class="selector-class">.el6</span><span class="selector-class">.x86_64</span><span class="selector-class">.rpm</span></span><br></pre></td></tr></table></figure>
+<p>然后按说明配置一下gitlab.rb，启动服务即可。注意8080端口和ssh端口转发。</p>
+<h3 id="2-用docker来更新最新版本的gitlab"><a href="#2-用docker来更新最新版本的gitlab" class="headerlink" title="2. 用docker来更新最新版本的gitlab"></a>2. 用docker来更新最新版本的gitlab</h3><p>Updated 2016-03-24 </p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 修改防火墙</span></span><br><span class="line">iptables -A INPUT -m state --state NEW -p tcp --dport 10022 -j ACCEPT</span><br><span class="line">iptables -A INPUT -m state --state NEW -p tcp --dport 8080 -j ACCEPT</span><br><span class="line">service iptables save</span><br><span class="line">service iptables status</span><br><span class="line">service iptables restart</span><br><span class="line">iptables -L</span><br><span class="line"></span><br><span class="line">service docker restart</span><br><span class="line">docker <span class="builtin-name">run</span> --detach \</span><br><span class="line">    --hostname gitlab.example.com \</span><br><span class="line">    --env <span class="attribute">GITLAB_OMNIBUS_CONFIG</span>=<span class="string">"external_url 'http://119.*.*.*/'; gitlab_rails['lfs_enabled'] = true;"</span> \</span><br><span class="line">    -p 443:443 -p 8080:80 -p 10022:22 \</span><br><span class="line">    --name gitlab \</span><br><span class="line">    --restart always \</span><br><span class="line">    --volume /srv/gitlab/config:/etc/gitlab \</span><br><span class="line">    --volume /srv/gitlab/logs:/var/log/gitlab \</span><br><span class="line">    --volume /srv/gitlab/data:/var/opt/gitlab \</span><br><span class="line">    gitlab/gitlab-ce:latest</span><br></pre></td></tr></table></figure>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
       <a href="/2014/12/15/2014-12-15-rChart/">
   <time datetime="2014-12-15T03:51:00.000Z">
     Dec 15 2014
@@ -473,89 +511,6 @@ m1$save(&#39;graph1.html&#39;, &#39;inline&#39;, cdn=TRUE)
     
       <p>Here I draw a genome annotation flow chart. Any suggestion is welcome!</p>
 <h3 id="A-roadmap-for-genome-annotation"><a href="#A-roadmap-for-genome-annotation" class="headerlink" title="A roadmap for genome annotation!"></a>A roadmap for <strong><em>genome annotation</em></strong>!</h3><img src="https://dl.dropboxusercontent.com/u/78977353/Octopress/image/genome/genome-annotation.png">
-
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
-</article>
-
-
-
-  
-    <article class="photo">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2013/11/18/2013-11-18-genome-assembly/">
-  <time datetime="2013-11-18T15:22:00.000Z">
-    Nov 18 2013
-  </time>
-</a>
-    
-    
-  
-    <h1 class="title"><a href="/2013/11/18/2013-11-18-genome-assembly/">genome assembly</a></h1>
-  
-
-  </header>
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      
-        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.001.jpg">
-      
-        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.002.jpg">
-      
-        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.003.jpg">
-      
-        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.004.jpg">
-      
-        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.005.jpg">
-      
-        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.006.jpg">
-      
-        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.007.jpg">
-      
-        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.008.jpg">
-      
-        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.009.jpg">
-      
-        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.010.jpg">
-      
-        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.011.jpg">
-      
-        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.012.jpg">
-      
-        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.013.jpg">
-      
-        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.014.jpg">
-      
-        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.015.jpg">
-      
-        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.016.jpg">
-      
-        <img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/DBG-img/DBG-img.017.jpg">
-      
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="entry">
-    
-      <p>Here is a short talk about <a href="https://docs.google.com/file/d/0B_bKUAo13sMjWlJSVTk0WE93aDA/edit" target="_blank" rel="noopener">genome assembly</a>.</p>
-<p>And for <strong><em>DBG</em></strong> details, please click on  <a href="https://docs.google.com/file/d/0B_bKUAo13sMjaWRhYVdqZTVuejQ/edit" target="_blank" rel="noopener">DBG</a>.</p>
-<p>Here I updated the images of the slide for you.</p>
 
     
   </div>
