@@ -123,6 +123,146 @@
   <header>
     
       <div class="icon"></div>
+      <a href="/2016/08/08/2016-08-08-Vagrant-Networks/">
+  <time datetime="2016-08-08T13:51:00.000Z">
+    Aug 8 2016
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2016/08/08/2016-08-08-Vagrant-Networks/">Vagrant Network</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h3 id="1-forwarded-port"><a href="#1-forwarded-port" class="headerlink" title="1.forwarded_port"></a>1.forwarded_port</h3><ol>
+<li>First, you need to be explicit about every port you want to forward. </li>
+<li>Forwarded ports are also accessible from outside your own computer. </li>
+<li>And finally, with VirtualBox, Vagrant can’t forward to ports less than 1024 on the host system.</li>
+</ol>
+<ul>
+<li>宿主机host的端口转发到虚拟机VM的某一个端口上</li>
+<li>虚拟机可以访问外部网络</li>
+</ul>
+<h4 id="配置参数"><a href="#配置参数" class="headerlink" title="配置参数"></a>配置参数</h4><ul>
+<li><code>guest</code>: </li>
+<li><code>guest_ip</code>: </li>
+<li><code>host</code>: &gt;1024    的端口</li>
+<li><code>host_ip</code>: <ul>
+<li>“127.0.0.1”: to forbid remote access to the forwarded port </li>
+</ul>
+</li>
+<li><code>protocol</code>:  <ul>
+<li>“tcp”</li>
+<li>“udp” </li>
+</ul>
+</li>
+<li><code>auto_correct</code>: <code>true</code> 防止端口占用(Autocorrecting Port Collisions)</li>
+</ul>
+<h4 id="V1"><a href="#V1" class="headerlink" title="V1"></a><del>V1</del></h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">config<span class="selector-class">.vm</span><span class="selector-class">.forward_port</span> <span class="number">80</span>, <span class="number">8080</span> </span><br><span class="line"><span class="selector-id">#config</span><span class="selector-class">.vm</span><span class="selector-class">.forwarded_port</span> <span class="number">80</span>, <span class="number">8080</span>, auto_correct: true</span><br><span class="line"><span class="selector-id">#config</span><span class="selector-class">.vm</span><span class="selector-class">.usable_port_range</span> = (<span class="number">2200</span>..<span class="number">2250</span>)</span><br><span class="line"><span class="selector-id">#config</span><span class="selector-class">.vm</span><span class="selector-class">.forwarded_port</span> <span class="number">80</span>, <span class="number">8080</span>, protocol: <span class="string">"udp"</span></span><br></pre></td></tr></table></figure>
+<h4 id="V2"><a href="#V2" class="headerlink" title="V2"></a>V2</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">config.<span class="keyword">vm</span>.network :forwarded_port, gues<span class="variable">t:</span> <span class="number">80</span>, hos<span class="variable">t:</span> <span class="number">8888</span></span><br><span class="line">config.<span class="keyword">vm</span>.network :forwarded_port, gues<span class="variable">t:</span> <span class="number">80</span>, hos<span class="variable">t:</span> <span class="number">8888</span>, auto_correc<span class="variable">t:</span> true</span><br><span class="line">config.<span class="keyword">vm</span>.network <span class="string">"forwarded_port"</span>, gues<span class="variable">t:</span> <span class="number">8001</span>, hos<span class="variable">t:</span> <span class="number">8001</span>, host_ip: <span class="string">"127.0.0.1"</span></span><br><span class="line"></span><br><span class="line"># protoco<span class="variable">l:</span> <span class="string">"udp"</span></span><br></pre></td></tr></table></figure>
+<h4 id="Pros"><a href="#Pros" class="headerlink" title="Pros"></a>Pros</h4><ul>
+<li>容易实现外网访问虚拟机</li>
+</ul>
+<h4 id="Cons"><a href="#Cons" class="headerlink" title="Cons"></a>Cons</h4><ul>
+<li>端口较多时比较麻烦,需手动配置</li>
+<li>不支持在宿主机器上使用小于1024的端口来转发。比如：不能使用SSL的443端口来进行https连接</li>
+<li>It is a communication channel that originates on the host side; you cannot use it for NFS or X11 because port forwarding doesn’t allow the guest to communicate with services running on the host.</li>
+<li>Port Collision(One port on your host can be assigned to only one service.)</li>
+</ul>
+<h3 id="2-Private-network-Host-Only"><a href="#2-Private-network-Host-Only" class="headerlink" title="2. Private network(Host-Only)"></a>2. Private network(Host-Only)</h3><ul>
+<li>Vagrant supports host-only networks by specifying a static IP for the machine.        </li>
+<li>The machine can then be accessed directly using this IP.        </li>
+<li>Machines outside of the host, such as other machines on the local network, cannot access the assigned static IP.</li>
+<li>The virtual machines can also communicate with the host itself. This can be useful for accessing services running on the host machine. Forwarded ports, on the other hand, can only be accessed from the host machine. The guest can’t talk to the host.(属主机host可以访问虚拟机)</li>
+<li>Host-only networks that multiple virtual machines can communicate with each other by being a part of the same network. (同一网段的虚拟机可以相互访问)</li>
+<li>虚拟机可以访问外部网络</li>
+</ul>
+<h4 id="配置参数-1"><a href="#配置参数-1" class="headerlink" title="配置参数"></a>配置参数</h4><ul>
+<li>手动配置IP    <ul>
+<li><code>config.vm.network &quot;private_network&quot;, ip: &quot;10.20.30.40&quot;</code> </li>
+</ul>
+</li>
+<li>VirtualBox built-in DHCP server<ul>
+<li><code>config.vm.network &quot;private_network&quot;, type: &quot;dhcp&quot;</code>  </li>
+</ul>
+</li>
+</ul>
+<h4 id="V1-1"><a href="#V1-1" class="headerlink" title="V1"></a><del>V1</del></h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">config</span><span class="selector-class">.vm</span><span class="selector-class">.network</span> "<span class="selector-tag">hostonly</span>", "192<span class="selector-class">.168</span><span class="selector-class">.33</span><span class="selector-class">.10</span>"</span><br></pre></td></tr></table></figure>
+<h4 id="V2-1"><a href="#V2-1" class="headerlink" title="V2"></a>V2</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">config</span><span class="selector-class">.vm</span><span class="selector-class">.network</span> "<span class="selector-tag">private_network</span>", <span class="selector-tag">ip</span>: "10<span class="selector-class">.11</span><span class="selector-class">.100</span><span class="selector-class">.200</span>"</span><br><span class="line"><span class="selector-tag">config</span><span class="selector-class">.vm</span><span class="selector-class">.network</span> "<span class="selector-tag">private_network</span>", <span class="selector-tag">ip</span>: "192<span class="selector-class">.168</span><span class="selector-class">.33</span><span class="selector-class">.10</span>"</span><br></pre></td></tr></table></figure>
+<h4 id="Pros-1"><a href="#Pros-1" class="headerlink" title="Pros"></a>Pros</h4><ul>
+<li>安全, 只有自己能访问</li>
+<li>Avoid typing the configuration of each forwarded port separately</li>
+<li>Avoid using port numbers such as 8800 for well-known services</li>
+<li>Use the same port numbers in different projects</li>
+<li>Communicate between multiple guests</li>
+<li>Use NFS for shared directories</li>
+</ul>
+<h4 id="Cons-1"><a href="#Cons-1" class="headerlink" title="Cons"></a>Cons</h4><ul>
+<li>Because it is isolated, coworkers and team members who may be working on the same project can’t look at your work.(私有网络,不能团队协作)</li>
+<li>宿主机上会自动创建虚拟网卡,<code>destory</code>虚拟机也不会自动删除</li>
+</ul>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ifconfig </span><br><span class="line">VBoxManage hostonlyif <span class="builtin-name">remove</span> vboxnet0</span><br><span class="line">VBoxManage hostonlyif <span class="builtin-name">remove</span> vboxnet1</span><br><span class="line">VBoxManage hostonlyif <span class="builtin-name">remove</span> vboxnet2</span><br><span class="line">VBoxManage list hostonlyifs</span><br></pre></td></tr></table></figure>
+<ul>
+<li>dhcp</li>
+</ul>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">VBoxManage <span class="built_in">list</span> dhcpservers</span><br><span class="line">VBoxManage dhcpserver remove <span class="comment">--netname HostInterfaceNetworking-vboxnet0</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-public-network-Bridged-Networking"><a href="#3-public-network-Bridged-Networking" class="headerlink" title="3. public network(Bridged Networking)"></a>3. public network(Bridged Networking)</h3><ul>
+<li>Bridged networking bridges the virtual machine onto a device on your physical machine, making the virtual machine look like another separate physical machine on the network.(虚拟机像实体机一样的网络配置, 也可以有静态IP)</li>
+<li>It becomes available for remote access.</li>
+</ul>
+<h4 id="V1-2"><a href="#V1-2" class="headerlink" title="V1"></a><del>V1</del></h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config<span class="selector-class">.vm</span><span class="selector-class">.network</span> <span class="string">"bridged"</span></span><br></pre></td></tr></table></figure>
+<h4 id="V2-2"><a href="#V2-2" class="headerlink" title="V2"></a>V2</h4><ul>
+<li>default</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config<span class="selector-class">.vm</span><span class="selector-class">.network</span> <span class="string">"public_network"</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>静态IP</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">config</span><span class="selector-class">.vm</span><span class="selector-class">.network</span> "<span class="selector-tag">public_network</span>", <span class="selector-tag">ip</span>: "192<span class="selector-class">.168</span><span class="selector-class">.1</span><span class="selector-class">.120</span>"</span><br></pre></td></tr></table></figure>
+<ul>
+<li>公有网络中还可以设置桥接的网卡</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config<span class="selector-class">.vm</span><span class="selector-class">.network</span> <span class="string">"public_network"</span>, :bridge =&gt; <span class="string">'en1: Wi-Fi (AirPort)'</span></span><br></pre></td></tr></table></figure>
+<h4 id="Pros-2"><a href="#Pros-2" class="headerlink" title="Pros"></a>Pros</h4><ul>
+<li>方便团队协作，别人可以访问你的虚拟机</li>
+</ul>
+<h4 id="Cons-2"><a href="#Cons-2" class="headerlink" title="Cons"></a>Cons</h4><ul>
+<li>需要有网络，有路由器分配IP</li>
+</ul>
+<h3 id="4-Composing-Networking-Options"><a href="#4-Composing-Networking-Options" class="headerlink" title="4. Composing Networking Options"></a>4. Composing Networking Options</h3><ul>
+<li>同一VM网络可组合</li>
+</ul>
+<h4 id="V1-3"><a href="#V1-3" class="headerlink" title="V1"></a><del>V1</del></h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config<span class="selector-class">.vm</span><span class="selector-class">.forwarded_port</span> <span class="number">80</span>, <span class="number">8080</span>config<span class="selector-class">.vm</span><span class="selector-class">.network</span> <span class="string">"hostonly"</span>, <span class="string">"192.168.33.10"</span>config<span class="selector-class">.vm</span><span class="selector-class">.network</span> <span class="string">"bridged"</span></span><br></pre></td></tr></table></figure>
+<h4 id="The-static-IP-for-private-networks"><a href="#The-static-IP-for-private-networks" class="headerlink" title="The static IP for private networks"></a>The static IP for private networks</h4><ul>
+<li><code>10.0.0.0-10.255.255.255</code> (<code>10/8</code> prefix)</li>
+<li><code>172.16.0.0-172.31.255.255</code> (<code>172.16/12</code> prefix)</li>
+<li><code>192.168.0.0-192.168.255.255</code> (<code>192.168/16</code> prefix)</li>
+</ul>
+<h4 id="vagrant-hosts"><a href="#vagrant-hosts" class="headerlink" title="vagrant-hosts"></a><code>vagrant-hosts</code></h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vagrant plugin install vagrant-hosts</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">web</span><span class="selector-class">.vm</span><span class="selector-class">.provision</span> <span class="selector-pseudo">:hosts</span></span><br></pre></td></tr></table></figure>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
       <a href="/2016/05/01/2016-05-01-statistics-learning-0001/">
   <time datetime="2016-05-01T13:51:00.000Z">
     May 1 2016
@@ -653,48 +793,6 @@
       
         <div class="alignleft">
           <a href="/2015/03/21/2015-03-21-ch3-Technology-Fundamentals/#more" class="more-link">Read More</a>
-        </div>
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
-</article>
-
-
-
-  
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2015/01/16/2015-01-16-gitlab-workflow/">
-  <time datetime="2015-01-16T11:51:00.000Z">
-    Jan 16 2015
-  </time>
-</a>
-    
-    
-  
-    <h1 class="title"><a href="/2015/01/16/2015-01-16-gitlab-workflow/">gitlab使用说明</a></h1>
-  
-
-  </header>
-  
-  <div class="entry">
-    
-      <p>这是gitlab搭建起来后，为团队内部写的简单配置说明。</p>
-<h3 id="Step1-Use-ssh-keygen-to-generate-a-new-pair-of-id-rsa-new-id-rsa-new-pub"><a href="#Step1-Use-ssh-keygen-to-generate-a-new-pair-of-id-rsa-new-id-rsa-new-pub" class="headerlink" title="Step1: Use ssh-keygen to generate a new pair of id_rsa_new / id_rsa_new.pub"></a>Step1: Use <code>ssh-keygen</code> to generate a new pair of id_rsa_new / id_rsa_new.pub</h3><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> ~<span class="string">/.ssh</span></span><br><span class="line">ssh-keygen -t rsa -C <span class="string">"tanhao2013@foxmail.com"</span> <span class="comment"># your email</span></span><br></pre></td></tr></table></figure>
-<p><img src="http://ww1.sinaimg.cn/large/6fbc15dcjw1enxr1dp2asj20hw0blmz5.jpg" alt="step1"></p>
-<h3 id="Step2-Add-the-ssh-key-to-the-gitlab"><a href="#Step2-Add-the-ssh-key-to-the-gitlab" class="headerlink" title="Step2: Add the ssh key to the gitlab"></a>Step2: Add the ssh key to the gitlab</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">cat</span> <span class="selector-tag">gitlab_rsa</span><span class="selector-class">.pub</span></span><br></pre></td></tr></table></figure>
-<p><img src="http://ww3.sinaimg.cn/large/6fbc15dcgw1f2aib0m5kpj20uw06nwgq.jpg" alt="step2"></p>
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-        <div class="alignleft">
-          <a href="/2015/01/16/2015-01-16-gitlab-workflow/#more" class="more-link">Read More</a>
         </div>
       
       

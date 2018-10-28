@@ -1,0 +1,184 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>Bayesian Genome Assembly and MCMC Assessment | Buttonwood</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Buttonwood">
+  
+  
+    <meta name="description" content="IntroductionThey first build an assembly graph starting from a de Bruijn graph of the reads. Then they remove all tips and merge all unambiguous paths into single nodes that are annotated by the seque">
+  
+  <meta name="description" content="IntroductionThey first build an assembly graph starting from a de Bruijn graph of the reads. Then they remove all tips and merge all unambiguous paths into single nodes that are annotated by the seque">
+<meta name="keywords" content="Assembly,Bayesian,MCMC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bayesian Genome Assembly and MCMC Assessment">
+<meta property="og:url" content="http://buttonwood.github.io/2013/07/02/2013-07-02-Bayesian-Genome-Assembly/index.html">
+<meta property="og:site_name" content="Buttonwood">
+<meta property="og:description" content="IntroductionThey first build an assembly graph starting from a de Bruijn graph of the reads. Then they remove all tips and merge all unambiguous paths into single nodes that are annotated by the seque">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://www.plosone.org/article/fetchObject.action?uri=info:doi/10.1371/journal.pone.0099497.g001&representation=PNG_I">
+<meta property="og:image" content="http://www.plosone.org/article/fetchObject.action?uri=info:doi/10.1371/journal.pone.0099497.g002&representation=PNG_I">
+<meta property="og:updated_time" content="2018-10-25T03:54:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Bayesian Genome Assembly and MCMC Assessment">
+<meta name="twitter:description" content="IntroductionThey first build an assembly graph starting from a de Bruijn graph of the reads. Then they remove all tips and merge all unambiguous paths into single nodes that are annotated by the seque">
+<meta name="twitter:image" content="http://www.plosone.org/article/fetchObject.action?uri=info:doi/10.1371/journal.pone.0099497.g001&representation=PNG_I">
+  
+    <link rel="alternate" href="/atom.xml" title="Buttonwood" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+</head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Buttonwood</a></h1>
+    <p><a href="/">Being A Coding Poet. Less Talk, and More Move!</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/about/">About</a></li>
+      
+        <li><a href="/archives/">Archives</a></li>
+      
+        <li><a href="/links/">Links</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2013/07/02/2013-07-02-Bayesian-Genome-Assembly/">
+  <time datetime="2013-07-02T13:51:00.000Z">
+    Jul 2 2013
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">Bayesian Genome Assembly and MCMC Assessment</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h4 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h4><p>They first build an assembly graph starting from a de Bruijn graph of the reads. Then they remove all tips and merge all unambiguous paths into single nodes that are annotated by the sequence of merged K-mers. </p>
+<p>The resulting unresolved assembly graph (no longer de Bruijn) is a directed graph that consists only of bubbles and is a minimal representation of the variants that can be inferred from the sequenced data. Concatenating the sequences across the nodes in a particular path through this graph gives a possible assembly sequence.</p>
+<a id="more"></a>
+<h4 id="Key-ideas"><a href="#Key-ideas" class="headerlink" title="Key ideas"></a>Key ideas</h4><p>A particular assembly hypothesis is represented as a boolean vector, whose values indicate which of the enumerated edges in the assembly graph are in an active path (Figure 1).</p>
+<p><img src="http://www.plosone.org/article/fetchObject.action?uri=info:doi/10.1371/journal.pone.0099497.g001&amp;representation=PNG_I" alt="Figure 1"></p>
+<p>Contiguous paths through the assembly graph correspond to proposed assemblies, and are represented by a boolean vector indicating which edges in the graph are active.</p>
+<p>Then, turning on an edge in an alternate branch turns on the entire alternate branch and turns off the existing path through the bubble (Figure 2).</p>
+<p><img src="http://www.plosone.org/article/fetchObject.action?uri=info:doi/10.1371/journal.pone.0099497.g002&amp;representation=PNG_I" alt="Figure 2"></p>
+<p>(a) Starting from an existing (blue) assembly, the proposal mechanism randomly chooses a new (green) edge. (b) If the edge is not already active, it is extended with a random walk until it meets the existing assembly. (c) This defines a (red) branch in the existing assembly, (d) which is then removed to yield a new (blue) assembly.</p>
+<h4 id="Disccusion"><a href="#Disccusion" class="headerlink" title="Disccusion"></a>Disccusion</h4><p>It’s very interesting. But by the way,</p>
+<blockquote>
+<p>Our prototype assembler cannot yet consider repeats, as each edge can only be visited once. </p>
+</blockquote>
+<p>There’s still a lot of work to do.</p>
+<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><p><a href="http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0099497" target="_blank" rel="noopener">Howison M, Zapata F, Edwards EJ, Dunn CW (2014) Bayesian Genome Assembly and Assessment by Markov Chain Monte Carlo Sampling. PLoS ONE 9(6): e99497. doi:10.1371/journal.pone.0099497.</a></p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/Bioinformatics/">Bioinformatics</a>, <a class="categories-link" href="/categories/Bioinformatics/ML/">ML</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/Assembly/">Assembly</a>, <a class="tags-link" href="/tags/Bayesian/">Bayesian</a>, <a class="tags-link" href="/tags/MCMC/">MCMC</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+<section id="comment"> 
+    <h1 class="title">Comments</h1>
+    <div class="ds-thread" data-title="Bayesian Genome Assembly and MCMC Assessment"></div> 
+</section>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2018 <a href="/">Buttonwood</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'buttonwood' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

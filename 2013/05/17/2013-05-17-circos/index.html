@@ -1,0 +1,278 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>Circos for Comparative genomics | Buttonwood</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Buttonwood">
+  
+  
+    <meta name="description" content="Synteny and Comparative genomicsWelcome to see details in my github issues.
+First, use Lastz for synteny block alignment.
+Then use SVG for synteny block drawing.
+And we found Circos more powerful on h">
+  
+  <meta name="description" content="Synteny and Comparative genomicsWelcome to see details in my github issues. First, use Lastz for synteny block alignment. Then use SVG for synteny block drawing. And we found Circos more powerful on h">
+<meta name="keywords" content="Circos,Synteny,Comparative genomics">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Circos for Comparative genomics">
+<meta property="og:url" content="http://buttonwood.github.io/2013/05/17/2013-05-17-circos/index.html">
+<meta property="og:site_name" content="Buttonwood">
+<meta property="og:description" content="Synteny and Comparative genomicsWelcome to see details in my github issues. First, use Lastz for synteny block alignment. Then use SVG for synteny block drawing. And we found Circos more powerful on h">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://dl.dropboxusercontent.com/u/78977353/hexo-git/cg/line.png">
+<meta property="og:image" content="https://dl.dropboxusercontent.com/u/78977353/hexo-git/cg/circos.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/20/1363765909_2834.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/20/1363778829_5544.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/25/1364182311_2969.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/25/1364190625_3670.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/25/1364208353_2999.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/26/1364278082_6035.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/26/1364282490_8992.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/26/1364290569_5627.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/27/1364353741_2058.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/27/1364371714_9661.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/27/1364374222_1392.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/27/1364378620_7933.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201304/01/1364786151_5213.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201304/01/1364793015_5671.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201304/02/1364869474_1651.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201304/07/1365297720_4423.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201304/07/1365299709_2161.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201304/07/1365302129_4867.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201304/16/1366103090_4905.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201304/17/1366184166_3701.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201304/17/1366188837_8179.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201304/18/1366255057_7310.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201304/18/1366255833_2779.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201304/18/1366256880_8552.png">
+<meta property="og:image" content="http://img.blog.csdn.net/20130429130303104">
+<meta property="og:image" content="http://img.blog.csdn.net/20130429130958655">
+<meta property="og:image" content="http://img.blog.csdn.net/20130429131928996">
+<meta property="og:image" content="http://img.blog.csdn.net/20130506111201824">
+<meta property="og:image" content="http://img.blog.csdn.net/20130506151746742">
+<meta property="og:image" content="http://img.blog.csdn.net/20130506155946352">
+<meta property="og:image" content="http://img.blog.csdn.net/20130506161104658">
+<meta property="og:image" content="http://img.blog.csdn.net/20130507110428083">
+<meta property="og:image" content="http://img.blog.csdn.net/20130507161241391">
+<meta property="og:image" content="http://img.blog.csdn.net/20130507162436576">
+<meta property="og:image" content="http://img.blog.csdn.net/20130507165405517">
+<meta property="og:image" content="http://img.blog.csdn.net/20130513142328276">
+<meta property="og:image" content="http://img.blog.csdn.net/20130513144524239">
+<meta property="og:image" content="http://img.blog.csdn.net/20130513145041778">
+<meta property="og:image" content="http://img.blog.csdn.net/20130513163736098">
+<meta property="og:image" content="http://img.blog.csdn.net/20130513164853106">
+<meta property="og:image" content="http://img.blog.csdn.net/20130513165454969">
+<meta property="og:image" content="http://img.blog.csdn.net/20130513170004939">
+<meta property="og:image" content="http://img.blog.csdn.net/20130514124703683">
+<meta property="og:image" content="http://img.blog.csdn.net/20130515153119236">
+<meta property="og:image" content="http://img.blog.csdn.net/20130515154308118">
+<meta property="og:image" content="http://img.blog.csdn.net/20140121161948796?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2tlbm95/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20130515155225157">
+<meta property="og:updated_time" content="2018-10-25T03:54:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Circos for Comparative genomics">
+<meta name="twitter:description" content="Synteny and Comparative genomicsWelcome to see details in my github issues. First, use Lastz for synteny block alignment. Then use SVG for synteny block drawing. And we found Circos more powerful on h">
+<meta name="twitter:image" content="https://dl.dropboxusercontent.com/u/78977353/hexo-git/cg/line.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Buttonwood" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+</head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Buttonwood</a></h1>
+    <p><a href="/">Being A Coding Poet. Less Talk, and More Move!</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/about/">About</a></li>
+      
+        <li><a href="/archives/">Archives</a></li>
+      
+        <li><a href="/links/">Links</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2013/05/17/2013-05-17-circos/">
+  <time datetime="2013-05-16T16:00:00.000Z">
+    May 17 2013
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">Circos for Comparative genomics</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h3 id="Synteny-and-Comparative-genomics"><a href="#Synteny-and-Comparative-genomics" class="headerlink" title="Synteny and Comparative genomics"></a>Synteny and Comparative genomics</h3><p>Welcome to see details in my <a href="https://github.com/Buttonwood/Bioinformatics/issues/4" target="_blank" rel="noopener">github issues</a>.</p>
+<p>First, use <a href="http://www.bx.psu.edu/miller_lab/dist/README.lastz-1.02.00/README.lastz-1.02.00a.html" target="_blank" rel="noopener">Lastz</a> for synteny block alignment.</p>
+<p>Then use SVG for synteny block drawing.<br><img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/cg/line.png" alt="line"></p>
+<p>And we found <a href="http://circos.ca/" target="_blank" rel="noopener">Circos</a> more powerful on handing this.</p>
+<p><img src="https://dl.dropboxusercontent.com/u/78977353/hexo-git/cg/circos.png" alt="circos"></p>
+<p>说明,本文以下内容多数来自网络资源转载,像原作者致意,感谢他们的原创工作!如想详细了解，请点击衔接，接入原文！</p>
+<h3 id="Circos-Installation"><a href="#Circos-Installation" class="headerlink" title="Circos Installation"></a>Circos Installation</h3><p>For OSX: you can refer to this <a href="http://kylase.github.io/CircosAPI/os-x-installation-guide/" target="_blank" rel="noopener">os-x-installation-guide</a> and <a href="http://pgfe.umassmed.edu/ou/archives/2513" target="_blank" rel="noopener">this</a>.</p>
+<h3 id="Read-this-first"><a href="#Read-this-first" class="headerlink" title="Read this first"></a>Read this first</h3><p><a href="http://pgfe.umassmed.edu/ou/archives/2513" target="_blank" rel="noopener">Circos系列教程一安装</a></p>
+<p><a href="http://pgfe.umassmed.edu/ou/archives/2519" target="_blank" rel="noopener">Circos系列教程二染色体示意图ideograms</a></p>
+<p><a href="http://pgfe.umassmed.edu/ou/archives/2554" target="_blank" rel="noopener">Circos系列教程三突出标记Highlight</a></p>
+<p><a href="http://pgfe.umassmed.edu/ou/archives/2579" target="_blank" rel="noopener">Circos系列教程四连线links</a></p>
+<h3 id="Tutorial"><a href="#Tutorial" class="headerlink" title="Tutorial"></a>Tutorial</h3><p><a href="http://blog.csdn.net/skenoy/article/details/8696402" target="_blank" rel="noopener"> CIRCOS教程翻译 1.1——helloworld</a><br><img src="http://img.my.csdn.net/uploads/201303/20/1363765909_2834.png" alt="1.1"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8697823" target="_blank" rel="noopener">CIRCOS教程翻译 1.2——ticks</a><br><img src="http://img.my.csdn.net/uploads/201303/20/1363778829_5544.png" alt="1.2"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8716127" target="_blank" rel="noopener">CIRCOS教程翻译 1.3 ——染色体的变化</a><br><img src="http://img.my.csdn.net/uploads/201303/25/1364182311_2969.png" alt="1.3"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8716632" target="_blank" rel="noopener">CIRCOS教程翻译 1.4——links和rules</a><br><img src="http://img.my.csdn.net/uploads/201303/25/1364190625_3670.png" alt="1.4"></p>
+<a id="more"></a>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8718080" target="_blank" rel="noopener">CIRCOS教程翻译 1.5——histogram</a><br><img src="http://img.my.csdn.net/uploads/201303/25/1364208353_2999.png" alt="1.5"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8721500" target="_blank" rel="noopener">CIRCOS教程翻译 1.6——axe和background</a><br><img src="http://img.my.csdn.net/uploads/201303/26/1364278082_6035.png" alt="1.6"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8721999" target="_blank" rel="noopener">CIRCOS教程翻译 1.7——heatmap</a><br><img src="http://img.my.csdn.net/uploads/201303/26/1364282490_8992.png" alt="heatmap"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8722846" target="_blank" rel="noopener">CIRCOS教程翻译 1.8——label</a><br><img src="http://img.my.csdn.net/uploads/201303/26/1364290569_5627.png" alt="lable"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8725383" target="_blank" rel="noopener">CIRCOS教程翻译 2.1——ideogram</a><br><img src="http://img.my.csdn.net/uploads/201303/27/1364353741_2058.png" alt="ideogram"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8726219" target="_blank" rel="noopener">CIRCOS教程翻译 2.2——karyotype</a><br><img src="http://img.my.csdn.net/uploads/201303/27/1364371714_9661.png" alt="karyotype"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8727242" target="_blank" rel="noopener">CIRCOS教程翻译 2.3——filtering</a><br><img src="http://img.my.csdn.net/uploads/201303/27/1364374222_1392.png" alt="filtering"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8727588" target="_blank" rel="noopener">CIRCOS教程翻译 2.4——order</a><br><img src="http://img.my.csdn.net/uploads/201303/27/1364378620_7933.png" alt="order"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8745606" target="_blank" rel="noopener">CIRCOS教程翻译 2.5——breaks</a><br><img src="http://img.my.csdn.net/uploads/201304/01/1364786151_5213.png" alt="breakd"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8745736" target="_blank" rel="noopener">CIRCOS教程翻译 2.6——spacing</a><br><img src="http://img.my.csdn.net/uploads/201304/01/1364793015_5671.png" alt="spacing"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8749921" target="_blank" rel="noopener">CIRCOS教程翻译 2.7——tags</a><br><img src="http://img.my.csdn.net/uploads/201304/02/1364869474_1651.png" alt="tags"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8766021" target="_blank" rel="noopener">CIRCOS教程翻译 2.8——variable radius</a><br><img src="http://img.my.csdn.net/uploads/201304/07/1365297720_4423.png" alt="radius"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8766073" target="_blank" rel="noopener">CIRCOS教程翻译 2.9——label</a><br><img src="http://img.my.csdn.net/uploads/201304/07/1365299709_2161.png" alt="lable"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8766304" target="_blank" rel="noopener">CIRCOS教程翻译 2.10——anlge offset and orientation</a><br><img src="http://img.my.csdn.net/uploads/201304/07/1365302129_4867.png" alt="anlge offset and orientation"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8809736" target="_blank" rel="noopener">CIRCOS教程翻译 3.1——Wedge Highlights</a><br><img src="http://img.my.csdn.net/uploads/201304/16/1366103090_4905.png" alt="Highlights"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8814239" target="_blank" rel="noopener">CIRCOS教程翻译 3.2——Embedded in Data File</a><br><img src="http://img.my.csdn.net/uploads/201304/17/1366184166_3701.png" alt="Embedded in Data File"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8814598" target="_blank" rel="noopener">CIRCOS教程翻译 3.3——Using z-depth</a><br><img src="http://img.my.csdn.net/uploads/201304/17/1366188837_8179.png" alt="3.3"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8817953" target="_blank" rel="noopener">CIRCOS教程翻译 3.4——Radial Position</a><br><img src="http://img.my.csdn.net/uploads/201304/18/1366255057_7310.png" alt="3.4"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8818012" target="_blank" rel="noopener">CIRCOS教程翻译 3.5——Ideogram Highlights</a><br><img src="http://img.my.csdn.net/uploads/201304/18/1366255833_2779.png" alt="3.5"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8818144" target="_blank" rel="noopener">CIRCOS教程翻译 3.6——Ideogram Highlights</a><br><img src="http://img.my.csdn.net/uploads/201304/18/1366256880_8552.png" alt="3.6"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8866668" target="_blank" rel="noopener">CIRCOS教程翻译 3.7——Focusing on a genome region</a><br><img src="http://img.blog.csdn.net/20130429130303104" alt="3.7"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8866693" target="_blank" rel="noopener">CIRCOS教程翻译 3.8——Plot axis range highlights</a><br><img src="http://img.blog.csdn.net/20130429130958655" alt="3.8"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8866704" target="_blank" rel="noopener"> CIRCOS教程翻译 3.9——Drawing on top of data</a><br><img src="http://img.blog.csdn.net/20130429131928996" alt="3.9"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8889203" target="_blank" rel="noopener">CIRCOS教程翻译 4.1——Tick Marks, Grids and Labels</a><br><img src="http://img.blog.csdn.net/20130506111201824" alt="Tick Marks, Grids and Labels"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8890632" target="_blank" rel="noopener">CIRCOS教程翻译 4.2——Margins</a><br><img src="http://img.blog.csdn.net/20130506151746742" alt="Margins"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8890935" target="_blank" rel="noopener">CIRCOS教程翻译 4.3——Label Margins</a><br><img src="http://img.blog.csdn.net/20130506155946352" alt="Label Margins"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8891032" target="_blank" rel="noopener">CIRCOS教程翻译 4.5——Grids</a><br><img src="http://img.blog.csdn.net/20130506161104658" alt="Grids"></p>
+<p><a href="http://img.blog.csdn.net/20130507110428083" target="_blank" rel="noopener">CIRCOS教程翻译 4.6——Label format</a><br><img src="http://img.blog.csdn.net/20130507110428083" alt="Label format"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8895680" target="_blank" rel="noopener">CIRCOS教程翻译 4.7——Relative Ticks</a><br><img src="http://img.blog.csdn.net/20130507161241391" alt="4.7--Relative"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8895813" target="_blank" rel="noopener">CIRCOS教程翻译 4.8——Single tick</a><br><img src="http://img.blog.csdn.net/20130507162436576" alt="4.8--Single tick"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8895940" target="_blank" rel="noopener">CIRCOS教程翻译 4.9——Rings</a><br><img src="http://img.blog.csdn.net/20130507165405517" alt="4.9--Rings"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8920484" target="_blank" rel="noopener">CIRCOS教程翻译 5.1——Drawing Basic Links</a><br><img src="http://img.blog.csdn.net/20130513142328276" alt="5.1——Drawing Basic Links"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8920558" target="_blank" rel="noopener">CIRCOS教程翻译 5.2——Geometry</a><br><img src="http://img.blog.csdn.net/20130513144524239" alt="5.2--Geometry"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8920645" target="_blank" rel="noopener">CIRCOS教程翻译 5.3——Formatting</a><br><img src="http://img.blog.csdn.net/20130513145041778" alt="5.3--Formatting"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8921256" target="_blank" rel="noopener">CIRCOS教程翻译 5.4——Rule</a><br><img src="http://img.blog.csdn.net/20130513163736098" alt="5.4--Rule"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8921378" target="_blank" rel="noopener">CIRCOS教程翻译 5.5——Rule</a><br><img src="http://img.blog.csdn.net/20130513164853106" alt="5.5--Rule"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8921455" target="_blank" rel="noopener">CIRCOS教程翻译 5.6——Rule</a><br><img src="http://img.blog.csdn.net/20130513165454969" alt="5.5——Rule"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8921506" target="_blank" rel="noopener">CIRCOS教程翻译 5.7——Rule</a><br><img src="http://img.blog.csdn.net/20130513170004939" alt="Rule"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8924948" target="_blank" rel="noopener">CIRCOS教程翻译 5.7——Rule</a><br><img src="http://img.blog.csdn.net/20130514124703683" alt="5.7——Rule"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8930582" target="_blank" rel="noopener">CIRCOS教程翻译 5.9——Ribbons</a><br><img src="http://img.blog.csdn.net/20130515153119236" alt="Ribbons"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8930798" target="_blank" rel="noopener">CIRCOS教程翻译 5.10——Ribbon Twists</a><br><img src="http://img.blog.csdn.net/20130515154308118" alt="Ribbon Twists"></p>
+<h3 id="Cases"><a href="#Cases" class="headerlink" title="Cases:"></a>Cases:</h3><p><a href="http://blog.csdn.net/skenoy/article/details/18614673" target="_blank" rel="noopener">circos输入数据文件格式化——depth，GC，geneskew</a><br><img src="http://img.blog.csdn.net/20140121161948796?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2tlbm95/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="DP-GC-SK"></p>
+<p><a href="http://blog.csdn.net/skenoy/article/details/8930854" target="_blank" rel="noopener">circos数据前5章小示</a><br><img src="http://img.blog.csdn.net/20130515155225157" alt="examples"></p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/Bioinformatics/">Bioinformatics</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/Circos/">Circos</a>, <a class="tags-link" href="/tags/Comparative-genomics/">Comparative genomics</a>, <a class="tags-link" href="/tags/Synteny/">Synteny</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+<section id="comment"> 
+    <h1 class="title">Comments</h1>
+    <div class="ds-thread" data-title="Circos for Comparative genomics"></div> 
+</section>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2018 <a href="/">Buttonwood</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'buttonwood' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>
